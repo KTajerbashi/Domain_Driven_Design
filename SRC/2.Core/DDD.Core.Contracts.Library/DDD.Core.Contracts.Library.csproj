@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DDD.Core.Domain.Library\DDD.Core.Domain.Library.csproj" />
+    <ProjectReference Include="..\DDD.Core.RequestResponse.Library\DDD.Core.RequestResponse.Library.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\1.Utilities\DDD.Utilities.Library\DDD.Utilities.Library.csproj" />
+    <ProjectReference Include="..\DDD.Core.Contracts.Library\DDD.Core.Contracts.Library.csproj" />
+    <ProjectReference Include="..\DDD.Core.Domain.Library\DDD.Core.Domain.Library.csproj" />
+  </ItemGroup>
+
 </Project>
