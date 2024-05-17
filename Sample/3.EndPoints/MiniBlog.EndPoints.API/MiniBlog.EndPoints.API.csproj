@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\SRC\4.EndPoints\DDD.EndPoints.Web.Library\DDD.EndPoints.Web.Library.csproj" />
+    <ProjectReference Include="..\..\1.Core\MiniBlog.Core.ApplicationServices\MiniBlog.Core.ApplicationServices.csproj" />
+    <ProjectReference Include="..\..\1.Core\MiniBlog.Core.Contracts\MiniBlog.Core.Contracts.csproj" />
+    <ProjectReference Include="..\..\1.Core\MiniBlog.Core.Domain\MiniBlog.Core.Domain.csproj" />
+    <ProjectReference Include="..\..\1.Core\MiniBlog.Core.RequestResponse\MiniBlog.Core.RequestResponse.csproj" />
+    <ProjectReference Include="..\..\2.Infrastructure\Data\MiniBlog.Infrastructure.Data.Sql.Commands\MiniBlog.Infrastructure.Data.Sql.Commands.csproj" />
+    <ProjectReference Include="..\..\2.Infrastructure\Data\MiniBlog.Infrastructure.Data.Sql.Queries\MiniBlog.Infrastructure.Data.Sql.Queries.csproj" />
+  </ItemGroup>
+
+</Project>
