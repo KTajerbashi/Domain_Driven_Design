@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\1.Utilities\DDD.Utilities.Library\DDD.Utilities.Library.csproj" />
+    <ProjectReference Include="..\..\2.Core\DDD.Core.ApplicationServices.Library\DDD.Core.ApplicationServices.Library.csproj" />
+    <ProjectReference Include="..\..\2.Core\DDD.Core.Contracts.Library\DDD.Core.Contracts.Library.csproj" />
+    <ProjectReference Include="..\..\2.Core\DDD.Core.Domain.Library\DDD.Core.Domain.Library.csproj" />
+    <ProjectReference Include="..\..\2.Core\DDD.Core.RequestResponse.Library\DDD.Core.RequestResponse.Library.csproj" />
+    <ProjectReference Include="..\..\3.Infrastructure\Data\DDD.Core.Data.Sql.Commands.Library\DDD.Core.Data.Sql.Commands.Library.csproj" />
+    <ProjectReference Include="..\..\3.Infrastructure\Data\DDD.Core.Data.Sql.Library\DDD.Core.Data.Sql.Library.csproj" />
+    <ProjectReference Include="..\..\3.Infrastructure\Data\DDD.Core.Data.Sql.Queries.Library\DDD.Core.Data.Sql.Queries.Library.csproj" />
+  </ItemGroup>
+
+</Project>
