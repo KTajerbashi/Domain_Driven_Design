@@ -1,3 +1,5 @@
+using DDD.Utilities.Library.Guards;
+using DDD.Utilities.Library.Guards.GuardClauses;
 using Microsoft.AspNetCore.Mvc;
 using MiniBlog.Core.Domain.People.Entities;
 using MiniBlog.Core.Domain.People.ValueObjects;
@@ -60,6 +62,7 @@ namespace MiniBlog.EndPoints.API.Controllers
         {
             try
             {
+                Guard.ThrowIf.Match("43","","");
                 PersonEventBase p = new(1,"Kamran","Tajerbashi");
                 return Ok("Ok");
             }
