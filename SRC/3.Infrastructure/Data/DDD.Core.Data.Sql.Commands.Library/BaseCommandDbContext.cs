@@ -7,6 +7,9 @@ using Microsoft.EntityFrameworkCore.Storage;
 using System.Globalization;
 
 namespace DDD.Core.Data.Sql.Commands.Library;
+/// <summary>
+/// 
+/// </summary>
 public abstract class BaseCommandDbContext : DbContext
 {
     protected IDbContextTransaction _transaction;
@@ -71,7 +74,11 @@ public abstract class BaseCommandDbContext : DbContext
         configurationBuilder.Properties<NationalCode>().HaveConversion<NationalCodeConversion>();
 
     }
-
+    /// <summary>
+    /// هرجا شاخه ی با تمام اجزای وابسته خودش را بخواهیم لود کنیم آنگاه ازین استفاده میکنیم
+    /// </summary>
+    /// <param name="clrEntityType"></param>
+    /// <returns></returns>
     public IEnumerable<string> GetIncludePaths(Type clrEntityType)
     {
         var entityType = Model.FindEntityType(clrEntityType);

@@ -4,6 +4,13 @@ using DDD.Core.Domain.Library.ValueObjects;
 using System.Linq.Expressions;
 
 namespace DDD.Core.Data.Sql.Commands.Library;
+
+/// <summary>
+/// هرگاه خواستیم ریپازیوتری بسازیم ازین باید ارت بری کنیم
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
+/// <typeparam name="TDbContext"></typeparam>
+/// <typeparam name="TId"></typeparam>
 public class BaseCommandRepository<TEntity, TDbContext, TId> : ICommandRepository<TEntity, TId>, IUnitOfWork
     where TEntity : AggregateRoot<TId>
     where TDbContext : BaseCommandDbContext

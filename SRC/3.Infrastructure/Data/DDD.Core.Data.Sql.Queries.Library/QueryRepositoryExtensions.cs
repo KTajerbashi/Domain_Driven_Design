@@ -3,6 +3,9 @@ using DDD.Utilities.Library.Extensions;
 using Microsoft.EntityFrameworkCore;
 namespace DDD.Core.Data.Sql.Queries.Library;
 
+/// <summary>
+/// 
+/// </summary>
 public static class QueryRepositoryExtensions
 {
     public static async Task<PagedData<TResult>> ToPagedData<TEntity, TQuery, TResult>(this IQueryable<TEntity> entities, PageQuery<PagedData<TQuery>> query, Func<TEntity, TResult> selectFunc)

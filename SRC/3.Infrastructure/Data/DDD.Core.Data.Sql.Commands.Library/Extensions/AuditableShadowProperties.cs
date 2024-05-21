@@ -5,22 +5,51 @@ using Zamin.Extensions.UsersManagement.Abstractions;
 namespace DDD.Core.Data.Sql.Commands.Library.Extensions;
 public static class AuditableShadowProperties
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static readonly Func<object, string> EFPropertyCreatedByUserId =
                                     entity => EF.Property<string>(entity, CreatedByUserId);
+    /// <summary>
+    /// 
+    /// </summary>
     public static readonly string CreatedByUserId = nameof(CreatedByUserId);
 
+    /// <summary>
+    /// 
+    /// </summary>
     public static readonly Func<object, string> EFPropertyModifiedByUserId =
                                     entity => EF.Property<string>(entity, ModifiedByUserId);
+
+    /// <summary>
+    /// 
+    /// </summary>
     public static readonly string ModifiedByUserId = nameof(ModifiedByUserId);
 
+    /// <summary>
+    /// 
+    /// </summary>
     public static readonly Func<object, DateTime?> EFPropertyCreatedDateTime =
                                     entity => EF.Property<DateTime?>(entity, CreatedDateTime);
+    /// <summary>
+    /// 
+    /// </summary>
     public static readonly string CreatedDateTime = nameof(CreatedDateTime);
-
+    
+    /// <summary>
+    /// 
+    /// </summary>
     public static readonly Func<object, DateTime?> EFPropertyModifiedDateTime =
                                     entity => EF.Property<DateTime?>(entity, ModifiedDateTime);
+    /// <summary>
+    /// 
+    /// </summary>
     public static readonly string ModifiedDateTime = nameof(ModifiedDateTime);
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="modelBuilder"></param>
     public static void AddAuditableShadowProperties(this ModelBuilder modelBuilder)
     {
         foreach (var entityType in modelBuilder.Model.GetEntityTypes().Where(c => typeof(IAuditableEntity).IsAssignableFrom(c.ClrType)))
@@ -36,6 +65,11 @@ public static class AuditableShadowProperties
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="changeTracker"></param>
+    /// <param name="userInfoService"></param>
     public static void SetAuditableEntityPropertyValues(
         this ChangeTracker changeTracker,
         IUserInfoService userInfoService)

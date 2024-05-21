@@ -3,8 +3,15 @@ using DDD.Core.Domain.Library.ValueObjects;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DDD.Core.Data.Sql.Commands.Library.Extensions;
+/// <summary>
+/// 
+/// </summary>
 public static class ModelBuilderExtensions
 {
+    /// <summary>
+    /// تمام موجودیت ها را دنبال میکند و کلید بیزنیسی را در آنها قرار میدهد و ولیوکانورتور را برای آنها اعمال میکند
+    /// </summary>
+    /// <param name="modelBuilder"></param>
     public static void AddBusinessId(this ModelBuilder modelBuilder)
     {
         foreach (var entityType in modelBuilder.Model
@@ -19,10 +26,27 @@ public static class ModelBuilderExtensions
             modelBuilder.Entity(entityType.ClrType).HasAlternateKey("BusinessId");
         }
     }
+    /// <summary>
+    /// ولیو کانورتور را روی تایپ خاصی اعمال میکند
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="modelBuilder"></param>
+    /// <param name="converter"></param>
+    /// <param name="maxLenght"></param>
+    /// <returns></returns>
     public static ModelBuilder UseValueConverterForType<T>(this ModelBuilder modelBuilder, ValueConverter converter, int maxLenght = 0)
     {
         return modelBuilder.UseValueConverterForType(typeof(T), converter, maxLenght);
     }
+    
+    /// <summary>
+    /// ولیو کانورتور را بای تایب اعمال میکند
+    /// </summary>
+    /// <param name="modelBuilder"></param>
+    /// <param name="type"></param>
+    /// <param name="converter"></param>
+    /// <param name="maxLength"></param>
+    /// <returns></returns>
     public static ModelBuilder UseValueConverterForType(this ModelBuilder modelBuilder, Type type, ValueConverter converter, int maxLength = 0)
     {
         foreach (var entityType in modelBuilder.Model.GetEntityTypes())

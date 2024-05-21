@@ -5,8 +5,15 @@ using System.Data.Common;
 
 namespace DDD.Core.Data.Sql.Commands.Library.Extensions;
 
+/// <summary>
+/// پیاده سازی ویژگی های لازمه برای کاماند ها
+/// </summary>
 public static class DbCommandExtension
 {
+    /// <summary>
+    /// این متد ی ک های عربی را فارسی تغییر میدهد
+    /// </summary>
+    /// <param name="command"></param>
     public static void ApplyCorrectYeKe(this DbCommand command)
     {
         command.CommandText = command.CommandText.ApplyCorrectYeKe();
