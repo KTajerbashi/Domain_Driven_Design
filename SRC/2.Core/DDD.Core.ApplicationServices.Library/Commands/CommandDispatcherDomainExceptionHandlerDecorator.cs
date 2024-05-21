@@ -24,11 +24,19 @@ public class CommandDispatcherDomainExceptionHandlerDecorator : CommandDispatche
         _serviceProvider = serviceProvider;
         _logger = logger;
     }
-
+    /// <summary>
+    /// 
+    /// </summary>
     public override int Order => 2;
     #endregion
 
     #region Send Commands
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TCommand"></typeparam>
+    /// <param name="command"></param>
+    /// <returns></returns>
     public override async Task<CommandResult> Send<TCommand>(TCommand command)
     {
         try
@@ -52,7 +60,13 @@ public class CommandDispatcherDomainExceptionHandlerDecorator : CommandDispatche
         }
 
     }
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TCommand"></typeparam>
+    /// <typeparam name="TData"></typeparam>
+    /// <param name="command"></param>
+    /// <returns></returns>
     public override async Task<CommandResult<TData>> Send<TCommand, TData>(TCommand command)
     {
         try
@@ -79,6 +93,12 @@ public class CommandDispatcherDomainExceptionHandlerDecorator : CommandDispatche
     #endregion
 
     #region Privaite Methods
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TCommand"></typeparam>
+    /// <param name="ex"></param>
+    /// <returns></returns>
     private CommandResult DomainExceptionHandlingWithoutReturnValue<TCommand>(DomainStateException ex)
     {
         var commandResult = new CommandResult
@@ -90,7 +110,14 @@ public class CommandDispatcherDomainExceptionHandlerDecorator : CommandDispatche
 
         return commandResult;
     }
-
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TCommand"></typeparam>
+    /// <typeparam name="TData"></typeparam>
+    /// <param name="ex"></param>
+    /// <returns></returns>
     private CommandResult<TData> DomainExceptionHandlingWithReturnValue<TCommand, TData>(DomainStateException ex)
     {
         var commandResult = new CommandResult<TData>()
@@ -102,7 +129,12 @@ public class CommandDispatcherDomainExceptionHandlerDecorator : CommandDispatche
 
         return commandResult;
     }
-
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="domainStateException"></param>
+    /// <returns></returns>
     private string GetExceptionText(DomainStateException domainStateException)
     {
         var translator = _serviceProvider.GetService<ITranslator>();

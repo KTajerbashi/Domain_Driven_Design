@@ -5,7 +5,7 @@ using DDD.Core.RequestResponse.Library.Commands;
 namespace DDD.Core.ApplicationServices.Library.Commands;
 
 /// <summary>
-/// 
+/// Chain Of Responsibility
 /// </summary>
 public abstract class CommandDispatcherDecorator : ICommandDispatcher
 {

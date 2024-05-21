@@ -6,7 +6,9 @@ using System.Diagnostics;
 using Zamin.Extensions.Logger.Abstractions;
 
 namespace DDD.Core.ApplicationServices.Library.Commands;
-
+/// <summary>
+/// 
+/// </summary>
 public class CommandDispatcher : ICommandDispatcher
 {
     #region Fields
@@ -25,6 +27,12 @@ public class CommandDispatcher : ICommandDispatcher
     #endregion
 
     #region Send Commands
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TCommand"></typeparam>
+    /// <param name="command"></param>
+    /// <returns></returns>
     public async Task<CommandResult> Send<TCommand>(TCommand command) where TCommand : class, ICommand
     {
         _stopwatch.Start();
@@ -48,7 +56,13 @@ public class CommandDispatcher : ICommandDispatcher
         }
 
     }
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TCommand"></typeparam>
+    /// <typeparam name="TData"></typeparam>
+    /// <param name="command"></param>
+    /// <returns></returns>
     public async Task<CommandResult<TData>> Send<TCommand, TData>(TCommand command) where TCommand : class, ICommand<TData>
     {
         _stopwatch.Start();
