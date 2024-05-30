@@ -1,5 +1,6 @@
 ﻿using DDD.Core.Domain.Library.Exceptions;
 using DDD.Core.Domain.Library.ValueObjects;
+using DDD.Utilities.Library.Extensions;
 using MiniBlog.Core.Domain.Resources;
 
 namespace MiniBlog.Core.Domain.People.ValueObjects
@@ -20,7 +21,7 @@ namespace MiniBlog.Core.Domain.People.ValueObjects
             {
                 throw new InvalidValueObjectStateException(MessagePatterns.EmptyStringValidationMessage, nameof(FirstName));
             }
-            if (value.Length < 2 || value.Length > 50)
+            if (!value.IsLengthBetween(2,50))
             {
                 throw new InvalidValueObjectStateException(MessagePatterns.StringLengthValidationMessage, nameof(FirstName), "2", "50");
             }

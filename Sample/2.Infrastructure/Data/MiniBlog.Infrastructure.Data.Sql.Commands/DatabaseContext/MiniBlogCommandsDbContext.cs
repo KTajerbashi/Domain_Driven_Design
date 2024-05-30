@@ -8,7 +8,7 @@ namespace MiniBlog.Infrastructure.Data.Sql.Commands.DatabaseContext
 {
     public class MiniBlogCommandsDbContext : BaseCommandDbContext
     {
-        public MiniBlogCommandsDbContext(DbContextOptions options) : base(options)
+        public MiniBlogCommandsDbContext(DbContextOptions<MiniBlogCommandsDbContext> options) : base(options)
         {
         }
 

@@ -1,15 +1,25 @@
 ﻿using DDD.EndPoints.Web.Library.Controllers;
 using Microsoft.AspNetCore.Mvc;
+using MiniBlog.Core.RequestResponse.People.Commands.Create;
 
-namespace MiniBlog.EndPoints.API.Controllers.Person
+namespace MiniBlog.EndPoints.API.Controllers
 {
     [Route("api/[controller]")]
     public class BlogController : BaseController
     {
         #region Test Methods
         [HttpPost("Create")]
-        public async Task<IActionResult> CreatePerson()
+        public async Task<IActionResult> CreatePerson(CreatePerson createPerson)
         {
+            try
+            {
+                //Person
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
             return Ok(ModelState);
         }
         [HttpPut("Update")]

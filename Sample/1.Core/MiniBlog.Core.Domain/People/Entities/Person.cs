@@ -25,7 +25,7 @@ namespace MiniBlog.Core.Domain.People.Entities
             {
                 throw new InvalidEntityStateException(MessagePatterns.IdInvalidationMessage);
             }
-            Id = id;
+            //Id = id;
             FirstName = firstName;
             LastName = lastName;
             AddEvent(new PersonCreated(id, BusinessId.Value, firstName, lastName));
