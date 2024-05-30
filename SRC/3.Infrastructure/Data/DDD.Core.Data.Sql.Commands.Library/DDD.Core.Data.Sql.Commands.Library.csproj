@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\0.ExternalKernelShared\Extensions.Serializers.Abstractions\Extensions.Serializers.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\2.Core\DDD.Core.Contracts.Library\DDD.Core.Contracts.Library.csproj" />
     <ProjectReference Include="..\..\..\2.Core\DDD.Core.Domain.Library\DDD.Core.Domain.Library.csproj" />
     <ProjectReference Include="..\DDD.Core.Data.Sql.Library\DDD.Core.Data.Sql.Library.csproj" />
