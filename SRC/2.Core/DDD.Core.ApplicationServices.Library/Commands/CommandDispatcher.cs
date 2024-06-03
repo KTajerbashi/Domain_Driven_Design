@@ -1,8 +1,8 @@
 ﻿using DDD.Core.Contracts.Library.ApplicationServices.Commands;
 using DDD.Core.RequestResponse.Library.Commands;
-using Extensions.Logger.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Zamin.Extensions.Logger.Abstractions;
 using System.Diagnostics;
 
 namespace DDD.Core.ApplicationServices.Library.Commands;
@@ -52,7 +52,7 @@ public class CommandDispatcher : ICommandDispatcher
         finally
         {
             _stopwatch.Stop();
-            _logger.LogInformation(EventID.PerformanceMeasurement, "Processing the {CommandType} command tooks {Millisecconds} Millisecconds", command.GetType(), _stopwatch.ElapsedMilliseconds);
+            _logger.LogInformation(ZaminEventId.PerformanceMeasurement, "Processing the {CommandType} command tooks {Millisecconds} Millisecconds", command.GetType(), _stopwatch.ElapsedMilliseconds);
         }
 
     }
