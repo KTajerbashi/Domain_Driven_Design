@@ -7,11 +7,10 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Zamin.Extensions.Events.Outbox.Dal.EF" Version="7.0.2-beta.2" />
+    <PackageReference Include="Zamin.Extensions.Events.Outbox.Dal.EF" Version="8.0.0" />
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\SRC\0.ExternalKernelShared\Extensions.Events.Outbox.Dal.EF\Extensions.Events.Outbox.Dal.EF.csproj" />
     <ProjectReference Include="..\..\..\..\SRC\3.Infrastructure\Data\DDD.Core.Data.Sql.Commands.Library\DDD.Core.Data.Sql.Commands.Library.csproj" />
     <ProjectReference Include="..\..\..\1.Core\MiniBlog.Core.Contracts\MiniBlog.Core.Contracts.csproj" />
     <ProjectReference Include="..\..\..\1.Core\MiniBlog.Core.Domain\MiniBlog.Core.Domain.csproj" />

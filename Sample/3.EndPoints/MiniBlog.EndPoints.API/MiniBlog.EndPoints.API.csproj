@@ -16,12 +16,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.5">
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.5">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -43,19 +43,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\SRC\0.ExternalKernelShared\Extensions.Caching.InMemory\Extensions.Caching.InMemory.csproj" />
-    <ProjectReference Include="..\..\..\SRC\0.ExternalKernelShared\Extensions.Events.PollingPublisher.Dal.Dapper\Extensions.Events.PollingPublisher.Dal.Dapper.csproj" />
-    <ProjectReference Include="..\..\..\SRC\0.ExternalKernelShared\Extensions.Events.PollingPublisher\Extensions.Events.PollingPublisher.csproj" />
-    <ProjectReference Include="..\..\..\SRC\0.ExternalKernelShared\Extensions.MessageBus.MessageInbox.Dal.Dapper\Extensions.MessageBus.MessageInbox.Dal.Dapper.csproj" />
-    <ProjectReference Include="..\..\..\SRC\0.ExternalKernelShared\Extensions.MessageBus.MessageInbox\Extensions.MessageBus.MessageInbox.csproj" />
-    <ProjectReference Include="..\..\..\SRC\0.ExternalKernelShared\Extensions.MessageBus.RabbitMQ\Extensions.MessageBus.RabbitMQ.csproj" />
-    <ProjectReference Include="..\..\..\SRC\0.ExternalKernelShared\Extensions.ObjectMappers.AutoMapper\Extensions.ObjectMappers.AutoMapper.csproj" />
-    <ProjectReference Include="..\..\..\SRC\0.ExternalKernelShared\Extensions.Serializers.Microsoft\Extensions.Serializers.Microsoft.csproj" />
-    <ProjectReference Include="..\..\..\SRC\0.ExternalKernelShared\Extensions.Serializers.NewtonSoft\Extensions.Serializers.NewtonSoft.csproj" />
-    <ProjectReference Include="..\..\..\SRC\0.ExternalKernelShared\Extensions.Translations.Parrot\Extensions.Translations.Parrot.csproj" />
-    <ProjectReference Include="..\..\..\SRC\0.ExternalKernelShared\Extensions.UsersManagement\Extensions.UsersManagement.csproj" />
-    <ProjectReference Include="..\..\..\SRC\0.ExternalKernelShared\Utilities.OpenTelemetryRegistration\Utilities.OpenTelemetryRegistration.csproj" />
-    <ProjectReference Include="..\..\..\SRC\0.ExternalKernelShared\Utilities.SerilogRegistration\Utilities.SerilogRegistration.csproj" />
     <ProjectReference Include="..\..\..\SRC\4.EndPoints\DDD.EndPoints.Web.Library\DDD.EndPoints.Web.Library.csproj" />
     <ProjectReference Include="..\..\1.Core\MiniBlog.Core.ApplicationServices\MiniBlog.Core.ApplicationServices.csproj" />
     <ProjectReference Include="..\..\1.Core\MiniBlog.Core.Contracts\MiniBlog.Core.Contracts.csproj" />
