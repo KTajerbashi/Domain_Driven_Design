@@ -16,13 +16,4 @@
     <PackageReference Include="Zamin.Extensions.Translations.Abstractions" Version="8.0.0" />
     <PackageReference Include="Zamin.Extensions.UsersManagement.Abstractions" Version="8.0.0" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\0.ExternalKernelShared\Extensions.Caching.Abstractions\Extensions.Caching.Abstractions.csproj" />
-    <ProjectReference Include="..\..\0.ExternalKernelShared\Extensions.DependencyInjection.Abstractions\Extensions.DependencyInjection.Abstractions.csproj" />
-    <ProjectReference Include="..\..\0.ExternalKernelShared\Extensions.Logger.Abstractions\Extensions.Logger.Abstractions.csproj" />
-    <ProjectReference Include="..\..\0.ExternalKernelShared\Extensions.ObjectMappers.Abstractions\Extensions.ObjectMappers.Abstractions.csproj" />
-    <ProjectReference Include="..\..\0.ExternalKernelShared\Extensions.Serializers.Abstractions\Extensions.Serializers.Abstractions.csproj" />
-    <ProjectReference Include="..\..\0.ExternalKernelShared\Extensions.Translations.Abstractions\Extensions.Translations.Abstractions.csproj" />
-    <ProjectReference Include="..\..\0.ExternalKernelShared\Extensions.UsersManagement.Abstractions\Extensions.UsersManagement.Abstractions.csproj" />
-  </ItemGroup>
 </Project>

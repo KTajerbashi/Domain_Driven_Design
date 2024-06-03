@@ -16,8 +16,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\..\..\0.ExternalKernelShared\Extensions.ChangeDataLog.Abstractions\Extensions.ChangeDataLog.Abstractions.csproj" />
-    <ProjectReference Include="..\..\..\0.ExternalKernelShared\Extensions.UsersManagement.Abstractions\Extensions.UsersManagement.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\2.Core\DDD.Core.Contracts.Library\DDD.Core.Contracts.Library.csproj" />
     <ProjectReference Include="..\..\..\2.Core\DDD.Core.Domain.Library\DDD.Core.Domain.Library.csproj" />
     <ProjectReference Include="..\..\..\2.Core\DDD.Core.Domain.ToolKits.Library\DDD.Core.Domain.ToolKits.Library.csproj" />

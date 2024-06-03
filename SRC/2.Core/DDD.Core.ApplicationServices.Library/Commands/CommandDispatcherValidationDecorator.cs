@@ -3,7 +3,7 @@ using DDD.Core.RequestResponse.Library.Common;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Zamin.Extensions.Logger.Abstractions;
+using Extensions.Logger.Abstractions;
 
 namespace DDD.Core.ApplicationServices.Library.Commands;
 
@@ -50,15 +50,15 @@ public class CommandDispatcherValidationDecorator : CommandDispatcherDecorator
     /// <returns></returns>
     public override async Task<CommandResult> Send<TCommand>(TCommand command)
     {
-        _logger.LogDebug(ZaminEventId.CommandValidation, "Validating command of type {CommandType} With value {Command}  start at :{StartDateTime}", command.GetType(), command, DateTime.Now);
+        _logger.LogDebug(EventID.CommandValidation, "Validating command of type {CommandType} With value {Command}  start at :{StartDateTime}", command.GetType(), command, DateTime.Now);
         var validationResult = Validate<TCommand, CommandResult>(command);
 
         if (validationResult != null)
         {
-            _logger.LogInformation(ZaminEventId.CommandValidation, "Validating command of type {CommandType} With value {Command}  failed. Validation errors are: {ValidationErrors}", command.GetType(), command, validationResult.Messages);
+            _logger.LogInformation(EventID.CommandValidation, "Validating command of type {CommandType} With value {Command}  failed. Validation errors are: {ValidationErrors}", command.GetType(), command, validationResult.Messages);
             return validationResult;
         }
-        _logger.LogDebug(ZaminEventId.CommandValidation, "Validating command of type {CommandType} With value {Command}  finished at :{EndDateTime}", command.GetType(), command, DateTime.Now);
+        _logger.LogDebug(EventID.CommandValidation, "Validating command of type {CommandType} With value {Command}  finished at :{EndDateTime}", command.GetType(), command, DateTime.Now);
         return await _commandDispatcher.Send(command);
     }
 
@@ -71,16 +71,16 @@ public class CommandDispatcherValidationDecorator : CommandDispatcherDecorator
     /// <returns></returns>
     public override async Task<CommandResult<TData>> Send<TCommand, TData>(TCommand command)
     {
-        _logger.LogDebug(ZaminEventId.CommandValidation, "Validating command of type {CommandType} With value {Command}  start at :{StartDateTime}", command.GetType(), command, DateTime.Now);
+        _logger.LogDebug(EventID.CommandValidation, "Validating command of type {CommandType} With value {Command}  start at :{StartDateTime}", command.GetType(), command, DateTime.Now);
 
         var validationResult = Validate<TCommand, CommandResult<TData>>(command);
 
         if (validationResult != null)
         {
-            _logger.LogInformation(ZaminEventId.CommandValidation, "Validating command of type {CommandType} With value {Command}  failed. Validation errors are: {ValidationErrors}", command.GetType(), command, validationResult.Messages);
+            _logger.LogInformation(EventID.CommandValidation, "Validating command of type {CommandType} With value {Command}  failed. Validation errors are: {ValidationErrors}", command.GetType(), command, validationResult.Messages);
             return validationResult;
         }
-        _logger.LogDebug(ZaminEventId.CommandValidation, "Validating command of type {CommandType} With value {Command}  finished at :{EndDateTime}", command.GetType(), command, DateTime.Now);
+        _logger.LogDebug(EventID.CommandValidation, "Validating command of type {CommandType} With value {Command}  finished at :{EndDateTime}", command.GetType(), command, DateTime.Now);
         return await _commandDispatcher.Send<TCommand, TData>(command);
     }
     #endregion
@@ -115,7 +115,7 @@ public class CommandDispatcherValidationDecorator : CommandDispatcherDecorator
         }
         else
         {
-            _logger.LogInformation(ZaminEventId.CommandValidation, "There is not any validator for {CommandType}", command.GetType());
+            _logger.LogInformation(EventID.CommandValidation, "There is not any validator for {CommandType}", command.GetType());
         }
         return res;
     }

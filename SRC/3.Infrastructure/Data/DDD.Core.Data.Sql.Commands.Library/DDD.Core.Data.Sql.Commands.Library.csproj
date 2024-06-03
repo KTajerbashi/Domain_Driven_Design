@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.1.35" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.6" />
     <PackageReference Include="Zamin.Extensions.Serializers.Abstractions" Version="8.0.0" />
   </ItemGroup>
 
@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\0.ExternalKernelShared\Extensions.Serializers.Abstractions\Extensions.Serializers.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\2.Core\DDD.Core.Contracts.Library\DDD.Core.Contracts.Library.csproj" />
     <ProjectReference Include="..\..\..\2.Core\DDD.Core.Domain.Library\DDD.Core.Domain.Library.csproj" />
     <ProjectReference Include="..\DDD.Core.Data.Sql.Library\DDD.Core.Data.Sql.Library.csproj" />
