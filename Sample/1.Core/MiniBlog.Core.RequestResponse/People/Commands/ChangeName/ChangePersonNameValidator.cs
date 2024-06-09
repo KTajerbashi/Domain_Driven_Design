@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Zamin.Extensions.Translations.Abstractions;
+using Extensions.Translations.Abstractions;
 
 namespace MiniBlog.Core.RequestResponse.People.Commands.ChangeName
 {
