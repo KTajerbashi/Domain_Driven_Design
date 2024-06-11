@@ -1,7 +1,6 @@
-﻿using ApiAuthentication.Extensions;
-using ApiAuthentication.Models;
+﻿using ApiAuthentication.Models;
 using ApiAuthentication.Options;
-using Extensions.Chaching.Abstractions;
+using Extensions.Caching.Abstractions;
 using IdentityModel.Client;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
