@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace DDD.Core.Data.Sql.Queries.Library;
-/// <summary>
-/// 
-/// </summary>
+namespace DDD.Infra.Data.Sql.Queries.Library;
 public abstract class BaseQueryDbContext : DbContext
 {
     public BaseQueryDbContext(DbContextOptions options) : base(options)

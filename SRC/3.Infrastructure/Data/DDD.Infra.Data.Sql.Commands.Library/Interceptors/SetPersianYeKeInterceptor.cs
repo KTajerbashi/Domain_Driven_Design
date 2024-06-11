@@ -1,11 +1,8 @@
-﻿using DDD.Core.Data.Sql.Commands.Library.Extensions;
+﻿using DDD.Infra.Data.Sql.Commands.Library.Extensions;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using System.Data.Common;
-namespace DDD.Core.Data.Sql.Commands.Library.Interceptors;
+namespace DDD.Infra.Data.Sql.Commands.Library.Interceptors;
 
-/// <summary>
-/// این سر راه کاماند قرار میگیرد و تمام ی ک ها را فارسی میکند
-/// </summary>
 public class SetPersianYeKeInterceptor : DbCommandInterceptor
 {
     public override InterceptionResult<int> NonQueryExecuting(DbCommand command, CommandEventData eventData, InterceptionResult<int> result)

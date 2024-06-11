@@ -1,11 +1,10 @@
-﻿using DDD.Core.RequestResponse.Library.Queries;
+﻿using Microsoft.EntityFrameworkCore;
+using DDD.Core.Contracts.Library.ApplicationServices.Queries;
+using DDD.Core.RequestResponse.Library.Queries;
 using DDD.Utilities.Library.Extensions;
-using Microsoft.EntityFrameworkCore;
-namespace DDD.Core.Data.Sql.Queries.Library;
 
-/// <summary>
-/// 
-/// </summary>
+namespace DDD.Infra.Data.Sql.Queries.Library;
+
 public static class QueryRepositoryExtensions
 {
     public static async Task<PagedData<TResult>> ToPagedData<TEntity, TQuery, TResult>(this IQueryable<TEntity> entities, PageQuery<PagedData<TQuery>> query, Func<TEntity, TResult> selectFunc)

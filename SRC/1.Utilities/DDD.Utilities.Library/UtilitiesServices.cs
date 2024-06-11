@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
-using Zamin.Extensions.ObjectMappers.Abstractions;
-using Zamin.Extensions.Serializers.Abstractions;
-using Zamin.Extensions.Translations.Abstractions;
-using Zamin.Extensions.UsersManagement.Abstractions;
-using Zamin.Extensions.Caching.Abstractions;
+using Extensions.ObjectMappers.Abstractions;
+using Extensions.Serializers.Abstractions;
+using Extensions.Translations.Abstractions;
+using Extensions.UsersManagement.Abstractions;
+using Extensions.Caching.Abstractions;
 namespace DDD.Utilities.Library;
 
 public class UtilitiesServices

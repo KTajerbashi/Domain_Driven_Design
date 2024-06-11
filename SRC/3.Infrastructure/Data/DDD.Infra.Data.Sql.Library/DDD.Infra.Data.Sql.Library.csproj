@@ -3,23 +3,25 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>disable</Nullable>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
+
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.1.35" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.6" />
-    <PackageReference Include="Zamin.Extensions.Serializers.Abstractions" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Using Include="Microsoft.EntityFrameworkCore" />
   </ItemGroup>
 
+
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\SharedKernel\Extensions.Abstractions\Extensions.ChangeDataLog.Abstractions\Extensions.ChangeDataLog.Abstractions.csproj" />
+    <ProjectReference Include="..\..\..\..\SharedKernel\Extensions.Abstractions\Extensions.UsersManagement.Abstractions\Extensions.UsersManagement.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\2.Core\DDD.Core.Contracts.Library\DDD.Core.Contracts.Library.csproj" />
+    <ProjectReference Include="..\..\..\2.Core\DDD.Core.Domain.ToolKits.Library\DDD.Core.Domain.ToolKits.Library.csproj" />
     <ProjectReference Include="..\..\..\2.Core\DDD.Core.Domain.Library\DDD.Core.Domain.Library.csproj" />
-    <ProjectReference Include="..\DDD.Core.Data.Sql.Library\DDD.Core.Data.Sql.Library.csproj" />
   </ItemGroup>
 
 </Project>

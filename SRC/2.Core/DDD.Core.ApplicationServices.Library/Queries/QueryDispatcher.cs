@@ -3,7 +3,7 @@ using DDD.Core.RequestResponse.Library.Queries;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
-using Zamin.Extensions.Logger.Abstractions;
+using Extensions.Logger.Abstractions;
 
 namespace DDD.Core.ApplicationServices.Library.Queries;
 
@@ -42,7 +42,7 @@ public class QueryDispatcher : IQueryDispatcher
         finally
         {
             _stopwatch.Stop();
-            _logger.LogInformation(ZaminEventId.PerformanceMeasurement, "Processing the {QueryType} query tooks {Millisecconds} Millisecconds", query.GetType(), _stopwatch.ElapsedMilliseconds);
+            _logger.LogInformation(LoggingEventId.PerformanceMeasurement, "Processing the {QueryType} query tooks {Millisecconds} Millisecconds", query.GetType(), _stopwatch.ElapsedMilliseconds);
         }
     }
     #endregion

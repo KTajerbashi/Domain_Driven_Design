@@ -1,15 +1,12 @@
-﻿using DDD.Core.Data.Sql.Commands.Library.Extensions;
-using DDD.Core.Data.Sql.Commands.Library.ValueConversions;
-using DDD.Core.Domain.Library.ValueObjects;
-using DDD.Core.Domain.ToolKits.Library.ValueObjects;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Globalization;
+using DDD.Infra.Data.Sql.Commands.Library.ValueConversions;
+using DDD.Infra.Data.Sql.Commands.Library.Extensions;
+using DDD.Core.Domain.ToolKits.Library.ValueObjects;
+using DDD.Core.Domain.Library.ValueObjects;
 
-namespace DDD.Core.Data.Sql.Commands.Library;
-/// <summary>
-/// 
-/// </summary>
+namespace DDD.Infra.Data.Sql.Commands.Library;
 public abstract class BaseCommandDbContext : DbContext
 {
     protected IDbContextTransaction _transaction;
@@ -74,11 +71,7 @@ public abstract class BaseCommandDbContext : DbContext
         configurationBuilder.Properties<NationalCode>().HaveConversion<NationalCodeConversion>();
 
     }
-    /// <summary>
-    /// هرجا شاخه ی با تمام اجزای وابسته خودش را بخواهیم لود کنیم آنگاه ازین استفاده میکنیم
-    /// </summary>
-    /// <param name="clrEntityType"></param>
-    /// <returns></returns>
+
     public IEnumerable<string> GetIncludePaths(Type clrEntityType)
     {
         var entityType = Model.FindEntityType(clrEntityType);

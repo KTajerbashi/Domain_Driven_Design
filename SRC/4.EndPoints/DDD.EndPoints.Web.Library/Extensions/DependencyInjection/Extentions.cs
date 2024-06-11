@@ -1,4 +1,4 @@
-﻿using Zamin.Extensions.DependencyInjection.Abstractions;
+﻿using Extensions.DependencyInjection.Abstractions;
 
 namespace DDD.EndPoints.Web.Library.Extensions.DependencyInjection;
 
@@ -18,7 +18,11 @@ public static class Extensions
     {
 
         var assemblies = GetAssemblies(assemblyNamesForSearch);
-        services.AddZaminApplicationServices(assemblies).AddZaminDataAccess(assemblies).AddZaminUntilityServices().AddCustomeDepenecies(assemblies);
+        services
+            .AddZaminApplicationServices(assemblies)
+            .AddZaminDataAccess(assemblies)
+            .AddZaminUntilityServices()
+            .AddCustomeDepenecies(assemblies);
         return services;
     }
 

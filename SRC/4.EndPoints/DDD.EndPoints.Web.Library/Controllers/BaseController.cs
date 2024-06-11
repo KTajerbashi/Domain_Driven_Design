@@ -8,7 +8,7 @@ using DDD.EndPoints.Web.Library.Extensions;
 using DDD.Utilities.Library;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
-using Zamin.Extensions.Serializers.Abstractions;
+using Extensions.Serializers.Abstractions;
 
 namespace DDD.EndPoints.Web.Library.Controllers
 {

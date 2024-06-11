@@ -1,10 +1,6 @@
 ﻿using DDD.Core.Contracts.Library.Data.Queries;
 
-namespace DDD.Core.Data.Sql.Queries.Library;
-/// <summary>
-/// 
-/// </summary>
-/// <typeparam name="TDbContext"></typeparam>
+namespace DDD.Infra.Data.Sql.Queries.Library;
 public class BaseQueryRepository<TDbContext> : IQueryRepository
     where TDbContext : BaseQueryDbContext
 {

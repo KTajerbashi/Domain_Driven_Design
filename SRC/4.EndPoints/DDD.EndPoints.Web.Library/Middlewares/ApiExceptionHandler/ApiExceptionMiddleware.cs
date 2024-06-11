@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Net;
-using Zamin.Extensions.Serializers.Abstractions;
-using Zamin.Extensions.Translations.Abstractions;
+using Extensions.Serializers.Abstractions;
+using Extensions.Translations.Abstractions;
 
 namespace DDD.EndPoints.Web.Library.Middlewares.ApiExceptionHandler
 {

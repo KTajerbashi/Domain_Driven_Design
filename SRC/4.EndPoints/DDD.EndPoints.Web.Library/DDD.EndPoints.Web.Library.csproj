@@ -10,22 +10,21 @@
   <ItemGroup>
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.6" />
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.SqlServer" Version="8.0.6" />
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.6" />
     <PackageReference Include="Scrutor" Version="4.2.2" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.1" />
   </ItemGroup>
+
 
   <ItemGroup>
     <ProjectReference Include="..\..\1.Utilities\DDD.Utilities.Library\DDD.Utilities.Library.csproj" />
     <ProjectReference Include="..\..\2.Core\DDD.Core.ApplicationServices.Library\DDD.Core.ApplicationServices.Library.csproj" />
     <ProjectReference Include="..\..\2.Core\DDD.Core.Contracts.Library\DDD.Core.Contracts.Library.csproj" />
     <ProjectReference Include="..\..\2.Core\DDD.Core.Domain.Library\DDD.Core.Domain.Library.csproj" />
+    <ProjectReference Include="..\..\2.Core\DDD.Core.Domain.ToolKits.Library\DDD.Core.Domain.ToolKits.Library.csproj" />
     <ProjectReference Include="..\..\2.Core\DDD.Core.RequestResponse.Library\DDD.Core.RequestResponse.Library.csproj" />
-    <ProjectReference Include="..\..\3.Infrastructure\Data\DDD.Core.Data.Sql.Commands.Library\DDD.Core.Data.Sql.Commands.Library.csproj" />
-    <ProjectReference Include="..\..\3.Infrastructure\Data\DDD.Core.Data.Sql.Library\DDD.Core.Data.Sql.Library.csproj" />
-    <ProjectReference Include="..\..\3.Infrastructure\Data\DDD.Core.Data.Sql.Queries.Library\DDD.Core.Data.Sql.Queries.Library.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,5 +36,16 @@
     <Using Include="Microsoft.Extensions.Logging" />
     <Using Include="Microsoft.Extensions.DependencyModel" />
     <Using Include="System.Reflection" />
+    <Using Include="DDD.Core.Contracts.Library.ApplicationServices.Commands" />
+    <Using Include="DDD.Core.Contracts.Library.ApplicationServices.Queries" />
+    <Using Include="DDD.Core.RequestResponse.Library.Common" />
+    <Using Include="DDD.Core.RequestResponse.Library.Commands" />
+    <Using Include="DDD.Core.RequestResponse.Library.Queries" />
+    <Using Include="DDD.Core.Contracts.Library.Data.Commands" />
+    <Using Include="DDD.Core.Contracts.Library.Data.Queries" />
+    
+    
+    
+    
   </ItemGroup>
 </Project>

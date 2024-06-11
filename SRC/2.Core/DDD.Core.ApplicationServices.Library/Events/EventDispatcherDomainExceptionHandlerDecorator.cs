@@ -1,6 +1,6 @@
 ﻿using DDD.Core.Domain.Library.Exceptions;
 using Microsoft.Extensions.Logging;
-using Zamin.Extensions.Logger.Abstractions;
+using Extensions.Logger.Abstractions;
 
 namespace DDD.Core.ApplicationServices.Library.Events;
 
@@ -27,13 +27,13 @@ public class EventDispatcherDomainExceptionHandlerDecorator : EventDispatcherDec
         }
         catch (DomainStateException ex)
         {
-            _logger.LogError(ZaminEventId.DomainValidationException, ex, "Processing of {EventType} With value {Event} failed at {StartDateTime} because there are domain exceptions.", @event.GetType(), @event, DateTime.Now);
+            _logger.LogError(LoggingEventId.DomainValidationException, ex, "Processing of {EventType} With value {Event} failed at {StartDateTime} because there are domain exceptions.", @event.GetType(), @event, DateTime.Now);
         }
         catch (AggregateException ex)
         {
             if (ex.InnerException is DomainStateException domainStateException)
             {
-                _logger.LogError(ZaminEventId.DomainValidationException, ex, "Processing of {EventType} With value {Event} failed at {StartDateTime} because there are domain exceptions.", @event.GetType(), @event, DateTime.Now);
+                _logger.LogError(LoggingEventId.DomainValidationException, ex, "Processing of {EventType} With value {Event} failed at {StartDateTime} because there are domain exceptions.", @event.GetType(), @event, DateTime.Now);
             }
             throw ex;
         }

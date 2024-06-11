@@ -1,6 +1,7 @@
-﻿using DDD.Core.Contracts.Library.Data.Commands;
+﻿
+using DDD.Core.Contracts.Library.Data.Commands;
 
-namespace DDD.Core.Data.Sql.Commands.Library;
+namespace DDD.Infra.Data.Sql.Commands.Library;
 public abstract class BaseEntityFrameworkUnitOfWork<TDbContext> : IUnitOfWork
     where TDbContext : BaseCommandDbContext
 {
