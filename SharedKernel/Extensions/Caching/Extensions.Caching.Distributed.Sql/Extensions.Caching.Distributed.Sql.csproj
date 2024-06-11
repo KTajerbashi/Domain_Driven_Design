@@ -6,4 +6,19 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.35" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.SqlServer" Version="8.0.6" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
+  </ItemGroup>
+  
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Extensions.Abstractions\Extensions.Caching.Abstractions\Extensions.Caching.Abstractions.csproj" />
+    <ProjectReference Include="..\..\..\Extensions.Abstractions\Extensions.Serializers.Abstractions\Extensions.Serializers.Abstractions.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -6,4 +6,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="7.1.3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Extensions.Abstractions\Extensions.Serializers.Abstractions\Extensions.Serializers.Abstractions.csproj" />
+    <ProjectReference Include="..\..\..\Extensions.Abstractions\Extensions.Translations.Abstractions\Extensions.Translations.Abstractions.csproj" />
+  </ItemGroup>
+
 </Project>
