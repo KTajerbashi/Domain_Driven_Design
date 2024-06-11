@@ -1,4 +1,4 @@
-﻿namespace Extensions.Chaching.Abstractions;
+﻿namespace Extensions.Caching.Abstractions;
 
 public class FakeCacheAdapter : ICacheAdapter
 {

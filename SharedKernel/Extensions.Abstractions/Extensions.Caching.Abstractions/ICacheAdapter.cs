@@ -1,4 +1,4 @@
-﻿namespace Extensions.Chaching.Abstractions;
+﻿namespace Extensions.Caching.Abstractions;
 public interface ICacheAdapter
 {
     void Add<TInput>(string key, TInput obj, DateTime? AbsoluteExpiration, TimeSpan? SlidingExpiration);
