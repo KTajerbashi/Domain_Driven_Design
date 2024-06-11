@@ -1,4 +1,4 @@
-﻿using DDD.Core.Data.Sql.Commands.Library;
+﻿using DDD.Infra.Data.Sql.Commands.Library;
 using Microsoft.EntityFrameworkCore;
 using MiniBlog.Core.Domain.People.Entities;
 using MiniBlog.Core.Domain.People.ValueObjects;

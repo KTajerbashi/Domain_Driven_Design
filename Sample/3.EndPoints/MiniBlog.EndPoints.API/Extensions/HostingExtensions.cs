@@ -1,13 +1,21 @@
-﻿using Microsoft.AspNetCore.Cors.Infrastructure;
-using Microsoft.EntityFrameworkCore;
-using DDD.Core.Data.Sql.Commands.Library.Interceptors;
-using DDD.EndPoints.Web.Library.Extensions.DependencyInjection;
+﻿using DDD.EndPoints.Web.Library.Extensions.DependencyInjection;
 using DDD.EndPoints.Web.Library.Extensions.ModelBinding;
+using DDD.Infra.Data.Sql.Commands.Library.Interceptors;
+using Extensions.Translations.Parrot.Extensions.DependencyInjection;
+using Extensions.UsersManagement.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Cors.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using MiniBlog.EndPoints.API.Extensions.DependencyInjection.Swaggers.Extentions;
 using MiniBlog.Infrastructure.Data.Sql.Commands.DatabaseContext;
 using MiniBlog.Infrastructure.Data.Sql.Queries.DatabaseContext;
 using Serilog;
-using Zamin.Extensions.DependencyInjection;
+using Extensions.ObjectMappers.AutoMapper.Extensions.DependencyInjection;
+using Extensions.Serializers.Microsoft.Extensions.DependencyInjection;
+using Extensions.Caching.InMemory.Extensions.DependencyInjection;
+
+
+
+
 namespace MiniBlog.EndPoints.API.Extensions
 {
     /// <summary>
@@ -22,62 +30,70 @@ namespace MiniBlog.EndPoints.API.Extensions
         /// <returns></returns>
         public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
         {
-            IConfiguration configuration = builder.Configuration;
+            try
+            {
+                IConfiguration configuration = builder.Configuration;
 
-            //zamin
-            builder.Services.AddWebApiCore("DDD", "MiniBlog");
+                //zamin
+                builder.Services.AddWebApiCore("DDD", "MiniBlog");
 
-            //microsoft
-            builder.Services.AddEndpointsApiExplorer();
+                //microsoft
+                builder.Services.AddEndpointsApiExplorer();
 
-            //zamin
-            builder.Services.AddZaminWebUserInfoService(configuration, "WebUserInfo", true);
+                //zamin
+                builder.Services.AddZaminWebUserInfoService(configuration, "WebUserInfo", true);
 
-            //zamin
-            builder.Services.AddZaminParrotTranslator(configuration, "ParrotTranslator");
+                //zamin
+                builder.Services.AddZaminParrotTranslator(configuration, "ParrotTranslator");
 
-            //zamin
-            //builder.Services.AddSoftwarePartDetector(configuration, "SoftwarePart");
+                //zamin
+                //builder.Services.AddSoftwarePartDetector(configuration, "SoftwarePart");
 
-            //zamin
-            builder.Services.AddNonValidatingValidator();
+                //zamin
+                builder.Services.AddNonValidatingValidator();
 
-            //zamin
-            builder.Services.AddZaminMicrosoftSerializer();
+                //zamin
+                builder.Services.AddZaminMicrosoftSerializer();
 
-            //zamin
-            builder.Services.AddZaminAutoMapperProfiles(configuration, "AutoMapper");
+                //zamin
+                builder.Services.AddZaminAutoMapperProfiles(configuration, "AutoMapper");
 
-            //zamin
-            builder.Services.AddZaminInMemoryCaching();
-            //builder.Services.AddZaminSqlDistributedCache(configuration, "SqlDistributedCache");
+                //zamin
+                builder.Services.AddZaminInMemoryCaching();
+                //builder.Services.AddZaminSqlDistributedCache(configuration, "SqlDistributedCache");
 
-            //CommandDbContext
-            builder.Services.AddDbContext<MiniBlogCommandsDbContext>(
-                c => c.UseSqlServer(configuration.GetConnectionString("CommandDb_ConnectionString"))
-                .AddInterceptors(new SetPersianYeKeInterceptor(),
-                                 new AddAuditDataInterceptor()));
+                //CommandDbContext
+                builder.Services.AddDbContext<MiniBlogCommandsDbContext>(
+                    c => c.UseSqlServer(configuration.GetConnectionString("CommandDb_ConnectionString"))
+                    .AddInterceptors(new SetPersianYeKeInterceptor(),
+                                     new AddAuditDataInterceptor()));
 
-            //QueryDbContext
-            builder.Services.AddDbContext<MiniBlogQueriesDbContext>(
-                c => c.UseSqlServer(configuration.GetConnectionString("QueryDb_ConnectionString")));
+                //QueryDbContext
+                builder.Services.AddDbContext<MiniBlogQueriesDbContext>(
+                    c => c.UseSqlServer(configuration.GetConnectionString("QueryDb_ConnectionString")));
 
-            //PollingPublisher
-            //builder.Services.AddZaminPollingPublisherDalSql(configuration, "PollingPublisherSqlStore");
-            //builder.Services.AddZaminPollingPublisher(configuration, "PollingPublisher");
+                //PollingPublisher
+                //builder.Services.AddZaminPollingPublisherDalSql(configuration, "PollingPublisherSqlStore");
+                //builder.Services.AddZaminPollingPublisher(configuration, "PollingPublisher");
 
-            //MessageInbox
-            //builder.Services.AddZaminMessageInboxDalSql(configuration, "MessageInboxSqlStore");
-            //builder.Services.AddZaminMessageInbox(configuration, "MessageInbox");
+                //MessageInbox
+                //builder.Services.AddZaminMessageInboxDalSql(configuration, "MessageInboxSqlStore");
+                //builder.Services.AddZaminMessageInbox(configuration, "MessageInbox");
 
-            //builder.Services.AddZaminRabbitMqMessageBus(configuration, "RabbitMq");
+                //builder.Services.AddZaminRabbitMqMessageBus(configuration, "RabbitMq");
 
-            //builder.Services.AddZaminTraceJeager(configuration, "OpenTeletmetry");
+                //builder.Services.AddZaminTraceJeager(configuration, "OpenTeletmetry");
 
-            //builder.Services.AddIdentityServer(configuration, "OAuth");
+                //builder.Services.AddIdentityServer(configuration, "OAuth");
 
-            builder.Services.AddSwagger(configuration, "Swagger");
-            return builder.Build();
+                builder.Services.AddSwagger(configuration, "Swagger");
+                return builder.Build();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         /// <summary>

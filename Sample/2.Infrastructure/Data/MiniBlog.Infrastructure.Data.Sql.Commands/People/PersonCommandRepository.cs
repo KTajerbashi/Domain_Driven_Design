@@ -1,4 +1,4 @@
-﻿using DDD.Core.Data.Sql.Commands.Library;
+﻿using DDD.Infra.Data.Sql.Commands.Library;
 using MiniBlog.Core.Contracts.People.Commands;
 using MiniBlog.Core.Domain.People.Entities;
 using MiniBlog.Infrastructure.Data.Sql.Commands.DatabaseContext;

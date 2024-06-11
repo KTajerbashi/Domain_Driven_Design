@@ -27,22 +27,21 @@
     </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.6.2" />
-    <PackageReference Include="Zamin.Extensions.Caching.InMemory" Version="8.0.0" />
-    <PackageReference Include="Zamin.Extensions.Events.PollingPublisher" Version="8.0.0" />
-    <PackageReference Include="Zamin.Extensions.Events.PollingPublisher.Dal.Dapper" Version="8.0.0" />
-    <PackageReference Include="Zamin.Extensions.MessageBus.MessageInbox" Version="8.0.1-beta.1" />
-    <PackageReference Include="Zamin.Extensions.MessageBus.MessageInbox.Dal.Dapper" Version="8.0.0" />
-    <PackageReference Include="Zamin.Extensions.MessageBus.RabbitMQ" Version="8.0.1-beta.1" />
-    <PackageReference Include="Zamin.Extensions.ObjectMappers.AutoMapper" Version="8.0.0" />
-    <PackageReference Include="Zamin.Extensions.Serializers.Microsoft" Version="8.0.0" />
-    <PackageReference Include="Zamin.Extensions.Serializers.NewtonSoft" Version="8.0.0" />
-    <PackageReference Include="Zamin.Extensions.Translations.Parrot" Version="8.0.0" />
-    <PackageReference Include="Zamin.Extensions.UsersManagement" Version="8.0.0" />
-    <PackageReference Include="Zamin.Utilities.OpenTelemetryRegistration" Version="8.0.0-beta.2" />
-    <PackageReference Include="Zamin.Utilities.SerilogRegistration" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\SharedKernel\Extensions\Caching\Extensions.Caching.InMemory\Extensions.Caching.InMemory.csproj" />
+    <ProjectReference Include="..\..\..\SharedKernel\Extensions\Events\Extensions.Events.PollingPublisher\Extensions.Events.PollingPublisher.csproj" />
+    <ProjectReference Include="..\..\..\SharedKernel\Extensions\MessageBus\Extensions.MessageBus.RabbitMQ\Extensions.MessageBus.RabbitMQ.csproj" />
+    <ProjectReference Include="..\..\..\SharedKernel\Extensions\MessageBus\MessageInbox\Extensions.MessageBus.MessageInbox.Dal.Dapper\Extensions.MessageBus.MessageInbox.Dal.Dapper.csproj" />
+    <ProjectReference Include="..\..\..\SharedKernel\Extensions\MessageBus\MessageInbox\Extensions.MessageBus.MessageInbox\Extensions.MessageBus.MessageInbox.csproj" />
+    <ProjectReference Include="..\..\..\SharedKernel\Extensions\ObjectMappers\Extensions.ObjectMappers.AutoMapper\Extensions.ObjectMappers.AutoMapper.csproj" />
+    <ProjectReference Include="..\..\..\SharedKernel\Extensions\Serializers\Extensions.Serializers.Microsoft\Extensions.Serializers.Microsoft.csproj" />
+    <ProjectReference Include="..\..\..\SharedKernel\Extensions\Serializers\Extensions.Serializers.NewtonSoft\Extensions.Serializers.NewtonSoft.csproj" />
+    <ProjectReference Include="..\..\..\SharedKernel\Extensions\Translations\Extensions.Translations.Parrot\Extensions.Translations.Parrot.csproj" />
+    <ProjectReference Include="..\..\..\SharedKernel\Extensions\UsersManagement\Extensions.UsersManagement\Extensions.UsersManagement.csproj" />
+    <ProjectReference Include="..\..\..\SharedKernel\Utilities\OpenTelemetryRegistration\OpenTelemetryRegistration.csproj" />
+    <ProjectReference Include="..\..\..\SharedKernel\Utilities\SerilogRegistration\SerilogRegistration.csproj" />
     <ProjectReference Include="..\..\..\SRC\4.EndPoints\DDD.EndPoints.Web.Library\DDD.EndPoints.Web.Library.csproj" />
     <ProjectReference Include="..\..\1.Core\MiniBlog.Core.ApplicationServices\MiniBlog.Core.ApplicationServices.csproj" />
     <ProjectReference Include="..\..\1.Core\MiniBlog.Core.Contracts\MiniBlog.Core.Contracts.csproj" />

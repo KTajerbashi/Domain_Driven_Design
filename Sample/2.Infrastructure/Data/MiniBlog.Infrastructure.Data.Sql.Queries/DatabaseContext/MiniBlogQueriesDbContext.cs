@@ -1,4 +1,4 @@
-﻿using DDD.Core.Data.Sql.Queries.Library;
+﻿using DDD.Infra.Data.Sql.Queries.Library;
 using Microsoft.EntityFrameworkCore;
 
 namespace MiniBlog.Infrastructure.Data.Sql.Queries.DatabaseContext

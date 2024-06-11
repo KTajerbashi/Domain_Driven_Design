@@ -1,12 +1,12 @@
 
 using MiniBlog.EndPoints.API.Extensions;
-using Zamin.Extensions.DependencyInjection;
-using Zamin.Utilities.SerilogRegistration.Extensions;
+using SerilogRegistration.Extensions;
+using SerilogRegistration.Extensions.DependencyInjection;
 
 SerilogExtensions.RunWithSerilogExceptionHandling(() =>
 {
     var builder = WebApplication.CreateBuilder(args);
-    var app = builder.AddZaminSerilog(o =>
+    var app = builder.AddTKSerilog(o =>
     {
         o.ApplicationName = builder.Configuration.GetValue<string>("ApplicationName");
         o.ServiceId = builder.Configuration.GetValue<string>("ServiceId");
