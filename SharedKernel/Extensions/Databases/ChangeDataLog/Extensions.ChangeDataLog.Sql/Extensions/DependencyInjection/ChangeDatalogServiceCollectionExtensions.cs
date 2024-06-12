@@ -10,7 +10,7 @@ public static class ChangeDatalogServiceCollectionExtensions
 {
     public static IServiceCollection AddChangeDatalogDalSql(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddScoped<IEntityChageInterceptorItemRepository, DapperEntityChageInterceptorItemRepository>();
+        services.AddScoped<IEntityChangeInterceptorItemRepository, DapperEntityChageInterceptorItemRepository>();
         services.Configure<ChangeDataLogSqlOptions>(configuration);
         return services;
     }
@@ -23,7 +23,7 @@ public static class ChangeDatalogServiceCollectionExtensions
 
     public static IServiceCollection AddChangeDatalogDalSql(this IServiceCollection services, Action<ChangeDataLogSqlOptions> setupAction)
     {
-        services.AddScoped<IEntityChageInterceptorItemRepository, DapperEntityChageInterceptorItemRepository>();
+        services.AddScoped<IEntityChangeInterceptorItemRepository, DapperEntityChageInterceptorItemRepository>();
         services.Configure(setupAction);
         return services;
     }

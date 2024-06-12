@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 namespace Extensions.ChangeDataLog.Abstractions;
-public class EntityChageInterceptorItem
+public class EntityChangeInterceptorItem
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public string ContextName { get; set; }

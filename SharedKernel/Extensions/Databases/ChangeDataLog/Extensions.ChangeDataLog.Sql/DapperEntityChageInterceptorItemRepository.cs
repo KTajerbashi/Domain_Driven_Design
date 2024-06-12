@@ -6,7 +6,7 @@ using System.Data;
 using Extensions.ChangeDataLog.Abstractions;
 
 namespace Extensions.ChangeDataLog.Sql;
-public class DapperEntityChageInterceptorItemRepository : IEntityChageInterceptorItemRepository
+public class DapperEntityChageInterceptorItemRepository : IEntityChangeInterceptorItemRepository
 {
     private readonly ChangeDataLogSqlOptions _options;
     private readonly IDbConnection _dbConnection;
@@ -27,7 +27,7 @@ public class DapperEntityChageInterceptorItemRepository : IEntityChageIntercepto
         InsertPropertyChangeLogItemCommand = string.Format(InsertPropertyChangeLogItemCommand, _options.SchemaName, _options.PropertyTableName);
     }
 
-    public void Save(List<EntityChageInterceptorItem> entityChageInterceptorItems)
+    public void Save(List<EntityChangeInterceptorItem> entityChageInterceptorItems)
     {
         foreach (var item in entityChageInterceptorItems)
         {
@@ -49,7 +49,7 @@ public class DapperEntityChageInterceptorItemRepository : IEntityChageIntercepto
 
     }
 
-    public Task SaveAsync(List<EntityChageInterceptorItem> entityChageInterceptorItems)
+    public Task SaveAsync(List<EntityChangeInterceptorItem> entityChageInterceptorItems)
     {
         throw new NotImplementedException();
     }

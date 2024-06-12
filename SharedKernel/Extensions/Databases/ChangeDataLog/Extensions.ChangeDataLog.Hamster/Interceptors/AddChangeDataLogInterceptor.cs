@@ -27,17 +27,17 @@ public class AddChangeDataLogInterceptor : SaveChangesInterceptor
     {
         var changeTracker = eventData.Context.ChangeTracker;
         var userInfoService = eventData.Context.GetService<IUserInfoService>();
-        var itemRepository = eventData.Context.GetService<IEntityChageInterceptorItemRepository>();
+        var itemRepository = eventData.Context.GetService<IEntityChangeInterceptorItemRepository>();
         var options = eventData.Context.GetService<IOptions<ChangeDataLogHamsterOptions>>().Value;
         var changedEntities = GetChangedEntities(changeTracker);
         var transactionId = Guid.NewGuid().ToString();
         var dateOfAccured = DateTime.Now;
 
-        var entityChageInterceptorItems = new List<EntityChageInterceptorItem>();
+        var entityChageInterceptorItems = new List<EntityChangeInterceptorItem>();
 
         foreach (var entity in changedEntities)
         {
-            var entityChageInterceptorItem = new EntityChageInterceptorItem
+            var entityChageInterceptorItem = new EntityChangeInterceptorItem
             {
                 Id = Guid.NewGuid(),
                 TransactionId = transactionId,

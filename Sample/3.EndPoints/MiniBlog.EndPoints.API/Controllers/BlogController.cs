@@ -7,6 +7,11 @@ namespace MiniBlog.EndPoints.API.Controllers
     [Route("api/[controller]")]
     public class BlogController : BaseController
     {
+        private readonly ILogger<BlogController> logger;
+        public BlogController(ILogger<BlogController> logger)
+        {
+            this.logger = logger;
+        }
         #region Test Methods
         [HttpPost("Create")]
         public async Task<IActionResult> CreatePerson(CreatePerson createPerson)
@@ -14,13 +19,13 @@ namespace MiniBlog.EndPoints.API.Controllers
             try
             {
                 //Person
+                return Ok(ModelState);
             }
             catch (Exception)
             {
 
                 throw;
             }
-            return Ok(ModelState);
         }
         [HttpPut("Update")]
         public async Task<IActionResult> UpdatePerson()
