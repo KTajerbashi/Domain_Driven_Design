@@ -31,6 +31,7 @@ namespace DDD.EndPoints.Web.Library.Controllers
             var bytes = serializer.ListToExcelByteArray(list);
             return File(bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
+      
         /// <summary>
         /// خروجی اکسل
         /// </summary>
@@ -61,6 +62,7 @@ namespace DDD.EndPoints.Web.Library.Controllers
             }
             return BadRequest(result.Messages);
         }
+        
         /// <summary>
         /// ایجاد
         /// </summary>
@@ -138,6 +140,7 @@ namespace DDD.EndPoints.Web.Library.Controllers
             }
             return BadRequest(result.Messages);
         }
+        
         /// <summary>
         /// حذف کردن
         /// </summary>

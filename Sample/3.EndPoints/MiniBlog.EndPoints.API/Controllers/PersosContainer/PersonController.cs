@@ -9,7 +9,7 @@ namespace MiniBlog.EndPoints.API.Controllers.PersosContainer
     public class PersonController : BaseController
     {
         [HttpPost("/CreatePerson")]
-        public async Task<IActionResult> CreatePerson(CreatePerson createPerson)
+        public async Task<IActionResult> CreatePerson(CreatePerson createPerson) 
         {
             return await Create<CreatePerson,int>(createPerson);
         }
