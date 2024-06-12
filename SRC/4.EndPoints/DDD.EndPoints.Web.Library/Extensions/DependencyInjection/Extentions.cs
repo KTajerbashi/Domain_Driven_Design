@@ -19,9 +19,9 @@ public static class Extensions
 
         var assemblies = GetAssemblies(assemblyNamesForSearch);
         services
-            .AddZaminApplicationServices(assemblies)
-            .AddZaminDataAccess(assemblies)
-            .AddZaminUntilityServices()
+            .AddApplicationServices(assemblies)
+            .AddDataAccess(assemblies)
+            .AddUntilityServices()
             .AddCustomeDepenecies(assemblies);
         return services;
     }

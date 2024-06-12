@@ -11,10 +11,10 @@ namespace Registration.Extensions.DependencyInjection;
 
 public static class SwaggerServiceCollectionExtensions
 {
-    public static IServiceCollection AddZaminSwagger(this IServiceCollection services, IConfiguration configuration, string sectionName)
-        => services.AddZaminSwagger(configuration.GetSection(sectionName));
+    public static IServiceCollection AddKernelSwagger(this IServiceCollection services, IConfiguration configuration, string sectionName)
+        => services.AddKernelSwagger(configuration.GetSection(sectionName));
 
-    public static IServiceCollection AddZaminSwagger(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddKernelSwagger(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<SwaggerOption>(configuration);
         var option = configuration.Get<SwaggerOption>() ?? new();
@@ -22,7 +22,7 @@ public static class SwaggerServiceCollectionExtensions
         return services.AddService(option);
     }
 
-    public static IServiceCollection AddZaminSwagger(this IServiceCollection services, Action<SwaggerOption> action)
+    public static IServiceCollection AddKernelSwagger(this IServiceCollection services, Action<SwaggerOption> action)
     {
         services.Configure(action);
         var option = new SwaggerOption();
@@ -60,7 +60,7 @@ public static class SwaggerServiceCollectionExtensions
         return services;
     }
 
-    public static void UseZaminSwagger(this WebApplication app)
+    public static void UseKernelSwagger(this WebApplication app)
     {
         var option = app.Services.GetRequiredService<IOptions<SwaggerOption>>().Value;
         if (option.Enabled)

@@ -19,7 +19,7 @@ public static class AddApplicationServicesExtensions
     /// <param name="services"></param>
     /// <param name="assembliesForSearch"></param>
     /// <returns></returns>
-    public static IServiceCollection AddZaminApplicationServices(this IServiceCollection services,
+    public static IServiceCollection AddApplicationServices(this IServiceCollection services,
                                                                  IEnumerable<Assembly> assembliesForSearch)
         => services.AddCommandHandlers(assembliesForSearch)
                    .AddCommandDispatcherDecorators()

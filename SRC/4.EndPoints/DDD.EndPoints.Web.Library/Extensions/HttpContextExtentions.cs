@@ -15,7 +15,7 @@ namespace DDD.EndPoints.Web.Library.Extensions
             (IQueryDispatcher)httpContext.RequestServices.GetService(typeof(IQueryDispatcher));
         public static IEventDispatcher EventDispatcher(this HttpContext httpContext) =>
             (IEventDispatcher)httpContext.RequestServices.GetService(typeof(IEventDispatcher));
-        public static UtilitiesServices ZaminApplicationContext(this HttpContext httpContext) =>
+        public static UtilitiesServices ApplicationContext(this HttpContext httpContext) =>
             (UtilitiesServices)httpContext.RequestServices.GetService(typeof(UtilitiesServices));
     }
 }

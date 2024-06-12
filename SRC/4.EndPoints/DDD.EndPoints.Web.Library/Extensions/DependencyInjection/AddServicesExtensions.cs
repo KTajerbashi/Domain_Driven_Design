@@ -1,9 +1,9 @@
 ﻿using DDD.Utilities.Library;
 
 namespace DDD.EndPoints.Web.Library.Extensions.DependencyInjection;
-public static class AddZaminServicesExtensions
+public static class AddServicesExtensions
 {
-    public static IServiceCollection AddZaminUntilityServices(
+    public static IServiceCollection AddUntilityServices(
         this IServiceCollection services)
     {
         services.AddTransient<UtilitiesServices>();

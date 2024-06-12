@@ -1,14 +1,9 @@
-﻿using DDD.Core.Contracts.Library.ApplicationServices.Commands;
-using DDD.Core.Contracts.Library.ApplicationServices.Events;
-using DDD.Core.Contracts.Library.ApplicationServices.Queries;
-using DDD.Core.RequestResponse.Library.Commands;
-using DDD.Core.RequestResponse.Library.Common;
-using DDD.Core.RequestResponse.Library.Queries;
+﻿using DDD.Core.Contracts.Library.ApplicationServices.Events;
 using DDD.EndPoints.Web.Library.Extensions;
 using DDD.Utilities.Library;
+using Extensions.Serializers.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
-using Extensions.Serializers.Abstractions;
 
 namespace DDD.EndPoints.Web.Library.Controllers
 {
@@ -17,7 +12,7 @@ namespace DDD.EndPoints.Web.Library.Controllers
         protected ICommandDispatcher CommandDispatcher => HttpContext.CommandDispatcher();
         protected IQueryDispatcher QueryDispatcher => HttpContext.QueryDispatcher();
         protected IEventDispatcher EventDispatcher => HttpContext.EventDispatcher();
-        protected UtilitiesServices ZaminApplicationContext => HttpContext.ZaminApplicationContext();
+        protected UtilitiesServices ApplicationContext => HttpContext.ApplicationContext();
 
         /// <summary>
         /// خروجی اکسل
@@ -31,7 +26,7 @@ namespace DDD.EndPoints.Web.Library.Controllers
             var bytes = serializer.ListToExcelByteArray(list);
             return File(bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
-      
+
         /// <summary>
         /// خروجی اکسل
         /// </summary>
@@ -62,7 +57,7 @@ namespace DDD.EndPoints.Web.Library.Controllers
             }
             return BadRequest(result.Messages);
         }
-        
+
         /// <summary>
         /// ایجاد
         /// </summary>
@@ -140,7 +135,7 @@ namespace DDD.EndPoints.Web.Library.Controllers
             }
             return BadRequest(result.Messages);
         }
-        
+
         /// <summary>
         /// حذف کردن
         /// </summary>

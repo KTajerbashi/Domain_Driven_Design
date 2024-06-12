@@ -7,7 +7,7 @@ namespace DDD.EndPoints.Web.Library.Extensions.DependencyInjection;
 /// </summary>
 public static class AddDataAccessExtentsions
 {
-    public static IServiceCollection AddZaminDataAccess(
+    public static IServiceCollection AddDataAccess(
         this IServiceCollection services,
         IEnumerable<Assembly> assembliesForSearch) =>
         services.AddRepositories(assembliesForSearch).AddUnitOfWorks(assembliesForSearch);
