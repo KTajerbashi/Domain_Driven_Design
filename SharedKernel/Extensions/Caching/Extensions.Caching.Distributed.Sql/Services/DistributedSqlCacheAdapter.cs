@@ -23,6 +23,14 @@ public class DistributedSqlCacheAdapter : ICacheAdapter
         _logger.LogInformation("DistributedCache Sql Adapter Start working");
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TInput"></typeparam>
+    /// <param name="key"></param>
+    /// <param name="obj"></param>
+    /// <param name="absoluteExpiration"></param>
+    /// <param name="slidingExpiration"></param>
     public void Add<TInput>(string key, TInput obj, DateTime? absoluteExpiration, TimeSpan? slidingExpiration)
     {
         _logger.LogTrace("DistributedCache Sql Adapter Cache {obj} with key : {key} " +
@@ -44,6 +52,12 @@ public class DistributedSqlCacheAdapter : ICacheAdapter
         _cache.Set(key, Encoding.UTF8.GetBytes(_serializer.Serialize(obj)), option);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TOutput"></typeparam>
+    /// <param name="key"></param>
+    /// <returns></returns>
     public TOutput Get<TOutput>(string key)
     {
         var result = _cache.GetString(key);
@@ -64,6 +78,10 @@ public class DistributedSqlCacheAdapter : ICacheAdapter
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="key"></param>
     public void RemoveCache(string key)
     {
         _logger.LogTrace("DistributedCache Sql Adapter Remove Cache with key : {key}", key);

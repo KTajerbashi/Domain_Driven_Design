@@ -6,6 +6,6 @@ namespace Extensions.Caching.InMemory.Extensions.DependencyInjection;
 
 public static class InMemoryCachingServiceCollectionExtensions
 {
-    public static IServiceCollection AddInMemoryCaching(this IServiceCollection services)
+    public static IServiceCollection AddKernelInMemoryCaching(this IServiceCollection services)
         => services.AddMemoryCache().AddTransient<ICacheAdapter, InMemoryCacheAdapter>();
 }

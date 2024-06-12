@@ -30,6 +30,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\SharedKernel\Extensions\Caching\Extensions.Caching.Distributed.Redis\Extensions.Caching.Distributed.Redis.csproj" />
+    <ProjectReference Include="..\..\..\SharedKernel\Extensions\Caching\Extensions.Caching.Distributed.Sql\Extensions.Caching.Distributed.Sql.csproj" />
     <ProjectReference Include="..\..\..\SharedKernel\Extensions\Caching\Extensions.Caching.InMemory\Extensions.Caching.InMemory.csproj" />
     <ProjectReference Include="..\..\..\SharedKernel\Extensions\Events\Extensions.Events.PollingPublisher\Extensions.Events.PollingPublisher.csproj" />
     <ProjectReference Include="..\..\..\SharedKernel\Extensions\MessageBus\Extensions.MessageBus.RabbitMQ\Extensions.MessageBus.RabbitMQ.csproj" />

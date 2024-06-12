@@ -12,6 +12,8 @@ using Serilog;
 using Extensions.ObjectMappers.AutoMapper.Extensions.DependencyInjection;
 using Extensions.Serializers.Microsoft.Extensions.DependencyInjection;
 using Extensions.Caching.InMemory.Extensions.DependencyInjection;
+using Extensions.Caching.Distributed.Sql.Extensions.DependencyInjection;
+using Extensions.Caching.Distributed.Redis.Extensions.DependencyInjection;
 
 
 
@@ -58,9 +60,12 @@ namespace MiniBlog.EndPoints.API.Extensions
                 //zamin
                 builder.Services.AddAutoMapperProfiles(configuration, "AutoMapper");
 
-                //zamin
-                builder.Services.AddInMemoryCaching();
-                //builder.Services.AddZaminSqlDistributedCache(configuration, "SqlDistributedCache");
+                //Kernel
+                builder.Services.AddKernelInMemoryCaching();
+                //builder.Services.AddKernelSqlDistributedCache(configuration, "SqlDistributedCache");
+                //builder.Services.AddKernelRedisDistributedCache(configuration,"RedisDistributedCache");
+
+
 
                 //CommandDbContext
                 builder.Services.AddDbContext<MiniBlogCommandsDbContext>(

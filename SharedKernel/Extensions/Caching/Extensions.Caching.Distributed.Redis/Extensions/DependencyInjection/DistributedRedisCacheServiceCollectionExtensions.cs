@@ -9,12 +9,12 @@ namespace Extensions.Caching.Distributed.Redis.Extensions.DependencyInjection;
 
 public static class DistributedRedisCacheServiceCollectionExtensions
 {
-    public static IServiceCollection AddRedisDistributedCache(this IServiceCollection services,
+    public static IServiceCollection AddKernelRedisDistributedCache(this IServiceCollection services,
                                                                    IConfiguration configuration,
                                                                    string sectionName)
-        => services.AddRedisDistributedCache(configuration.GetSection(sectionName));
+        => services.AddKernelRedisDistributedCache(configuration.GetSection(sectionName));
 
-    public static IServiceCollection AddRedisDistributedCache(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddKernelRedisDistributedCache(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddTransient<ICacheAdapter, DistributedRedisCacheAdapter>();
         services.Configure<DistributedRedisCacheOptions>(configuration);
@@ -30,7 +30,7 @@ public static class DistributedRedisCacheServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection AddRedisDistributedCache(this IServiceCollection services,
+    public static IServiceCollection AddKernelRedisDistributedCache(this IServiceCollection services,
                                                               Action<DistributedRedisCacheOptions> setupAction)
     {
         services.AddTransient<ICacheAdapter, DistributedRedisCacheAdapter>();

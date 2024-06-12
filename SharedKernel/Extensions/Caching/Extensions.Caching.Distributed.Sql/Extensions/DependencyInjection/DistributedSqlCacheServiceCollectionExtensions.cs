@@ -11,12 +11,24 @@ namespace Extensions.Caching.Distributed.Sql.Extensions.DependencyInjection;
 
 public static class DistributedSqlCacheServiceCollectionExtensions
 {
-    public static IServiceCollection AddSqlDistributedCache(this IServiceCollection services,
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="configuration"></param>
+    /// <param name="sectionName"></param>
+    /// <returns></returns>
+    public static IServiceCollection AddKernelSqlDistributedCache(this IServiceCollection services,
                                                                   IConfiguration configuration,
                                                                   string sectionName)
-        => services.AddSqlDistributedCache(configuration.GetSection(sectionName));
-
-    public static IServiceCollection AddSqlDistributedCache(this IServiceCollection services, IConfiguration configuration)
+        => services.AddKernelSqlDistributedCache(configuration.GetSection(sectionName));
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="configuration"></param>
+    /// <returns></returns>
+    public static IServiceCollection AddKernelSqlDistributedCache(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddTransient<ICacheAdapter, DistributedSqlCacheAdapter>();
         services.Configure<DistributedSqlCacheOptions>(configuration);
@@ -36,7 +48,13 @@ public static class DistributedSqlCacheServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection AddSqlDistributedCache(this IServiceCollection services,
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="setupAction"></param>
+    /// <returns></returns>
+    public static IServiceCollection AddKernelSqlDistributedCache(this IServiceCollection services,
                                                             Action<DistributedSqlCacheOptions> setupAction)
     {
         services.AddTransient<ICacheAdapter, DistributedSqlCacheAdapter>();
@@ -57,24 +75,29 @@ public static class DistributedSqlCacheServiceCollectionExtensions
 
         return services;
     }
-
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="options"></param>
     private static void CreateTable(DistributedSqlCacheOptions options)
     {
         string table = options.TableName;
         string schema = options.SchemaName;
 
         string createTable =
-            $"IF (NOT EXISTS (SELECT *  FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '{schema}' AND  TABLE_NAME = '{table}' ))" + "\n" +
-            $"Begin" + "\n" +
-            $"CREATE TABLE [{schema}].[{table}](" + "\n" +
-            $"[Id][nvarchar](449) COLLATE SQL_Latin1_General_CP1_CS_AS NOT NULL," + "\n" +
-            $"[Value] [varbinary](max)NOT NULL," + "\n" +
-            $"[ExpiresAtTime] [datetimeoffset](7) NOT NULL," + "\n" +
-            $"[SlidingExpirationInSeconds] [bigint] NULL," + "\n" +
-            $"[AbsoluteExpiration] [datetimeoffset](7) NULL," + "\n" +
-            $"PRIMARY KEY(Id)," + "\n" +
-            $"INDEX Index_ExpiresAtTime NONCLUSTERED (ExpiresAtTime))" + "\n" +
-            $"End";
+            $@"
+IF (NOT EXISTS (SELECT *  FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '{schema}' AND  TABLE_NAME = '{table}' ))
+Begin
+CREATE TABLE [{schema}].[{table}](
+[Id][nvarchar](449) COLLATE SQL_Latin1_General_CP1_CS_AS NOT NULL,
+[Value] [varbinary](max)NOT NULL,
+[ExpiresAtTime] [datetimeoffset](7) NOT NULL,
+[SlidingExpirationInSeconds] [bigint] NULL,
+[AbsoluteExpiration] [datetimeoffset](7) NULL,
+PRIMARY KEY(Id),
+INDEX Index_ExpiresAtTime NONCLUSTERED (ExpiresAtTime))
+End;
+";
 
         var dbConnection = new SqlConnection(options.ConnectionString);
         dbConnection.Execute(createTable);
