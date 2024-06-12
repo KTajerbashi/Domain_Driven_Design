@@ -12,7 +12,7 @@ using System.Diagnostics.Metrics;
 namespace OpenTelemetryRegistration.Extensions.DependencyInjection;
 public static class OpenTeletmetryServiceCollectionExtensions
 {
-    public static IServiceCollection AddZaminObservabilitySupport(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddObservabilitySupport(this IServiceCollection services, IConfiguration configuration)
     {
 
         services.Configure<OpenTeletmetryOptions>(configuration);
@@ -21,13 +21,13 @@ public static class OpenTeletmetryServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection AddZaminObservabilitySupport(this IServiceCollection services, IConfiguration configuration, string sectionName)
+    public static IServiceCollection AddObservabilitySupport(this IServiceCollection services, IConfiguration configuration, string sectionName)
     {
-        services.AddZaminObservabilitySupport(configuration.GetSection(sectionName));
+        services.AddObservabilitySupport(configuration.GetSection(sectionName));
         return services;
     }
 
-    public static IServiceCollection AddZaminObservabilitySupport(this IServiceCollection services, Action<OpenTeletmetryOptions> setupAction)
+    public static IServiceCollection AddObservabilitySupport(this IServiceCollection services, Action<OpenTeletmetryOptions> setupAction)
     {
         services.Configure(setupAction);
         RegisterTraceServices(services);
@@ -79,7 +79,7 @@ public static class OpenTeletmetryServiceCollectionExtensions
     }
 
 
-    public static IApplicationBuilder UseZaminObservabilityMiddlewares(this IApplicationBuilder app)
+    public static IApplicationBuilder UseObservabilityMiddlewares(this IApplicationBuilder app)
     {
         app.UseMiddleware<ResponseMetricMiddleware>();
         app.UseOpenTelemetryPrometheusScrapingEndpoint();

@@ -5,10 +5,10 @@ using SerilogRegistration.Options;
 using System.Reflection;
 
 namespace SerilogRegistration.Enrichers;
-public class ZaminApplicaitonEnricher : ILogEventEnricher
+public class ApplicaitonEnricher : ILogEventEnricher
 {
     private readonly SerilogApplicationEnricherOptions _options;
-    public ZaminApplicaitonEnricher(IOptions<SerilogApplicationEnricherOptions> options)
+    public ApplicaitonEnricher(IOptions<SerilogApplicationEnricherOptions> options)
     {
         _options = options.Value;
     }

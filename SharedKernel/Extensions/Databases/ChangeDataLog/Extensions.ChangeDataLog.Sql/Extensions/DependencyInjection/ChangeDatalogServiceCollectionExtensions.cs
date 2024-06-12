@@ -6,22 +6,22 @@ using Extensions.ChangeDataLog.Abstractions;
 
 namespace Extensions.ChangeDataLog.Sql.Extensions.DependencyInjection;
 
-public static class ChageDatalogServiceCollectionExtensions
+public static class ChangeDatalogServiceCollectionExtensions
 {
-    public static IServiceCollection AddZaminChageDatalogDalSql(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddChangeDatalogDalSql(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<IEntityChageInterceptorItemRepository, DapperEntityChageInterceptorItemRepository>();
         services.Configure<ChangeDataLogSqlOptions>(configuration);
         return services;
     }
 
-    public static IServiceCollection AddZaminChageDatalogDalSql(this IServiceCollection services, IConfiguration configuration, string sectionName)
+    public static IServiceCollection AddChangeDatalogDalSql(this IServiceCollection services, IConfiguration configuration, string sectionName)
     {
-        services.AddZaminChageDatalogDalSql(configuration.GetSection(sectionName));
+        services.AddChangeDatalogDalSql(configuration.GetSection(sectionName));
         return services;
     }
 
-    public static IServiceCollection AddZaminChageDatalogDalSql(this IServiceCollection services, Action<ChangeDataLogSqlOptions> setupAction)
+    public static IServiceCollection AddChangeDatalogDalSql(this IServiceCollection services, Action<ChangeDataLogSqlOptions> setupAction)
     {
         services.AddScoped<IEntityChageInterceptorItemRepository, DapperEntityChageInterceptorItemRepository>();
         services.Configure(setupAction);

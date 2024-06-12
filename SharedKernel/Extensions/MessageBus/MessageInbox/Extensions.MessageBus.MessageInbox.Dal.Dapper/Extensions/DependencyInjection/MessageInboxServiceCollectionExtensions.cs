@@ -8,20 +8,20 @@ namespace Extensions.MessageBus.MessageInbox.Dal.Dapper.Extensions.DependencyInj
 
 public static class MessageInboxServiceCollectionExtensions
 {
-    public static IServiceCollection AddZaminMessageInboxDalSql(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddMessageInboxDalSql(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<MessageInboxDalDapperOptions>(configuration);
         AddServices(services);
         return services;
     }
 
-    public static IServiceCollection AddZaminMessageInboxDalSql(this IServiceCollection services, IConfiguration configuration, string sectionName)
+    public static IServiceCollection AddMessageInboxDalSql(this IServiceCollection services, IConfiguration configuration, string sectionName)
     {
-        services.AddZaminMessageInboxDalSql(configuration.GetSection(sectionName));
+        services.AddMessageInboxDalSql(configuration.GetSection(sectionName));
         return services;
     }
 
-    public static IServiceCollection AddZaminMessageInboxDalSql(this IServiceCollection services, Action<MessageInboxDalDapperOptions> setupAction)
+    public static IServiceCollection AddMessageInboxDalSql(this IServiceCollection services, Action<MessageInboxDalDapperOptions> setupAction)
     {
         services.Configure(setupAction);
         AddServices(services);

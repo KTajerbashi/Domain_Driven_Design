@@ -10,20 +10,20 @@ namespace Extensions.MessageBus.RabbitMQ.Extensions.DependencyInjection;
 
 public static class RabbitMqMessageBusServiceCollectionExtensions
 {
-    public static IServiceCollection AddZaminRabbitMqMessageBus(this IServiceCollection services, IConfiguration configuration, List<Type>? commands = null, Dictionary<string, List<Type>>? events = null)
+    public static IServiceCollection AddRabbitMqMessageBus(this IServiceCollection services, IConfiguration configuration, List<Type>? commands = null, Dictionary<string, List<Type>>? events = null)
     {
         services.Configure<RabbitMqOptions>(configuration);
         services.AddServices();
         return services;
     }
 
-    public static IServiceCollection AddZaminRabbitMqMessageBus(this IServiceCollection services, IConfiguration configuration, string sectionName, List<Type>? commands = null, Dictionary<string, List<Type>>? events = null)
+    public static IServiceCollection AddRabbitMqMessageBus(this IServiceCollection services, IConfiguration configuration, string sectionName, List<Type>? commands = null, Dictionary<string, List<Type>>? events = null)
     {
-        services.AddZaminRabbitMqMessageBus(configuration.GetSection(sectionName));
+        services.AddRabbitMqMessageBus(configuration.GetSection(sectionName));
         return services;
     }
 
-    public static IServiceCollection AddZaminRabbitMqMessageBus(this IServiceCollection services, Action<RabbitMqOptions> setupAction, List<Type>? commands = null, Dictionary<string, List<Type>>? events = null)
+    public static IServiceCollection AddRabbitMqMessageBus(this IServiceCollection services, Action<RabbitMqOptions> setupAction, List<Type>? commands = null, Dictionary<string, List<Type>>? events = null)
     {
         services.Configure(setupAction);
         services.AddServices();

@@ -13,7 +13,7 @@ public static class Extensions
     /// <param name="services"></param>
     /// <param name="assemblyNamesForSearch"></param>
     /// <returns></returns>
-    public static IServiceCollection AddZaminDependencies(this IServiceCollection services,
+    public static IServiceCollection AddDependencies(this IServiceCollection services,
         params string[] assemblyNamesForSearch)
     {
 

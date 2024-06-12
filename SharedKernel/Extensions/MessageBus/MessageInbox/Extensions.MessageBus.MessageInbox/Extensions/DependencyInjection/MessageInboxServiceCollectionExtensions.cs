@@ -8,20 +8,20 @@ namespace Extensions.MessageBus.MessageInbox.Extensions.DependencyInjection;
 
 public static class MessageInboxServiceCollectionExtensions
 {
-    public static IServiceCollection AddZaminMessageInbox(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddMessageInbox(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<MessageInboxOptions>(configuration);
         AddServices(services);
         return services;
     }
 
-    public static IServiceCollection AddZaminMessageInbox(this IServiceCollection services, IConfiguration configuration, string sectionName)
+    public static IServiceCollection AddMessageInbox(this IServiceCollection services, IConfiguration configuration, string sectionName)
     {
-        services.AddZaminMessageInbox(configuration.GetSection(sectionName));
+        services.AddMessageInbox(configuration.GetSection(sectionName));
         return services;
     }
 
-    public static IServiceCollection AddZaminMessageInbox(this IServiceCollection services, Action<MessageInboxOptions> setupAction)
+    public static IServiceCollection AddMessageInbox(this IServiceCollection services, Action<MessageInboxOptions> setupAction)
     {
         services.Configure(setupAction);
         AddServices(services);

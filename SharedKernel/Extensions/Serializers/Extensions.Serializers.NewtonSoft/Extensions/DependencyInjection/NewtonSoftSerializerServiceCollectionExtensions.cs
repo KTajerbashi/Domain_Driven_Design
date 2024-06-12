@@ -6,6 +6,6 @@ namespace Extensions.Serializers.NewtonSoft.Extensions.DependencyInjection;
 
 public static class NewtonSoftSerializerServiceCollectionExtensions
 {
-    public static IServiceCollection AddZaminNewtonSoftSerializer(this IServiceCollection services)
+    public static IServiceCollection AddSNewtonSoftSerializer(this IServiceCollection services)
         => services.AddSingleton<IJsonSerializer, NewtonSoftSerializer>();
 }

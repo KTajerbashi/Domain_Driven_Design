@@ -9,7 +9,7 @@ namespace Extensions.UsersManagement.Extensions.DependencyInjection;
 
 public static class UserInfoServiceCollectionExtensions
 {
-    public static IServiceCollection AddZaminWebUserInfoService(this IServiceCollection services, IConfiguration configuration, bool useFake = false)
+    public static IServiceCollection AddWebUserInfoService(this IServiceCollection services, IConfiguration configuration, bool useFake = false)
     {
         if (useFake)
         {
@@ -26,13 +26,13 @@ public static class UserInfoServiceCollectionExtensions
     }
 
 
-    public static IServiceCollection AddZaminWebUserInfoService(this IServiceCollection services, IConfiguration configuration, string sectionName, bool useFake = false)
+    public static IServiceCollection AddWebUserInfoService(this IServiceCollection services, IConfiguration configuration, string sectionName, bool useFake = false)
     {
-        services.AddZaminWebUserInfoService(configuration.GetSection(sectionName), useFake);
+        services.AddWebUserInfoService(configuration.GetSection(sectionName), useFake);
         return services;
     }
 
-    public static IServiceCollection AddZaminWebUserInfoService(this IServiceCollection services, Action<UserManagementOptions> setupAction, bool useFake = false)
+    public static IServiceCollection AddWebUserInfoService(this IServiceCollection services, Action<UserManagementOptions> setupAction, bool useFake = false)
     {
         if (useFake)
         {

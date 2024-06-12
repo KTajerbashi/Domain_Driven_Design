@@ -4,11 +4,11 @@ using Extensions.UsersManagement.Abstractions;
 
 namespace SerilogRegistration.Enrichers;
 
-public class ZaminUserInfoEnricher : ILogEventEnricher
+public class UserInfoEnricher : ILogEventEnricher
 {
     private readonly IUserInfoService _userInfoService;
 
-    public ZaminUserInfoEnricher(IUserInfoService userInfoService)
+    public UserInfoEnricher(IUserInfoService userInfoService)
     {
         _userInfoService = userInfoService;
     }

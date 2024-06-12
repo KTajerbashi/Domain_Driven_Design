@@ -6,6 +6,6 @@ namespace Extensions.Serializers.Microsoft.Extensions.DependencyInjection;
 
 public static class MicrosoftSerializerServiceCollectionExtensions
 {
-    public static IServiceCollection AddZaminMicrosoftSerializer(this IServiceCollection services)
+    public static IServiceCollection AddMicrosoftSerializer(this IServiceCollection services)
         => services.AddSingleton<IJsonSerializer, MicrosoftSerializer>();
 }

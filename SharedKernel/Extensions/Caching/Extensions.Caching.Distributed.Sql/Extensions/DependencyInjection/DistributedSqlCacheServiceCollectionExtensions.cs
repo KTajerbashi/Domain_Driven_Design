@@ -11,12 +11,12 @@ namespace Extensions.Caching.Distributed.Sql.Extensions.DependencyInjection;
 
 public static class DistributedSqlCacheServiceCollectionExtensions
 {
-    public static IServiceCollection AddZaminSqlDistributedCache(this IServiceCollection services,
+    public static IServiceCollection AddSqlDistributedCache(this IServiceCollection services,
                                                                   IConfiguration configuration,
                                                                   string sectionName)
-        => services.AddZaminSqlDistributedCache(configuration.GetSection(sectionName));
+        => services.AddSqlDistributedCache(configuration.GetSection(sectionName));
 
-    public static IServiceCollection AddZaminSqlDistributedCache(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddSqlDistributedCache(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddTransient<ICacheAdapter, DistributedSqlCacheAdapter>();
         services.Configure<DistributedSqlCacheOptions>(configuration);
@@ -36,7 +36,7 @@ public static class DistributedSqlCacheServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection AddZaminSqlDistributedCache(this IServiceCollection services,
+    public static IServiceCollection AddSqlDistributedCache(this IServiceCollection services,
                                                             Action<DistributedSqlCacheOptions> setupAction)
     {
         services.AddTransient<ICacheAdapter, DistributedSqlCacheAdapter>();

@@ -34,8 +34,8 @@ public static class SerilogServiceCollectionExtensions
 
         List<ILogEventEnricher> logEventEnrichers = new();
 
-        builder.Services.AddTransient<ZaminUserInfoEnricher>();
-        builder.Services.AddTransient<ZaminApplicaitonEnricher>();
+        builder.Services.AddTransient<UserInfoEnricher>();
+        builder.Services.AddTransient<ApplicaitonEnricher>();
         foreach (var enricherType in enrichersType)
         {
             builder.Services.AddTransient(enricherType);
@@ -43,8 +43,8 @@ public static class SerilogServiceCollectionExtensions
 
         builder.Host.UseSerilog((ctx, services, lc) =>
         {
-            logEventEnrichers.Add(services.GetRequiredService<ZaminUserInfoEnricher>());
-            logEventEnrichers.Add(services.GetRequiredService<ZaminApplicaitonEnricher>());
+            logEventEnrichers.Add(services.GetRequiredService<UserInfoEnricher>());
+            logEventEnrichers.Add(services.GetRequiredService<ApplicaitonEnricher>());
             foreach (var enricherType in enrichersType)
             {
                 logEventEnrichers.Add(services.GetRequiredService(enricherType) as ILogEventEnricher);

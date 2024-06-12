@@ -17,7 +17,7 @@ public static class AddApiConfigurationExtensions
     public static IServiceCollection AddWebApiCore(this IServiceCollection services, params string[] assemblyNamesForLoad)
     {
         services.AddControllers().AddFluentValidation();
-        services.AddZaminDependencies(assemblyNamesForLoad);
+        services.AddDependencies(assemblyNamesForLoad);
 
         return services;
     }
@@ -27,7 +27,7 @@ public static class AddApiConfigurationExtensions
     /// </summary>
     /// <param name="app"></param>
 
-    public static void UseZaminApiExceptionHandler(this IApplicationBuilder app)
+    public static void UseApiExceptionHandler(this IApplicationBuilder app)
     {
         app.UseApiExceptionHandler(options =>
         {

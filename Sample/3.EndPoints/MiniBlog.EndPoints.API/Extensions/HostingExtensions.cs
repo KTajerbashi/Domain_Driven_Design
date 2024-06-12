@@ -41,10 +41,10 @@ namespace MiniBlog.EndPoints.API.Extensions
                 builder.Services.AddEndpointsApiExplorer();
 
                 //zamin
-                builder.Services.AddZaminWebUserInfoService(configuration, "WebUserInfo", true);
+                builder.Services.AddWebUserInfoService(configuration, "WebUserInfo", true);
 
                 //zamin
-                builder.Services.AddZaminParrotTranslator(configuration, "ParrotTranslator");
+                builder.Services.AddParrotTranslator(configuration, "ParrotTranslator");
 
                 //zamin
                 //builder.Services.AddSoftwarePartDetector(configuration, "SoftwarePart");
@@ -53,13 +53,13 @@ namespace MiniBlog.EndPoints.API.Extensions
                 builder.Services.AddNonValidatingValidator();
 
                 //zamin
-                builder.Services.AddZaminMicrosoftSerializer();
+                builder.Services.AddMicrosoftSerializer();
 
                 //zamin
-                builder.Services.AddZaminAutoMapperProfiles(configuration, "AutoMapper");
+                builder.Services.AddAutoMapperProfiles(configuration, "AutoMapper");
 
                 //zamin
-                builder.Services.AddZaminInMemoryCaching();
+                builder.Services.AddInMemoryCaching();
                 //builder.Services.AddZaminSqlDistributedCache(configuration, "SqlDistributedCache");
 
                 //CommandDbContext
@@ -104,7 +104,7 @@ namespace MiniBlog.EndPoints.API.Extensions
         public static WebApplication ConfigurePipeline(this WebApplication app)
         {
             //zamin
-            app.UseZaminApiExceptionHandler();
+            app.UseApiExceptionHandler();
 
             //Serilog
             app.UseSerilogRequestLogging();
