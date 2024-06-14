@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Extensions.ChangeDataLog.Sql.Options
+﻿namespace Extensions.ChangeDataLog.Sql.Options
 {
+    /// <summary>
+    /// پارامتر های کانفیگ سرویس جهت مدیریت ارتباط با پایگاه داده و جدول ذخیره کننده
+    /// </summary>
     public class ChangeDataLogSqlOptions
     {
         public string ConnectionString { get; set; } = string.Empty;

@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Extensions.ChangeDataLog.Sql.Options
+﻿namespace Extensions.ChangeDataLog.Sql.Options
 {
+    /// <summary>
+    /// پراپرتی های که نمیخواهیم در تغییرات ببینیم
+    /// </summary>
     public class ChangeDataLogHamsterOptions
     {
+        /// <summary>
+        /// نام هر فیلد که توی لیست مورد نظر باشد را در تغییرات لحاظ نمیکند
+        /// </summary>
         public List<string> propertyForReject { get; set; } = new List<string>
             {
                 "CreatedByUserId",
@@ -15,6 +15,9 @@ namespace Extensions.ChangeDataLog.Sql.Options
                 "ModifiedByUserId",
                 "ModifiedDateTime"
             };
+        /// <summary>
+        /// کلید بیزنسی
+        /// </summary>
         public string BusinessIdFieldName { get; set; } = "BusinessId";
 
     }

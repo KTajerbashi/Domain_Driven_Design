@@ -6,6 +6,12 @@ using System.Data;
 using Extensions.ChangeDataLog.Abstractions;
 
 namespace Extensions.ChangeDataLog.Sql;
+
+/// <summary>
+/// پیاده سازی انترسیپتور برای 
+/// SQL SERVER
+/// و ذخیره لاگ تغییرات روی پایگاه داده
+/// </summary>
 public class DapperEntityChageInterceptorItemRepository : IEntityChangeInterceptorItemRepository
 {
     private readonly ChangeDataLogSqlOptions _options;

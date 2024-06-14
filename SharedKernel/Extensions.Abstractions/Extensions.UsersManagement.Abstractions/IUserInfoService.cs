@@ -1,5 +1,8 @@
 ﻿namespace Extensions.UsersManagement.Abstractions;
 
+/// <summary>
+/// انتزاع دریافت کلاینت جاری درخواست
+/// </summary>
 public interface IUserInfoService
 {
     string GetUserAgent();

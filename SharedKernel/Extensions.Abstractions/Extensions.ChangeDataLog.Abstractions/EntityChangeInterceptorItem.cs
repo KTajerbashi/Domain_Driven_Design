@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Extensions.ChangeDataLog.Abstractions;
+﻿namespace Extensions.ChangeDataLog.Abstractions;
 public class EntityChangeInterceptorItem
 {
     public Guid Id { get; set; } = Guid.NewGuid();
@@ -13,7 +10,9 @@ public class EntityChangeInterceptorItem
     public string TransactionId { get; set; }
     public DateTime DateOfOccurrence { get; set; }
     public string ChangeType { get; set; }
-
+    /// <summary>
+    /// این لیست پراپرتی های که تغییر کرده را در خودش نگه میدارد
+    /// </summary>
     public List<PropertyChangeLogItem> PropertyChangeLogItems { get; set; } = new List<PropertyChangeLogItem>();
     public void AddPropertyChangeItem(string propertyName, string value)
     {

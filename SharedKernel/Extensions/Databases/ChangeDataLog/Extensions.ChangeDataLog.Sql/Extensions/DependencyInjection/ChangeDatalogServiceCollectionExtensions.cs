@@ -1,11 +1,13 @@
-﻿using Extensions.ChangeDataLog.Sql.Extensions.DependencyInjection;
+﻿using Extensions.ChangeDataLog.Abstractions;
 using Extensions.ChangeDataLog.Sql.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Extensions.ChangeDataLog.Abstractions;
 
 namespace Extensions.ChangeDataLog.Sql.Extensions.DependencyInjection;
 
+/// <summary>
+/// تزریق کننده سرویس تغییرات
+/// </summary>
 public static class ChangeDatalogServiceCollectionExtensions
 {
     public static IServiceCollection AddChangeDatalogDalSql(this IServiceCollection services, IConfiguration configuration)
