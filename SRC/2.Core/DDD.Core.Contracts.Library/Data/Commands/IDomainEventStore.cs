@@ -3,7 +3,9 @@ using DDD.Core.Domain.Library.Events;
 
 namespace DDD.Core.Contracts.Library.Data.Commands;
 /// <summary>
-/// در صورت نیاز به ذخیره و بازیابی eventها از این اینترفیس استفاده می‌شود.
+/// در صورت نیاز به ذخیره و بازیابی 
+/// event
+/// ها از این اینترفیس استفاده می‌شود.
 /// </summary>
 public interface IDomainEventStore
 {

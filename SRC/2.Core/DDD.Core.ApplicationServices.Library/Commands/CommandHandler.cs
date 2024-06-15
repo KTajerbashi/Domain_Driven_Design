@@ -100,6 +100,10 @@ public abstract class CommandHandler<TCommand, TData> : ICommandHandler<TCommand
     }
 }
 
+/// <summary>
+/// 
+/// </summary>
+/// <typeparam name="TCommand"></typeparam>
 public abstract class CommandHandler<TCommand> : ICommandHandler<TCommand>
 where TCommand : ICommand
 {

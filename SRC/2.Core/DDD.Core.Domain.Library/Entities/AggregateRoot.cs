@@ -17,7 +17,7 @@ public abstract class AggregateRoot<TId> : Entity<TId>, IAggregateRoot
           IFormattable
 {
     /// <summary>
-    /// لیست Evantهای مربوطه را نگهداری می‌کند        
+    /// لیست Eventهای مربوطه را نگهداری می‌کند        
     /// </summary>
     private readonly List<IDomainEvent> _events;
     protected AggregateRoot() => _events = new();

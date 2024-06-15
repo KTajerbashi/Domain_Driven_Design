@@ -3,10 +3,12 @@ using DDD.Core.Domain.Library.ValueObjects;
 using System.Linq.Expressions;
  
 namespace DDD.Core.Contracts.Library.Data.Commands;
+
 /// <summary>
 /// در صورتی که داده‌ها به صورت عادی ذخیره سازی شوند از این Interface جهت تعیین اعمال اصلی موجود در بخش ذخیره سازی داده‌ها استفاده می‌شود.
 /// </summary>
 /// <typeparam name="TEntity">کلاسی که جهت ذخیره سازی انتخاب می‌شود</typeparam>
+/// <typeparam name="TId"></typeparam>
 public interface ICommandRepository<TEntity, TId> : IUnitOfWork
     where TEntity : AggregateRoot<TId>
      where TId : struct,

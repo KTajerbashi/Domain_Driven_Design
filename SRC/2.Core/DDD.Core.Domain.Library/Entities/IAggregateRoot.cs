@@ -1,6 +1,4 @@
-﻿
-
-using DDD.Core.Domain.Library.Events;
+﻿using DDD.Core.Domain.Library.Events;
 
 namespace DDD.Core.Domain.Library.Entities;
 
