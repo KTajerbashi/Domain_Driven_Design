@@ -2,6 +2,7 @@
 using DDD.Core.Domain.Library.Events;
 
 namespace DDD.Core.ApplicationServices.Library.Events;
+
 /// <summary>
 /// 
 /// </summary>

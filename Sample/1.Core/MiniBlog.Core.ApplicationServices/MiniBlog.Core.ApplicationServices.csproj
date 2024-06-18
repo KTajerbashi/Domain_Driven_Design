@@ -12,8 +12,4 @@
     <ProjectReference Include="..\MiniBlog.Core.Domain\MiniBlog.Core.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="People\Queries\" />
-  </ItemGroup>
-
 </Project>

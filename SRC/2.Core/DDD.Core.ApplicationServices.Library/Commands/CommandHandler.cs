@@ -1,5 +1,4 @@
-﻿
-using DDD.Core.Contracts.Library.ApplicationServices.Commands;
+﻿using DDD.Core.Contracts.Library.ApplicationServices.Commands;
 using DDD.Core.RequestResponse.Library.Commands;
 using DDD.Core.RequestResponse.Library.Common;
 using DDD.Utilities.Library;
@@ -11,17 +10,22 @@ namespace DDD.Core.ApplicationServices.Library.Commands;
 /// </summary>
 /// <typeparam name="TCommand"></typeparam>
 /// <typeparam name="TData"></typeparam>
-public abstract class CommandHandler<TCommand, TData> : ICommandHandler<TCommand, TData>
+public abstract class CommandHandler<TCommand, TData> 
+    : ICommandHandler<TCommand, TData>
     where TCommand : ICommand<TData>
 {
     /// <summary>
     /// این سرویس خدمات است موارد مورد نیاز است
     /// </summary>
     protected readonly UtilitiesServices UtilitiesServices;
+   
     /// <summary>
     /// چون کاماند هندلر خروجی ازین جنس است پس ما یک نمونه میسازیم
+    /// خروجی تمام متد های هندلر ازین جنس است
     /// </summary>
     protected readonly CommandResult<TData> result = new();
+   
+    
     public CommandHandler(UtilitiesServices utilitiesServices)
     {
         UtilitiesServices = utilitiesServices;
@@ -45,6 +49,7 @@ public abstract class CommandHandler<TCommand, TData> : ICommandHandler<TCommand
         result.Status = ApplicationServiceStatus.Ok;
         return Task.FromResult(result);
     }
+    
     /// <summary>
     /// درصورتیکه خروجی هندل خروجی مورد نظر بود این متد را پاس میدهیم
     /// </summary>
@@ -56,6 +61,7 @@ public abstract class CommandHandler<TCommand, TData> : ICommandHandler<TCommand
         result.Status = ApplicationServiceStatus.Ok;
         return result;
     }
+    
     /// <summary>
     /// این متد مانند اوکی است اما داده و خروجی را خودش ست میکند و ارسال میکند
     /// </summary>
@@ -68,6 +74,7 @@ public abstract class CommandHandler<TCommand, TData> : ICommandHandler<TCommand
         result.Status = status;
         return Task.FromResult(result);
     }
+    
     /// <summary>
     /// این متد مانند اوکی است اما داده و خروجی را خودش ست میکند و ارسال میکند
     /// </summary>
@@ -80,6 +87,7 @@ public abstract class CommandHandler<TCommand, TData> : ICommandHandler<TCommand
         result.Status = status;
         return result;
     }
+    
     /// <summary>
     /// ایجاد پیام برای خروجی
     /// و استفاده از مترجم
@@ -89,6 +97,7 @@ public abstract class CommandHandler<TCommand, TData> : ICommandHandler<TCommand
     {
         result.AddMessage(UtilitiesServices.Translator[message]);
     }
+    
     /// <summary>
     /// جهت چند زبانه کردن پیام ها
     /// استفاده از مترجم
@@ -110,10 +119,12 @@ public abstract class CommandHandler<TCommand> : ICommandHandler<TCommand>
 {
     protected readonly UtilitiesServices UtilitiesServices;
     protected readonly CommandResult result = new();
+   
     public CommandHandler(UtilitiesServices utilitiesServices)
     {
         UtilitiesServices = utilitiesServices;
     }
+    
     /// <summary>
     /// 
     /// </summary>

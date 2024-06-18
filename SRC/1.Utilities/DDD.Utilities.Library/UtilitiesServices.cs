@@ -6,6 +6,14 @@ using Extensions.UsersManagement.Abstractions;
 using Extensions.Caching.Abstractions;
 namespace DDD.Utilities.Library;
 
+/// <summary>
+/// این سرویس کامل موارد مورد نیاز را ارائه میکند
+/// مترجم های مورد نیاز
+/// مپر های مورد نیاز
+/// لاگ های مورد نیاز
+/// مبدل های تبدیل فرمت های جیسون
+/// اطلاعات کاربری سرویس
+/// </summary>
 public class UtilitiesServices
 {
     public readonly ITranslator Translator;

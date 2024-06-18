@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using FluentValidation;
+using Extensions.Logger.Abstractions;
 using DDD.Core.RequestResponse.Library.Commands;
 using DDD.Core.RequestResponse.Library.Common;
-using Extensions.Logger.Abstractions;
 
 
 namespace DDD.Core.ApplicationServices.Library.Commands;

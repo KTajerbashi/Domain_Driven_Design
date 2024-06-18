@@ -1,6 +1,8 @@
 ﻿using DDD.EndPoints.Web.Library.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using MiniBlog.Core.RequestResponse.People.Commands.Create;
+using MiniBlog.Core.RequestResponse.People.Queries.GetAllPerson;
+using MiniBlog.Core.RequestResponse.People.Queries.GetPersonById;
 
 namespace MiniBlog.EndPoints.API.Controllers
 {
@@ -72,8 +74,8 @@ namespace MiniBlog.EndPoints.API.Controllers
         #endregion
 
         #region Queries
-        //[HttpGet("GetById")]
-        //public async Task<IActionResult> GetById(GetBlogByIdQuery query) => await Query<GetBlogByIdQuery, BlogQr?>(query);
+        [HttpGet("GetById")]
+        public async Task<IActionResult> GetById(GetPersonByIdModel query) => await Query<GetPersonByIdModel, PersonQuery?>(query);
         #endregion
 
         #region Methods

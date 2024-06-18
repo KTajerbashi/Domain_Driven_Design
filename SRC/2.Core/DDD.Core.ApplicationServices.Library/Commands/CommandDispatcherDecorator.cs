@@ -1,5 +1,4 @@
-﻿
-using DDD.Core.Contracts.Library.ApplicationServices.Commands;
+﻿using DDD.Core.Contracts.Library.ApplicationServices.Commands;
 using DDD.Core.RequestResponse.Library.Commands;
 
 namespace DDD.Core.ApplicationServices.Library.Commands;

@@ -30,8 +30,10 @@ public class CommandDispatcherDomainExceptionHandlerDecorator : CommandDispatche
     /// </summary>
     /// <param name="serviceProvider"></param>
     /// <param name="logger"></param>
-    public CommandDispatcherDomainExceptionHandlerDecorator(IServiceProvider serviceProvider,
-                                                            ILogger<CommandDispatcherDomainExceptionHandlerDecorator> logger)
+    public CommandDispatcherDomainExceptionHandlerDecorator(
+        IServiceProvider serviceProvider,
+        ILogger<CommandDispatcherDomainExceptionHandlerDecorator> logger
+        )
     {
         _serviceProvider = serviceProvider;
         _logger = logger;
@@ -43,6 +45,7 @@ public class CommandDispatcherDomainExceptionHandlerDecorator : CommandDispatche
     #endregion
 
     #region Send Commands
+   
     /// <summary>
     /// 
     /// </summary>
@@ -72,6 +75,8 @@ public class CommandDispatcherDomainExceptionHandlerDecorator : CommandDispatche
         }
 
     }
+   
+    
     /// <summary>
     /// 
     /// </summary>
@@ -105,6 +110,7 @@ public class CommandDispatcherDomainExceptionHandlerDecorator : CommandDispatche
     #endregion
 
     #region Privaite Methods
+   
     /// <summary>
     /// 
     /// </summary>

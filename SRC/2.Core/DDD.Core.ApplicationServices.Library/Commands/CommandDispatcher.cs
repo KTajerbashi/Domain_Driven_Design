@@ -11,6 +11,7 @@ namespace DDD.Core.ApplicationServices.Library.Commands;
 /// </summary>
 public class CommandDispatcher : ICommandDispatcher
 {
+
     #region Fields
 
     /// <summary>
@@ -73,6 +74,7 @@ public class CommandDispatcher : ICommandDispatcher
         }
 
     }
+   
     /// <summary>
     /// 
     /// </summary>
@@ -100,6 +102,6 @@ public class CommandDispatcher : ICommandDispatcher
             _logger.LogInformation("Processing the {CommandType} command tooks {Millisecconds} Millisecconds", command.GetType(), _stopwatch.ElapsedMilliseconds);
         }
     }
-
     #endregion
+
 }
