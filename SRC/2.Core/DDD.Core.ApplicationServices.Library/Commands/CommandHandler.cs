@@ -5,6 +5,7 @@ using DDD.Core.RequestResponse.Library.Common;
 using DDD.Utilities.Library;
 
 namespace DDD.Core.ApplicationServices.Library.Commands;
+
 /// <summary>
 /// 
 /// </summary>
@@ -105,7 +106,7 @@ public abstract class CommandHandler<TCommand, TData> : ICommandHandler<TCommand
 /// </summary>
 /// <typeparam name="TCommand"></typeparam>
 public abstract class CommandHandler<TCommand> : ICommandHandler<TCommand>
-where TCommand : ICommand
+    where TCommand : ICommand
 {
     protected readonly UtilitiesServices UtilitiesServices;
     protected readonly CommandResult result = new();
@@ -113,34 +114,69 @@ where TCommand : ICommand
     {
         UtilitiesServices = utilitiesServices;
     }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="command"></param>
+    /// <returns></returns>
     public abstract Task<CommandResult> Handle(TCommand command);
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     protected virtual Task<CommandResult> OkAsync()
     {
         result.Status = ApplicationServiceStatus.Ok;
         return Task.FromResult(result);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     protected virtual CommandResult Ok()
     {
         result.Status = ApplicationServiceStatus.Ok;
         return result;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="status"></param>
+    /// <returns></returns>
     protected virtual Task<CommandResult> ResultAsync(ApplicationServiceStatus status)
     {
         result.Status = status;
         return Task.FromResult(result);
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="status"></param>
+    /// <returns></returns>
     protected virtual CommandResult Result(ApplicationServiceStatus status)
     {
         result.Status = status;
         return result;
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="message"></param>
     protected void AddMessage(string message)
     {
         result.AddMessage(UtilitiesServices.Translator[message]);
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="message"></param>
+    /// <param name="arguments"></param>
     protected void AddMessage(string message, params string[] arguments)
     {
         result.AddMessage(UtilitiesServices.Translator[message, arguments]);

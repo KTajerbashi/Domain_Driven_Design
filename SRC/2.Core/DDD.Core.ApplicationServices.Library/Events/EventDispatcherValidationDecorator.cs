@@ -4,12 +4,23 @@ using Microsoft.Extensions.Logging;
 using Extensions.Logger.Abstractions;
 
 namespace DDD.Core.ApplicationServices.Library.Events;
-
+/// <summary>
+/// 
+/// </summary>
 public class EventDispatcherValidationDecorator : EventDispatcherDecorator
 {
     #region Fields
+    /// <summary>
+    /// 
+    /// </summary>
     private readonly IServiceProvider _serviceProvider;
+    /// <summary>
+    /// 
+    /// </summary>
     private readonly ILogger<EventDispatcherValidationDecorator> _logger;
+    /// <summary>
+    /// 
+    /// </summary>
     public override int Order => 1;
     #endregion
 
@@ -23,6 +34,12 @@ public class EventDispatcherValidationDecorator : EventDispatcherDecorator
     #endregion
 
     #region Publish Domain Event
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TDomainEvent"></typeparam>
+    /// <param name="event"></param>
+    /// <returns></returns>
     public override async Task PublishDomainEventAsync<TDomainEvent>(TDomainEvent @event)
     {
         _logger.LogDebug(LoggingEventId.EventValidation, "Validating Event of type {EventType} With value {Event}  start at :{StartDateTime}", @event.GetType(), @event, DateTime.Now);
@@ -42,6 +59,12 @@ public class EventDispatcherValidationDecorator : EventDispatcherDecorator
     #endregion
 
     #region Privaite Methods
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TDomainEvent"></typeparam>
+    /// <param name="event"></param>
+    /// <returns></returns>
     private List<string> Validate<TDomainEvent>(TDomainEvent @event)
     {
         List<string> errorMessages = new();

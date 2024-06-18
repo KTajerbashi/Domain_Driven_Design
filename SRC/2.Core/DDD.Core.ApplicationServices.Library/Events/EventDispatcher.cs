@@ -6,15 +6,35 @@ using System.Diagnostics;
 
 namespace DDD.Core.ApplicationServices.Library.Events;
 
+/// <summary>
+/// 
+/// </summary>
 public class EventDispatcher : IEventDispatcher
 {
     #region Fields
+    /// <summary>
+    /// 
+    /// </summary>
     private readonly IServiceProvider _serviceProvider;
+
+    /// <summary>
+    /// 
+    /// </summary>
     private readonly ILogger<EventDispatcher> _logger;
+
+    /// <summary>
+    /// 
+    /// </summary>
     private readonly Stopwatch _stopwatch;
     #endregion
 
     #region Constructors
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="serviceProvider"></param>
+    /// <param name="logger"></param>
     public EventDispatcher(IServiceProvider serviceProvider, ILogger<EventDispatcher> logger)
     {
         _serviceProvider = serviceProvider;
@@ -24,6 +44,13 @@ public class EventDispatcher : IEventDispatcher
     #endregion
 
     #region Event Dispatcher
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TDomainEvent"></typeparam>
+    /// <param name="event"></param>
+    /// <returns></returns>
     public async Task PublishDomainEventAsync<TDomainEvent>(TDomainEvent @event) where TDomainEvent : class, IDomainEvent
     {
         _stopwatch.Start();

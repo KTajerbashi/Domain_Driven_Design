@@ -14,10 +14,22 @@ namespace DDD.Core.ApplicationServices.Library.Commands;
 public class CommandDispatcherDomainExceptionHandlerDecorator : CommandDispatcherDecorator
 {
     #region Fields
+    /// <summary>
+    /// 
+    /// </summary>
     private readonly IServiceProvider _serviceProvider;
+    /// <summary>
+    /// 
+    /// </summary>
     private readonly ILogger<CommandDispatcherDomainExceptionHandlerDecorator> _logger;
     #endregion
+
     #region Constructors
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="serviceProvider"></param>
+    /// <param name="logger"></param>
     public CommandDispatcherDomainExceptionHandlerDecorator(IServiceProvider serviceProvider,
                                                             ILogger<CommandDispatcherDomainExceptionHandlerDecorator> logger)
     {

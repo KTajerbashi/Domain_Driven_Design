@@ -8,11 +8,23 @@ using Extensions.Translations.Abstractions;
 
 namespace DDD.Core.ApplicationServices.Library.Queries;
 
+/// <summary>
+/// 
+/// </summary>
 public class QueryDispatcherDomainExceptionHandlerDecorator : QueryDispatcherDecorator
 {
     #region Fields
+    /// <summary>
+    /// 
+    /// </summary>
     private readonly IServiceProvider _serviceProvider;
+    /// <summary>
+    /// 
+    /// </summary>
     private readonly ILogger<QueryDispatcherDomainExceptionHandlerDecorator> _logger;
+    /// <summary>
+    /// 
+    /// </summary>
     public override int Order => 2;
     #endregion
 
@@ -26,6 +38,13 @@ public class QueryDispatcherDomainExceptionHandlerDecorator : QueryDispatcherDec
     #endregion
 
     #region Query Dispatcher
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TQuery"></typeparam>
+    /// <typeparam name="TData"></typeparam>
+    /// <param name="query"></param>
+    /// <returns></returns>
     public override async Task<QueryResult<TData>> Execute<TQuery, TData>(TQuery query)
     {
         try
@@ -52,6 +71,13 @@ public class QueryDispatcherDomainExceptionHandlerDecorator : QueryDispatcherDec
     #endregion
 
     #region Privaite Methods
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TQuery"></typeparam>
+    /// <typeparam name="TData"></typeparam>
+    /// <param name="ex"></param>
+    /// <returns></returns>
     private QueryResult<TData> DomainExceptionHandlingWithReturnValue<TQuery, TData>(DomainStateException ex)
     {
         var queryResult = new QueryResult<TData>()
@@ -64,6 +90,11 @@ public class QueryDispatcherDomainExceptionHandlerDecorator : QueryDispatcherDec
         return queryResult;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="domainStateException"></param>
+    /// <returns></returns>
     private string GetExceptionText(DomainStateException domainStateException)
     {
         var translator = _serviceProvider.GetService<ITranslator>();

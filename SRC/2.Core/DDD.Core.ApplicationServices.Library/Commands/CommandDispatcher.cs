@@ -1,10 +1,9 @@
 ﻿using DDD.Core.Contracts.Library.ApplicationServices.Commands;
 using DDD.Core.RequestResponse.Library.Commands;
+using Extensions.Logger.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Extensions.Logger.Abstractions;
 using System.Diagnostics;
-using Extensions.Logger.Abstractions;
 
 namespace DDD.Core.ApplicationServices.Library.Commands;
 /// <summary>
@@ -13,12 +12,29 @@ namespace DDD.Core.ApplicationServices.Library.Commands;
 public class CommandDispatcher : ICommandDispatcher
 {
     #region Fields
+
+    /// <summary>
+    /// 
+    /// </summary>
     private readonly IServiceProvider _serviceProvider;
+
+    /// <summary>
+    /// 
+    /// </summary>
     private readonly ILogger<CommandDispatcher> _logger;
+
+    /// <summary>
+    /// 
+    /// </summary>
     private readonly Stopwatch _stopwatch;
     #endregion
 
     #region Constructors
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="serviceProvider"></param>
+    /// <param name="logger"></param>
     public CommandDispatcher(IServiceProvider serviceProvider, ILogger<CommandDispatcher> logger)
     {
         _serviceProvider = serviceProvider;

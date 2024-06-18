@@ -3,11 +3,19 @@ using Microsoft.Extensions.Logging;
 using Extensions.Logger.Abstractions;
 
 namespace DDD.Core.ApplicationServices.Library.Events;
-
+/// <summary>
+/// 
+/// </summary>
 public class EventDispatcherDomainExceptionHandlerDecorator : EventDispatcherDecorator
 {
     #region Fields
+    /// <summary>
+    /// 
+    /// </summary>
     private readonly ILogger<EventDispatcherDomainExceptionHandlerDecorator> _logger;
+    /// <summary>
+    /// 
+    /// </summary>
     public override int Order => 2;
     #endregion
 
@@ -19,6 +27,12 @@ public class EventDispatcherDomainExceptionHandlerDecorator : EventDispatcherDec
     #endregion
 
     #region Publish Domain Event
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TDomainEvent"></typeparam>
+    /// <param name="event"></param>
+    /// <returns></returns>
     public override async Task PublishDomainEventAsync<TDomainEvent>(TDomainEvent @event)
     {
         try

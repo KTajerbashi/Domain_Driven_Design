@@ -6,12 +6,25 @@ using Microsoft.Extensions.Logging;
 using Extensions.Logger.Abstractions;
 
 namespace DDD.Core.ApplicationServices.Library.Queries;
-
+/// <summary>
+/// 
+/// </summary>
 public class QueryDispatcherValidationDecorator : QueryDispatcherDecorator
 {
     #region Fields
+    /// <summary>
+    /// 
+    /// </summary>
     private readonly IServiceProvider _serviceProvider;
+    
+    /// <summary>
+    /// 
+    /// </summary>
     private readonly ILogger<QueryDispatcherValidationDecorator> _logger;
+    
+    /// <summary>
+    /// 
+    /// </summary>
     public override int Order => 1;
     #endregion
 
@@ -25,6 +38,13 @@ public class QueryDispatcherValidationDecorator : QueryDispatcherDecorator
     #endregion
 
     #region Query Dispatcher
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TQuery"></typeparam>
+    /// <typeparam name="TData"></typeparam>
+    /// <param name="query"></param>
+    /// <returns></returns>
     public override async Task<QueryResult<TData>> Execute<TQuery, TData>(TQuery query)
     {
         _logger.LogDebug(LoggingEventId.QueryValidation, "Validating query of type {QueryType} With value {Query}  start at :{StartDateTime}", query.GetType(), query, DateTime.Now);
@@ -43,6 +63,13 @@ public class QueryDispatcherValidationDecorator : QueryDispatcherDecorator
     #endregion
 
     #region Privaite Methods
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TQuery"></typeparam>
+    /// <typeparam name="TValidationResult"></typeparam>
+    /// <param name="query"></param>
+    /// <returns></returns>
     private TValidationResult Validate<TQuery, TValidationResult>(TQuery query) where TValidationResult : ApplicationServiceResult, new()
     {
         var validator = _serviceProvider.GetService<IValidator<TQuery>>();

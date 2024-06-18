@@ -7,11 +7,23 @@ using Extensions.Logger.Abstractions;
 
 namespace DDD.Core.ApplicationServices.Library.Queries;
 
+/// <summary>
+/// 
+/// </summary>
 public class QueryDispatcher : IQueryDispatcher
 {
     #region Fields
+    /// <summary>
+    /// 
+    /// </summary>
     private readonly IServiceProvider _serviceProvider;
+    /// <summary>
+    /// 
+    /// </summary>
     private readonly ILogger<QueryDispatcher> _logger;
+    /// <summary>
+    /// 
+    /// </summary>
     private readonly Stopwatch _stopwatch;
     #endregion
 
@@ -25,6 +37,13 @@ public class QueryDispatcher : IQueryDispatcher
     #endregion
 
     #region Query Dispatcher
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TQuery"></typeparam>
+    /// <typeparam name="TData"></typeparam>
+    /// <param name="query"></param>
+    /// <returns></returns>
     public Task<QueryResult<TData>> Execute<TQuery, TData>(TQuery query) where TQuery : class, IQuery<TData>
     {
         _stopwatch.Start();
