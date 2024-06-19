@@ -3,9 +3,7 @@
 namespace DDD.Infra.Data.Sql.Queries.Library;
 public abstract class BaseQueryDbContext : DbContext
 {
-    public BaseQueryDbContext(DbContextOptions options) : base(options)
-    {
-    }
+    public BaseQueryDbContext(DbContextOptions options) : base(options) { }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -16,6 +14,7 @@ public abstract class BaseQueryDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
     }
+
     public override int SaveChanges()
     {
         throw new NotSupportedException();
@@ -25,6 +24,7 @@ public abstract class BaseQueryDbContext : DbContext
         throw new NotSupportedException();
 
     }
+
     public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
     {
         throw new NotSupportedException();

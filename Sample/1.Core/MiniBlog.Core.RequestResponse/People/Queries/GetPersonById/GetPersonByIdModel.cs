@@ -4,8 +4,8 @@ using MiniBlog.Core.RequestResponse.People.Queries.GetAllPerson;
 
 namespace MiniBlog.Core.RequestResponse.People.Queries.GetPersonById;
 
-public class GetPersonByIdModel : IQuery<PersonQuery>//, IWebRequest
+public class GetPersonByIdModel : IQuery<PersonQuery>, IWebRequest
 {
     public int PersonId { get; set; }
-    //public string Path => "/api/Person/GetPersonById";
+    public string Path => "/api/Person/GetPersonById";
 }
