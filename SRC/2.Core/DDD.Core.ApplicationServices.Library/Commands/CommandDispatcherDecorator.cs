@@ -34,6 +34,7 @@ public abstract class CommandDispatcherDecorator : ICommandDispatcher
     {
         _commandDispatcher = commandDispatcher;
     }
+  
     #region Abstract Send Commands
     /// <summary>
     /// 

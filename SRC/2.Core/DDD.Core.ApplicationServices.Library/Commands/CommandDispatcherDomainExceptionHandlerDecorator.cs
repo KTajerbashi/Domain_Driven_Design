@@ -168,5 +168,6 @@ public class CommandDispatcherDomainExceptionHandlerDecorator : CommandDispatche
         return result;
     }
     #endregion
+
 }
 
