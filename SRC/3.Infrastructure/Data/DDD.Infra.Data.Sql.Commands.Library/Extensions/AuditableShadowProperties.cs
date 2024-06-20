@@ -3,6 +3,11 @@ using Extensions.UsersManagement.Abstractions;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace DDD.Infra.Data.Sql.Commands.Library.Extensions;
+
+
+/// <summary>
+/// فیلد های که در تمامی جداول میخواهیم وجود داشته باشد
+/// </summary>
 public static class AuditableShadowProperties
 {
     public static readonly Func<object, string> EFPropertyCreatedByUserId =
@@ -21,8 +26,16 @@ public static class AuditableShadowProperties
                                     entity => EF.Property<DateTime?>(entity, ModifiedDateTime);
     public static readonly string ModifiedDateTime = nameof(ModifiedDateTime);
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="modelBuilder"></param>
     public static void AddAuditableShadowProperties(this ModelBuilder modelBuilder)
     {
+        /// تمامی کلاس های که اینترفس 
+        /// IAuditableEntity
+        /// را دارند را بگیر و پراپرتی های مورد نظر را به آنها اضافه کن
+        /// و این فقط فبلد دیتابیس ساخته میشود
         foreach (var entityType in modelBuilder.Model.GetEntityTypes().Where(c => typeof(IAuditableEntity).IsAssignableFrom(c.ClrType)))
         {
             modelBuilder.Entity(entityType.ClrType)
@@ -36,6 +49,11 @@ public static class AuditableShadowProperties
         }
     }
 
+    /// <summary>
+    /// این متد فیلد های که ساخته میشود را مقدار دهی میکند
+    /// </summary>
+    /// <param name="changeTracker"></param>
+    /// <param name="userInfoService"></param>
     public static void SetAuditableEntityPropertyValues(
         this ChangeTracker changeTracker,
         IUserInfoService userInfoService)
