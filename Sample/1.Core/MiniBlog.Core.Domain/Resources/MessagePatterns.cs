@@ -7,7 +7,5 @@
         public static string StringLengthValidationMessage = "The length For {0} should be between {1} and {2}";
         public static string FirstName = nameof(FirstName);
         public static string LastName = nameof(LastName);
-
-
     }
 }

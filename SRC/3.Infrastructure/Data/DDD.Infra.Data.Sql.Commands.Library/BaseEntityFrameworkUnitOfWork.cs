@@ -18,16 +18,10 @@ public abstract class BaseEntityFrameworkUnitOfWork<TDbContext> : IUnitOfWork
     }
 
     public int Commit()
-    {
-        var result = _dbContext.SaveChanges();
-        return result;
-    }
+        => _dbContext.SaveChanges();
 
     public async Task<int> CommitAsync()
-    {
-        var result = await _dbContext.SaveChangesAsync();
-        return result;
-    }
+        => await _dbContext.SaveChangesAsync();
 
     public void CommitTransaction()
     {

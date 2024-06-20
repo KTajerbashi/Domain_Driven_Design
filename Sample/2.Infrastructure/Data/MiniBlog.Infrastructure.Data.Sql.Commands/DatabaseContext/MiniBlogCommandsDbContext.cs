@@ -18,6 +18,9 @@ namespace MiniBlog.Infrastructure.Data.Sql.Commands.DatabaseContext
             configurationBuilder.Properties<FirstName>().HaveConversion<FirstNameConversion>();
             configurationBuilder.Properties<LastName>().HaveConversion<LastNameConversion>();
         }
+
+
+
         public DbSet<Person> People { get; set; }
     }
 }
