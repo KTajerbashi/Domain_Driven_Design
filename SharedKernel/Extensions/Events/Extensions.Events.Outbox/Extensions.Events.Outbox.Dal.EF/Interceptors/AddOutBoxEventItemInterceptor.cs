@@ -77,7 +77,7 @@ public class AddOutBoxEventItemInterceptor : SaveChangesInterceptor
                 {
                     EventId = Guid.NewGuid(),
                     AccuredByUserId = userInfoService.UserIdOrDefault(),
-                    AccuredOn = DateTime.Now,
+                    AccruedOn = DateTime.Now,
                     AggregateId = aggregate.BusinessId.ToString(),
                     AggregateName = aggregate.GetType().Name,
                     AggregateTypeName = aggregate.GetType().FullName ?? aggregate.GetType().Name,

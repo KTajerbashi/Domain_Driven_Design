@@ -16,7 +16,7 @@ namespace MiniBlog.EndPoints.API.Controllers
         }
         #region Test Methods
         [HttpPost("Create")]
-        public async Task<IActionResult> CreatePerson(CreatePerson createPerson)
+        public async Task<IActionResult> Create(CreatePerson createPerson)
         {
             try
             {
@@ -30,17 +30,17 @@ namespace MiniBlog.EndPoints.API.Controllers
             }
         }
         [HttpPut("Update")]
-        public async Task<IActionResult> UpdatePerson()
+        public async Task<IActionResult> Update()
         {
             return Ok(ModelState);
         }
         [HttpDelete("Delete")]
-        public async Task<IActionResult> DeletePerson()
+        public async Task<IActionResult> Delete()
         {
             return Ok(ModelState);
         }
         [HttpGet("Get")]
-        public async Task<IActionResult> GetPerson()
+        public async Task<IActionResult> Get()
         {
             return Ok(ModelState);
         }

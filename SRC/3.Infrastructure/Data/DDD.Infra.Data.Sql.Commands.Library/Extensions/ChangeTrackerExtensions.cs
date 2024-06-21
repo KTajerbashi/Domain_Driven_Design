@@ -8,7 +8,7 @@ namespace DDD.Infra.Data.Sql.Commands.Library.Extensions;
 public static class ChangeTrackerExtensions
 {
     /// <summary>
-    /// ترکر های با بده که 
+    /// ترکر های بده که 
     /// Aggregate Root  
     /// هستند
     /// </summary>

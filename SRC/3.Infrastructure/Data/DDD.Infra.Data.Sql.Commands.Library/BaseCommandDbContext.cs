@@ -22,6 +22,7 @@ public abstract class BaseCommandDbContext : DbContext
     protected BaseCommandDbContext()
     {
     }
+
     /// <summary>
     /// شروع تراکنش
     /// </summary>
@@ -29,6 +30,7 @@ public abstract class BaseCommandDbContext : DbContext
     {
         _transaction = Database.BeginTransaction();
     }
+
     /// <summary>
     /// برگشت تراکنش
     /// </summary>
@@ -41,6 +43,7 @@ public abstract class BaseCommandDbContext : DbContext
         }
         _transaction.Rollback();
     }
+
     /// <summary>
     /// کامیت کردن تراکنش
     /// </summary>
@@ -53,6 +56,7 @@ public abstract class BaseCommandDbContext : DbContext
         }
         _transaction.Commit();
     }
+
     /// <summary>
     /// دریافت مقدار شادو پراپرتی
     /// </summary>

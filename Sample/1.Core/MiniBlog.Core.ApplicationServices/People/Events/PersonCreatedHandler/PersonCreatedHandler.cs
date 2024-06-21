@@ -26,7 +26,7 @@ namespace MiniBlog.Core.ApplicationServices.People.Events.PersonCreatedHandler
                 await personCommandRepository.InsertAsync(person);
                 await personCommandRepository.CommitAsync();
                 
-                _logger.LogInformation("Handeled {Event} in BlogCreatedHandler", Event.GetType().Name);
+                _logger.LogInformation("Handled {Event} in BlogCreatedHandler", Event.GetType().Name);
                 
                 await Task.CompletedTask;
             }

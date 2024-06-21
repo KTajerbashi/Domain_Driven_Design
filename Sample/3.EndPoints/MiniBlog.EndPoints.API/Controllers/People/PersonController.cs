@@ -4,7 +4,7 @@ using MiniBlog.Core.RequestResponse.People.Commands.Create;
 using MiniBlog.Core.RequestResponse.People.Queries.GetAllPerson;
 using MiniBlog.Core.RequestResponse.People.Queries.GetPersonById;
 
-namespace MiniBlog.EndPoints.API.Controllers.PersosContainer
+namespace MiniBlog.EndPoints.API.Controllers.People
 {
     [Route("api/[controller]")]
     public class PersonController : BaseController

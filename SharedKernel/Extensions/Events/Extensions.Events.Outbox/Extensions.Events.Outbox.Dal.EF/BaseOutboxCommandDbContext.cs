@@ -1,7 +1,7 @@
-﻿using Extensions.Events.Abstractions;
-using DDD.Infra.Data.Sql.Commands.Library;
-using Extensions.Events.Outbox.Extensions.Events.Outbox.Dal.EF.Interceptors;
+﻿using DDD.Infra.Data.Sql.Commands.Library;
+using Extensions.Events.Abstractions;
 using Extensions.Events.Outbox.Extensions.Events.Outbox.Dal.EF.Configs;
+using Extensions.Events.Outbox.Extensions.Events.Outbox.Dal.EF.Interceptors;
 
 namespace Extensions.Events.Outbox.Extensions.Events.Outbox.Dal.EF;
 
