@@ -7,6 +7,9 @@ using DDD.Core.Domain.ToolKits.Library.ValueObjects;
 using DDD.Core.Domain.Library.ValueObjects;
 
 namespace DDD.Infra.Data.Sql.Commands.Library;
+/// <summary>
+/// 
+/// </summary>
 public abstract class BaseCommandDbContext : DbContext
 {
     protected IDbContextTransaction _transaction;
@@ -19,12 +22,17 @@ public abstract class BaseCommandDbContext : DbContext
     protected BaseCommandDbContext()
     {
     }
-
+    /// <summary>
+    /// شروع تراکنش
+    /// </summary>
     public void BeginTransaction()
     {
         _transaction = Database.BeginTransaction();
     }
-
+    /// <summary>
+    /// برگشت تراکنش
+    /// </summary>
+    /// <exception cref="NullReferenceException"></exception>
     public void RollbackTransaction()
     {
         if (_transaction == null)
@@ -33,7 +41,10 @@ public abstract class BaseCommandDbContext : DbContext
         }
         _transaction.Rollback();
     }
-
+    /// <summary>
+    /// کامیت کردن تراکنش
+    /// </summary>
+    /// <exception cref="NullReferenceException"></exception>
     public void CommitTransaction()
     {
         if (_transaction == null)
@@ -42,7 +53,13 @@ public abstract class BaseCommandDbContext : DbContext
         }
         _transaction.Commit();
     }
-
+    /// <summary>
+    /// دریافت مقدار شادو پراپرتی
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="entity"></param>
+    /// <param name="propertyName"></param>
+    /// <returns></returns>
     public T GetShadowPropertyValue<T>(object entity, string propertyName) where T : IConvertible
     {
         var value = Entry(entity).Property(propertyName).CurrentValue;
@@ -51,16 +68,31 @@ public abstract class BaseCommandDbContext : DbContext
             : default;
     }
 
+    /// <summary>
+    /// دریافت مقدار شادو پراپرتی
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="propertyName"></param>
+    /// <returns></returns>
     public object GetShadowPropertyValue(object entity, string propertyName)
     {
         return Entry(entity).Property(propertyName).CurrentValue;
     }
 
+    /// <summary>
+    /// مطمیین شویم شادو پراپرتی ها به مدل دتابیس ما وصل میشود
+    /// </summary>
+    /// <param name="builder"></param>
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
         builder.AddAuditableShadowProperties();
     }
+
+    /// <summary>
+    /// اعمال شدن ولیو کانورتور
+    /// </summary>
+    /// <param name="configurationBuilder"></param>
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {
         base.ConfigureConventions(configurationBuilder);
@@ -72,6 +104,13 @@ public abstract class BaseCommandDbContext : DbContext
 
     }
 
+    /// <summary>
+    /// فرزندان یک موجودیت شاخه را کامل برگرداند
+    /// دریافت Include
+    /// .ThenInclude
+    /// </summary>
+    /// <param name="clrEntityType"></param>
+    /// <returns></returns>
     public IEnumerable<string> GetIncludePaths(Type clrEntityType)
     {
         var entityType = Model.FindEntityType(clrEntityType);

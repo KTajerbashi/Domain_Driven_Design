@@ -1,10 +1,13 @@
-﻿using Extensions.Events.Outbox.Dal.EF.Configs;
-using Extensions.Events.Outbox.Dal.EF.Interceptors;
-using Extensions.Events.Abstractions;
+﻿using Extensions.Events.Abstractions;
 using DDD.Infra.Data.Sql.Commands.Library;
+using Extensions.Events.Outbox.Extensions.Events.Outbox.Dal.EF.Interceptors;
+using Extensions.Events.Outbox.Extensions.Events.Outbox.Dal.EF.Configs;
 
 namespace Extensions.Events.Outbox.Extensions.Events.Outbox.Dal.EF;
 
+/// <summary>
+/// 
+/// </summary>
 public abstract class BaseOutboxCommandDbContext : BaseCommandDbContext
 {
     public DbSet<OutBoxEventItem> OutBoxEventItems { get; set; }

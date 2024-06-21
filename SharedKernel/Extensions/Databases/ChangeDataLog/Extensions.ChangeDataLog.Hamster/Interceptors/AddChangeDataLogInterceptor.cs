@@ -1,5 +1,5 @@
 ﻿using Extensions.ChangeDataLog.Abstractions;
-using Extensions.ChangeDataLog.Sql.Options;
+using Extensions.ChangeDataLog.Hamster.Options;
 using Extensions.UsersManagement.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Options;
 
-namespace Infra.Data.Sql.Commands.Interceptors;
+namespace Extensions.ChangeDataLog.Hamster.Interceptors;
 
 /// <summary>
 /// کلاس اضافه کردن تغییرات روی موجودیت در پایگاه داده

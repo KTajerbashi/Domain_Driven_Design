@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MiniBlog.Core.Domain.People.Entities;
 using MiniBlog.Core.Domain.People.ValueObjects;
-using MiniBlog.Infrastructure.Data.Sql.Commands.People;
+using MiniBlog.Infrastructure.Data.Sql.Commands.People.ValueConversions;
 
 namespace MiniBlog.Infrastructure.Data.Sql.Commands.DatabaseContext
 {
@@ -18,9 +18,6 @@ namespace MiniBlog.Infrastructure.Data.Sql.Commands.DatabaseContext
             configurationBuilder.Properties<FirstName>().HaveConversion<FirstNameConversion>();
             configurationBuilder.Properties<LastName>().HaveConversion<LastNameConversion>();
         }
-
-
-
         public DbSet<Person> People { get; set; }
     }
 }

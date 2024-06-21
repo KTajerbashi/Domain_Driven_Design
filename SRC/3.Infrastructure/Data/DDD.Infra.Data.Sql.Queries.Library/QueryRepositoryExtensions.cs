@@ -1,12 +1,24 @@
-﻿using Microsoft.EntityFrameworkCore;
-using DDD.Core.Contracts.Library.ApplicationServices.Queries;
-using DDD.Core.RequestResponse.Library.Queries;
+﻿using DDD.Core.RequestResponse.Library.Queries;
 using DDD.Utilities.Library.Extensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace DDD.Infra.Data.Sql.Queries.Library;
 
+/// <summary>
+/// 
+/// </summary>
 public static class QueryRepositoryExtensions
 {
+    /// <summary>
+    /// پیجینگ را پیاده سازی میکند
+    /// </summary>
+    /// <typeparam name="TEntity"></typeparam>
+    /// <typeparam name="TQuery"></typeparam>
+    /// <typeparam name="TResult"></typeparam>
+    /// <param name="entities"></param>
+    /// <param name="query"></param>
+    /// <param name="selectFunc"></param>
+    /// <returns></returns>
     public static async Task<PagedData<TResult>> ToPagedData<TEntity, TQuery, TResult>(this IQueryable<TEntity> entities, PageQuery<PagedData<TQuery>> query, Func<TEntity, TResult> selectFunc)
     {
         var result = new PagedData<TResult>

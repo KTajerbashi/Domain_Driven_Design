@@ -6,16 +6,32 @@ using Extensions.Events.Abstractions;
 using Extensions.Serializers.Abstractions;
 using Extensions.UsersManagement.Abstractions;
 
-namespace Extensions.Events.Outbox.Dal.EF.Interceptors;
+namespace Extensions.Events.Outbox.Extensions.Events.Outbox.Dal.EF.Interceptors;
 
+/// <summary>
+/// 
+/// </summary>
 public class AddOutBoxEventItemInterceptor : SaveChangesInterceptor
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="eventData"></param>
+    /// <param name="result"></param>
+    /// <returns></returns>
     public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
     {
         AddOutbox(eventData);
         return base.SavingChanges(eventData, result);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="eventData"></param>
+    /// <param name="result"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
     public override ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
     {
         AddOutbox(eventData);
@@ -23,6 +39,10 @@ public class AddOutBoxEventItemInterceptor : SaveChangesInterceptor
         return base.SavingChangesAsync(eventData, result, cancellationToken);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="eventData"></param>
     private static void AddOutbox(DbContextEventData eventData)
     {
         List<dynamic> changedAggregates = eventData.Context.ChangeTracker

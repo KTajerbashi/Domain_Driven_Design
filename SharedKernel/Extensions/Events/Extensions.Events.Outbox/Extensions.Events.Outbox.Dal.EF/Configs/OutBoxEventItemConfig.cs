@@ -1,8 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Extensions.Events.Abstractions;
 
-namespace Extensions.Events.Outbox.Dal.EF.Configs;
+namespace Extensions.Events.Outbox.Extensions.Events.Outbox.Dal.EF.Configs;
 
+/// <summary>
+/// 
+/// </summary>
 public class OutBoxEventItemConfig : IEntityTypeConfiguration<OutBoxEventItem>
 {
     public void Configure(EntityTypeBuilder<OutBoxEventItem> builder)

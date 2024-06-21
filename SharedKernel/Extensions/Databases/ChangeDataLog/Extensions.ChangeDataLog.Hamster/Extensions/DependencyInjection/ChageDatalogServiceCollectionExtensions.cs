@@ -1,8 +1,8 @@
-﻿using Extensions.ChangeDataLog.Sql.Options;
+﻿using Extensions.ChangeDataLog.Hamster.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Extensions.DependencyInjection;
+namespace Extensions.ChangeDataLog.Hamster.Extensions.DependencyInjection;
 
 /// <summary>
 /// سرویس تزریق کننده 

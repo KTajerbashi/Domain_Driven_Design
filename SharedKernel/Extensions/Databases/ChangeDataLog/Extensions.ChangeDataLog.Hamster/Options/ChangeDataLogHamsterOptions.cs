@@ -1,4 +1,4 @@
-﻿namespace Extensions.ChangeDataLog.Sql.Options
+﻿namespace Extensions.ChangeDataLog.Hamster.Options
 {
     /// <summary>
     /// پراپرتی های که نمیخواهیم در تغییرات ببینیم

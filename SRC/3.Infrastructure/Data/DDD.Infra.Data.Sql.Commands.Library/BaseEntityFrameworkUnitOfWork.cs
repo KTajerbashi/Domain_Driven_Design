@@ -2,6 +2,11 @@
 using DDD.Core.Contracts.Library.Data.Commands;
 
 namespace DDD.Infra.Data.Sql.Commands.Library;
+/// <summary>
+/// پیاده سازی الگوی
+/// Unit Of Work
+/// </summary>
+/// <typeparam name="TDbContext"></typeparam>
 public abstract class BaseEntityFrameworkUnitOfWork<TDbContext> : IUnitOfWork
     where TDbContext : BaseCommandDbContext
 {
