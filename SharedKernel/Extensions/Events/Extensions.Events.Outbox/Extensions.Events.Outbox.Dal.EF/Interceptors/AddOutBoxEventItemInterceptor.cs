@@ -40,7 +40,11 @@ public class AddOutBoxEventItemInterceptor : SaveChangesInterceptor
     }
 
     /// <summary>
-    /// 
+    /// روی 
+    /// Aggregate 
+    /// حلقه میزتد و تمامی رویداد های انجام شده روی شاخه را در جدول 
+    /// OutBoxEventItem
+    /// ذخیره میکند
     /// </summary>
     /// <param name="eventData"></param>
     private static void AddOutbox(DbContextEventData eventData)
@@ -76,7 +80,7 @@ public class AddOutBoxEventItemInterceptor : SaveChangesInterceptor
                 eventData.Context.Add(new OutBoxEventItem
                 {
                     EventId = Guid.NewGuid(),
-                    AccuredByUserId = userInfoService.UserIdOrDefault(),
+                    AccruedByUserId = userInfoService.UserIdOrDefault(),
                     AccruedOn = DateTime.Now,
                     AggregateId = aggregate.BusinessId.ToString(),
                     AggregateName = aggregate.GetType().Name,

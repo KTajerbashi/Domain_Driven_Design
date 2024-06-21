@@ -45,7 +45,7 @@ namespace Extensions.Events.PollingPublisher
                             Route = $"{_options.ApplicationName}.event.{item.EventName}",
                             Headers = new Dictionary<string, object>
                             {
-                                ["AccuredByUserId"] = item.AccuredByUserId,
+                                ["AccuredByUserId"] = item.AccruedByUserId,
                                 ["AccuredOn"] = item.AccruedOn.ToString(),
                                 ["AggregateName"] = item.AggregateName,
                                 ["AggregateTypeName"] = item.AggregateTypeName,

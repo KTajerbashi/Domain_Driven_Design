@@ -10,7 +10,7 @@ public class OutBoxEventItemConfig : IEntityTypeConfiguration<OutBoxEventItem>
 {
     public void Configure(EntityTypeBuilder<OutBoxEventItem> builder)
     {
-        builder.Property(c => c.AccuredByUserId).HasMaxLength(255);
+        builder.Property(c => c.AccruedByUserId).HasMaxLength(255);
         builder.Property(c => c.EventName).HasMaxLength(255);
         builder.Property(c => c.AggregateName).HasMaxLength(255);
         builder.Property(c => c.EventTypeName).HasMaxLength(500);
