@@ -1,9 +1,7 @@
 ﻿using DDD.Core.ApplicationServices.Library.Commands;
 using DDD.Core.ApplicationServices.Library.Events;
 using DDD.Core.ApplicationServices.Library.Queries;
-using DDD.Core.Contracts.Library.ApplicationServices.Commands;
 using DDD.Core.Contracts.Library.ApplicationServices.Events;
-using DDD.Core.Contracts.Library.ApplicationServices.Queries;
 using FluentValidation;
 
 namespace DDD.EndPoints.Web.Library.Extensions.DependencyInjection;
