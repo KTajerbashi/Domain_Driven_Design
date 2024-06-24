@@ -5,6 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Extensions.Events.PollingPublisher.Dal.Dapper.Extensions.DependencyInjection;
+/// <summary>
+/// تزریق های که برای الگوی پولینگ پابلش لازم است
+/// </summary>
 public static class PollingPublisherServiceCollectionExtensions
 {
     public static IServiceCollection AddPollingPublisherDalSql(this IServiceCollection services, IConfiguration configuration)

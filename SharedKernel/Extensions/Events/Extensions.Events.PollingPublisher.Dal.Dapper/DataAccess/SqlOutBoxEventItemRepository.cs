@@ -8,7 +8,9 @@ using System.Data;
 
 namespace Extensions.Events.PollingPublisher.Dal.Dapper.DataAccess
 {
-
+    /// <summary>
+    /// 
+    /// </summary>
     public class SqlOutBoxEventItemRepository : IOutBoxEventItemRepository
     {
         private readonly PollingPublisherDalRedisOptions _options;
@@ -22,6 +24,11 @@ namespace Extensions.Events.PollingPublisher.Dal.Dapper.DataAccess
             _logger = logger;
             _logger.LogInformation("New Instance of SqlOutBoxEventItemRepository Created");
         }
+        /// <summary>
+        /// خواندن آیتم ها  از پایگاه داده و ارسال در صف 
+        /// </summary>
+        /// <param name="maxCount"></param>
+        /// <returns></returns>
         public List<OutBoxEventItem> GetOutBoxEventItemsForPublish(int maxCount = 100)
         {
             try
@@ -37,6 +44,11 @@ namespace Extensions.Events.PollingPublisher.Dal.Dapper.DataAccess
             }
 
         }
+        
+        /// <summary>
+        /// رویداد های که دریافت میکند را مارک میزند که خوانده شده است
+        /// </summary>
+        /// <param name="outBoxEventItems"></param>
         public void MarkAsRead(List<OutBoxEventItem> outBoxEventItems)
         {
             try
@@ -48,12 +60,12 @@ namespace Extensions.Events.PollingPublisher.Dal.Dapper.DataAccess
                     {
                         Ids = idForMark
                     });
-                    _logger.LogInformation("{Count} of event marked as processed in service {ApplicaitonName} at {DateTime}. marked ids are {Ids}", outBoxEventItems.Count, _options.ApplicationName, DateTime.Now, idForMark);
+                    _logger.LogInformation("{Count} of event marked as processed in service {ApplicationName} at {DateTime}. marked ids are {Ids}", outBoxEventItems.Count, _options.ApplicationName, DateTime.Now, idForMark);
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Marking events as processed failed in applicaiton {ApplicaitonName}", _options.ApplicationName);
+                _logger.LogError(ex, "Marking events as processed failed in application {ApplicationName}", _options.ApplicationName);
                 throw;
             }
 
