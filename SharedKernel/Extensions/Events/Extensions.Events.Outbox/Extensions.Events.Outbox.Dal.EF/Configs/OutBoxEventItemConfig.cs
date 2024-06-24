@@ -17,7 +17,7 @@ public class OutBoxEventItemConfig : IEntityTypeConfiguration<OutBoxEventItem>
         builder.Property(c => c.AggregateTypeName).HasMaxLength(500);
         builder.Property(c => c.TraceId).HasMaxLength(100);
         builder.Property(c => c.SpanId).HasMaxLength(100);
-        builder.ToTable("OutBoxEventItems", "zamin");
+        builder.ToTable("OutBoxEventItems", "Event");
     }
 }
 

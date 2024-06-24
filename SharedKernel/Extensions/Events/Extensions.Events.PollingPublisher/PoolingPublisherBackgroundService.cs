@@ -32,7 +32,7 @@ namespace Extensions.Events.PollingPublisher
             {
                 try
                 {
-                    var outboxItems = _outBoxEventItemRepository.GetOutBoxEventItemsForPublisher(_options.SendCount);
+                    var outboxItems = _outBoxEventItemRepository.GetOutBoxEventItemsForPublish(_options.SendCount);
                     foreach (var item in outboxItems)
                     {
                         using Activity trace = StartChildActivity(item);
@@ -45,8 +45,8 @@ namespace Extensions.Events.PollingPublisher
                             Route = $"{_options.ApplicationName}.event.{item.EventName}",
                             Headers = new Dictionary<string, object>
                             {
-                                ["AccuredByUserId"] = item.AccruedByUserId,
-                                ["AccuredOn"] = item.AccruedOn.ToString(),
+                                ["AccruedByUserId"] = item.AccruedByUserId,
+                                ["AccruedOn"] = item.AccruedOn.ToString(),
                                 ["AggregateName"] = item.AggregateName,
                                 ["AggregateTypeName"] = item.AggregateTypeName,
                                 ["EventTypeName"] = item.EventTypeName,

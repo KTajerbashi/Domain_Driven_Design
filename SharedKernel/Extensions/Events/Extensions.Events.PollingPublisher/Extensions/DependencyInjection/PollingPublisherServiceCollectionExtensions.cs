@@ -1,27 +1,25 @@
-﻿using Extensions.Events.PollingPublisher.Extensions.DependencyInjection;
-using Extensions.Events.PollingPublisher.Options;
+﻿using Extensions.Events.PollingPublisher.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Extensions.Events.PollingPublisher;
 
 namespace Extensions.Events.PollingPublisher.Extensions.DependencyInjection;
 
 public static class PollingPublisherServiceCollectionExtensions
 {
-    public static IServiceCollection AddZaminPollingPublisher(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddPollingPublisher(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<PollingPublisherOptions>(configuration);
         AddServices(services);
         return services;
     }
 
-    public static IServiceCollection AddZaminPollingPublisher(this IServiceCollection services, IConfiguration configuration, string sectionName)
+    public static IServiceCollection AddPollingPublisher(this IServiceCollection services, IConfiguration configuration, string sectionName)
     {
-        services.AddZaminPollingPublisher(configuration.GetSection(sectionName));
+        services.AddPollingPublisher(configuration.GetSection(sectionName));
         return services;
     }
 
-    public static IServiceCollection AddZaminPollingPublisher(this IServiceCollection services, Action<PollingPublisherOptions> setupAction)
+    public static IServiceCollection AddPollingPublisher(this IServiceCollection services, Action<PollingPublisherOptions> setupAction)
     {
         services.Configure(setupAction);
         AddServices(services);

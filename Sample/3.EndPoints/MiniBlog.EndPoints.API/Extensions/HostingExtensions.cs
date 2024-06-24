@@ -108,7 +108,6 @@ namespace MiniBlog.EndPoints.API.Extensions
         /// <returns></returns>
         public static WebApplication ConfigurePipeline(this WebApplication app)
         {
-            //zamin
             app.UseApiExceptionHandler();
 
             //Serilog
