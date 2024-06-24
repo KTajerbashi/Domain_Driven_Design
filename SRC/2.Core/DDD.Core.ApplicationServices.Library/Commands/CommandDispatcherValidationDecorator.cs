@@ -94,7 +94,8 @@ public class CommandDispatcherValidationDecorator : CommandDispatcherDecorator
     /// <typeparam name="TValidationResult"></typeparam>
     /// <param name="command"></param>
     /// <returns></returns>
-    private TValidationResult Validate<TCommand, TValidationResult>(TCommand command) where TValidationResult : ApplicationServiceResult, new()
+    private TValidationResult Validate<TCommand, TValidationResult>(TCommand command) 
+        where TValidationResult : ApplicationServiceResult, new()
     {
         var validator = _serviceProvider.GetService<IValidator<TCommand>>();
         TValidationResult res = null;

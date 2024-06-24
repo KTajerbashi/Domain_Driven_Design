@@ -36,7 +36,6 @@ namespace MiniBlog.EndPoints.API.Extensions
             {
                 IConfiguration configuration = builder.Configuration;
 
-                //zamin
                 builder.Services.AddWebApiCore("DDD", "MiniBlog");
 
                 //microsoft

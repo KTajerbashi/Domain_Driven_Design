@@ -28,6 +28,5 @@ namespace MiniBlog.Infrastructure.Data.Sql.Commands.DatabaseContext
             configurationBuilder.Properties<LastName>().HaveConversion<LastNameConversion>();
         }
         public DbSet<Person> People { get; set; }
-        public override DbSet<OutBoxEventItem> OutBoxEventItems { get => base.OutBoxEventItems; set => base.OutBoxEventItems = value; }
     }
 }
