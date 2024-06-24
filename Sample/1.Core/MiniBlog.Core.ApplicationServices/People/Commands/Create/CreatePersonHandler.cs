@@ -1,6 +1,7 @@
 ﻿
 using DDD.Core.ApplicationServices.Library.Commands;
 using DDD.Core.RequestResponse.Library.Commands;
+using DDD.Core.RequestResponse.Library.Common;
 using DDD.Utilities.Library;
 using MiniBlog.Core.Contracts.People.Commands;
 using MiniBlog.Core.Domain.People.Entities;
@@ -19,8 +20,9 @@ public class CreatePersonHandler : CommandHandler<CreatePerson, int>
     public override async Task<CommandResult<int>> Handle(CreatePerson command)
     {
         Person person = new Person(command.Id, command.FirstName, command.LastName);
-        repository.Insert(person);
-        await repository.CommitAsync();
-        return await OkAsync(person.Id);
+        //repository.Insert(person);
+        //await repository.CommitAsync();
+
+        return await ResultAsync(person.Id,ApplicationServiceStatus.NotFound);
     }
 }

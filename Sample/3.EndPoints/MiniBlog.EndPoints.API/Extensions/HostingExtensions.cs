@@ -1,6 +1,9 @@
 ﻿using DDD.EndPoints.Web.Library.Extensions.DependencyInjection;
 using DDD.EndPoints.Web.Library.Extensions.ModelBinding;
 using DDD.Infra.Data.Sql.Commands.Library.Interceptors;
+using Extensions.Caching.InMemory.Extensions.DependencyInjection;
+using Extensions.ObjectMappers.AutoMapper.Extensions.DependencyInjection;
+using Extensions.Serializers.Microsoft.Extensions.DependencyInjection;
 using Extensions.Translations.Parrot.Extensions.DependencyInjection;
 using Extensions.UsersManagement.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Cors.Infrastructure;
@@ -9,11 +12,6 @@ using MiniBlog.EndPoints.API.Extensions.DependencyInjection.Swaggers.Extentions;
 using MiniBlog.Infrastructure.Data.Sql.Commands.DatabaseContext;
 using MiniBlog.Infrastructure.Data.Sql.Queries.DatabaseContext;
 using Serilog;
-using Extensions.ObjectMappers.AutoMapper.Extensions.DependencyInjection;
-using Extensions.Serializers.Microsoft.Extensions.DependencyInjection;
-using Extensions.Caching.InMemory.Extensions.DependencyInjection;
-using Extensions.Caching.Distributed.Sql.Extensions.DependencyInjection;
-using Extensions.Caching.Distributed.Redis.Extensions.DependencyInjection;
 
 
 
@@ -50,7 +48,7 @@ namespace MiniBlog.EndPoints.API.Extensions
                 //zamin
                 //builder.Services.AddSoftwarePartDetector(configuration, "SoftwarePart");
 
-                //zamin
+
                 builder.Services.AddNonValidatingValidator();
 
                 //zamin

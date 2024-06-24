@@ -9,7 +9,9 @@ namespace DDD.EndPoints.Web.Library.Filters
         {
             if (!context.ModelState.IsValid)
             {
-                var errors = context.ModelState.Where(x => x.Value.Errors.Any()).Select(kvp => string.Join(", ", kvp.Value.Errors.Select(p => p.ErrorMessage))).ToList();
+                var errors = context.ModelState.Where(x => x.Value.Errors.Any())
+                    .Select(kvp => string.Join(", ", kvp.Value.Errors.Select(p => p.ErrorMessage)))
+                    .ToList();
                 context.Result = new BadRequestObjectResult(errors);
             }
         }
