@@ -7,12 +7,22 @@ using FluentValidation;
 namespace DDD.EndPoints.Web.Library.Extensions.DependencyInjection;
 
 /// <summary>
-/// 
+/// درین اکستنشن تمامی سرویس ها و ریپازیتوری ها و وابستگی هارا که در لایه های 
+/// Application 
+/// Contract
+/// داریم را تزریق میکنیم
 /// </summary>
 public static class AddApplicationServicesExtensions
 {
     /// <summary>
-    /// 
+    /// تزریق 
+    /// هندلر و دیسپچر های که برای الگوی 
+    /// Mediate R
+    /// پیاده سازی شده است
+    /// Commands    Query  Dispatcher   Event
+    /// همچنان تزریق اعتبار سنجی های که برای درخواست نوشته شده است
+    /// =========================
+    /// بعد از مرحله چهارم اجرا میشود
     /// </summary>
     /// <param name="services"></param>
     /// <param name="assembliesForSearch"></param>
@@ -28,7 +38,9 @@ public static class AddApplicationServicesExtensions
                    .AddFluentValidators(assembliesForSearch);
 
     /// <summary>
-    /// 
+    /// تزریق تمام هندلر های که از 
+    /// ICommandHandler
+    /// پیاده سازی یا ارث بری کرده است
     /// </summary>
     /// <param name="services"></param>
     /// <param name="assembliesForSearch"></param>
@@ -37,7 +49,9 @@ public static class AddApplicationServicesExtensions
         => services.AddWithTransientLifetime(assembliesForSearch, typeof(ICommandHandler<>), typeof(ICommandHandler<,>));
 
     /// <summary>
-    /// 
+    /// تزریق تمام دیسپچر های که از 
+    /// ICommandDispatcher
+    /// پیاده سازی یا ارث بری کرده است
     /// </summary>
     /// <param name="services"></param>
     /// <returns></returns>
@@ -47,6 +61,7 @@ public static class AddApplicationServicesExtensions
         services.AddTransient<CommandDispatcherDecorator, CommandDispatcherDomainExceptionHandlerDecorator>();
         services.AddTransient<CommandDispatcherDecorator, CommandDispatcherValidationDecorator>();
 
+        ///پیاده سازی پایپ لاین نحوه دیسپچ کردن به ترتیب 
         services.AddTransient<ICommandDispatcher>(c =>
         {
             var commandDispatcher = c.GetRequiredService<CommandDispatcher>();
@@ -58,14 +73,9 @@ public static class AddApplicationServicesExtensions
                 for (int i = 0; i <= listFinalIndex; i++)
                 {
                     if (i == listFinalIndex)
-                    {
                         decorators[i].SetCommandDispatcher(commandDispatcher);
-
-                    }
                     else
-                    {
                         decorators[i].SetCommandDispatcher(decorators[i + 1]);
-                    }
                 }
                 return decorators[0];
             }
@@ -75,7 +85,9 @@ public static class AddApplicationServicesExtensions
     }
 
     /// <summary>
-    /// 
+    /// تزریق تمام هندلر های که از 
+    /// IQueryHandler
+    /// پیاده سازی یا ارث بری کرده است
     /// </summary>
     /// <param name="services"></param>
     /// <param name="assembliesForSearch"></param>
@@ -84,7 +96,9 @@ public static class AddApplicationServicesExtensions
         => services.AddWithTransientLifetime(assembliesForSearch, typeof(IQueryHandler<,>));
 
     /// <summary>
-    /// 
+    /// تزریق تمام دیسپچر های که از 
+    /// IQueryDispatcher
+    /// پیاده سازی یا ارث بری کرده است
     /// </summary>
     /// <param name="services"></param>
     /// <returns></returns>
@@ -94,6 +108,7 @@ public static class AddApplicationServicesExtensions
         services.AddTransient<QueryDispatcherDecorator, QueryDispatcherDomainExceptionHandlerDecorator>();
         services.AddTransient<QueryDispatcherDecorator, QueryDispatcherValidationDecorator>();
 
+        ///پیاده سازی پایپ لاین نحوه دیسپچ کردن به ترتیب 
         services.AddTransient<IQueryDispatcher>(c =>
         {
             var queryDispatcher = c.GetRequiredService<QueryDispatcher>();
@@ -122,7 +137,9 @@ public static class AddApplicationServicesExtensions
     }
 
     /// <summary>
-    /// 
+    /// تزریق تمام هندلر های که از 
+    /// IDomainEventHandler
+    /// پیاده سازی یا ارث بری کرده است
     /// </summary>
     /// <param name="services"></param>
     /// <param name="assembliesForSearch"></param>
@@ -131,7 +148,9 @@ public static class AddApplicationServicesExtensions
         => services.AddWithTransientLifetime(assembliesForSearch, typeof(IDomainEventHandler<>));
 
     /// <summary>
-    /// 
+    /// تزریق تمام دیسپچر های که از 
+    /// IEventDispatcher
+    /// پیاده سازی یا ارث بری کرده است
     /// </summary>
     /// <param name="services"></param>
     /// <returns></returns>
@@ -141,6 +160,7 @@ public static class AddApplicationServicesExtensions
         services.AddTransient<EventDispatcherDecorator, EventDispatcherDomainExceptionHandlerDecorator>();
         services.AddTransient<EventDispatcherDecorator, EventDispatcherValidationDecorator>();
 
+        ///پیاده سازی پایپ لاین نحوه دیسپچ کردن به ترتیب 
         services.AddTransient<IEventDispatcher>(c =>
         {
             var queryDispatcher = c.GetRequiredService<EventDispatcher>();
@@ -169,7 +189,9 @@ public static class AddApplicationServicesExtensions
     }
 
     /// <summary>
-    /// 
+    /// تزریق 
+    /// Fluent Validations
+    /// برای درخواست های که نوشته شده است
     /// </summary>
     /// <param name="services"></param>
     /// <param name="assembliesForSearch"></param>

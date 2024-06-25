@@ -3,7 +3,14 @@
 namespace DDD.EndPoints.Web.Library.Extensions.DependencyInjection;
 public static class AddServicesExtensions
 {
-    public static IServiceCollection AddUntilityServices(
+    /// <summary>
+    /// 
+    /// ======================================
+    /// بعد از مرحله چهارم اجرا میشود
+    /// </summary>
+    /// <param name="services"></param>
+    /// <returns></returns>
+    public static IServiceCollection AddUtilityServices(
         this IServiceCollection services)
     {
         services.AddTransient<UtilitiesServices>();

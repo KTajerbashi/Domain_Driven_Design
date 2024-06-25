@@ -9,21 +9,27 @@ namespace DDD.EndPoints.Web.Library.Extensions.DependencyInjection;
 public static class AddApiConfigurationExtensions
 {
     /// <summary>
-    /// 
+    /// درین ساختار وابستگی های زیر ساخت تزریق میشود
+    /// =========================================
+    /// بعد از مرحله چهارم اجرا میشود
     /// </summary>
     /// <param name="services"></param>
     /// <param name="assemblyNamesForLoad"></param>
     /// <returns></returns>
     public static IServiceCollection AddWebApiCore(this IServiceCollection services, params string[] assemblyNamesForLoad)
     {
-        services.AddControllers().AddFluentValidation();
+        services
+            .AddControllers()
+            .AddFluentValidation();
         services.AddDependencies(assemblyNamesForLoad);
 
         return services;
     }
 
     /// <summary>
-    /// 
+    /// میدلور های مدیریت خطا درین اکستنشن تزریق میشود
+    /// ==============
+    /// در ادامه مرحله پنجم گام اول
     /// </summary>
     /// <param name="app"></param>
 

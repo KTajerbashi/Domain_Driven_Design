@@ -8,6 +8,12 @@
             return builder.UseMiddleware<ApiExceptionMiddleware>(options);
         }
 
+        /// <summary>
+        /// در ادامه مرحله پنجم بعد از گام اول اجرا میشود
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="configureOptions"></param>
+        /// <returns></returns>
         public static IApplicationBuilder UseApiExceptionHandler(this IApplicationBuilder builder,
             Action<ApiExceptionOptions> configureOptions)
         {

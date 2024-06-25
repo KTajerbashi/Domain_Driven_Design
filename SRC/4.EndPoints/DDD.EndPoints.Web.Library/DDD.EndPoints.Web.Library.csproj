@@ -43,9 +43,5 @@
     <Using Include="DDD.Core.RequestResponse.Library.Queries" />
     <Using Include="DDD.Core.Contracts.Library.Data.Commands" />
     <Using Include="DDD.Core.Contracts.Library.Data.Queries" />
-    
-    
-    
-    
   </ItemGroup>
 </Project>

@@ -2,6 +2,7 @@
 using System.Net;
 using Extensions.Serializers.Abstractions;
 using Extensions.Translations.Abstractions;
+using System.Diagnostics;
 
 namespace DDD.EndPoints.Web.Library.Middlewares.ApiExceptionHandler
 {
@@ -38,11 +39,13 @@ namespace DDD.EndPoints.Web.Library.Middlewares.ApiExceptionHandler
 
         private Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
+            var traceId = Activity.Current?.Id ?? context?.TraceIdentifier;
             var error = new ApiError
             {
                 Id = Guid.NewGuid().ToString(),
                 Status = (short)HttpStatusCode.InternalServerError,
-                Title = _translator["SOME_KIND_OF_ERROR_OCCURRED_IN_THE_API"]
+                Title = _translator["SOME_KIND_OF_ERROR_OCCURRED_IN_THE_API"],
+                TraceId = traceId,
             };
 
             _options.AddResponseDetails?.Invoke(context, exception, error);

@@ -3,12 +3,17 @@
 namespace DDD.EndPoints.Web.Library.Extensions.DependencyInjection;
 
 /// <summary>
-/// 
+/// این اکستنشن کلاس مرکزیت وابستگی ها و تزریق های است
 /// </summary>
 public static class Extensions
 {
     /// <summary>
-    /// 
+    /// درین وابستگی های لایه اپلیکشن
+    /// لایه دیتابیس
+    /// لایه یوتیلیتیس
+    /// و بقیه وابستگی ها میباشد
+    /// ==========================================
+    /// بعد از مرحله چهارم اجرا میشود
     /// </summary>
     /// <param name="services"></param>
     /// <param name="assemblyNamesForSearch"></param>
@@ -21,42 +26,52 @@ public static class Extensions
         services
             .AddApplicationServices(assemblies)
             .AddDataAccess(assemblies)
-            .AddUntilityServices()
-            .AddCustomeDepenecies(assemblies);
+            .AddUtilityServices()
+            .AddCustomDependencies(assemblies);
         return services;
     }
 
     /// <summary>
-    /// 
+    /// این اکستنشن اینترفس های لایف تایم را تزریق میکند
+    /// =======================
+    /// بعد از مرحله چهارم اجرا میشود
     /// </summary>
     /// <param name="services"></param>
     /// <param name="assemblies"></param>
     /// <returns></returns>
-    public static IServiceCollection AddCustomeDepenecies(this IServiceCollection services, IEnumerable<Assembly> assemblies)
+    public static IServiceCollection AddCustomDependencies(this IServiceCollection services, IEnumerable<Assembly> assemblies)
     {
-        return services.AddWithTransientLifetime(assemblies, typeof(ITransientLifetime))
-            .AddWithScopedLifetime(assemblies, typeof(IScopeLifetime))
-            .AddWithSingletonLifetime(assemblies, typeof(ISingletoneLifetime));
+        return services
+                        .AddWithTransientLifetime(assemblies, typeof(ITransientLifetime))
+                        .AddWithScopedLifetime(assemblies, typeof(IScopeLifetime))
+                        .AddWithSingletonLifetime(assemblies, typeof(ISingletoneLifetime));
     }
+   
+    
     /// <summary>
-    /// 
+    /// سرویس های که لایف تایم که از نوعیت ترانزینت باشد
+    /// با این تزریق میکنیم
     /// </summary>
     /// <param name="services"></param>
     /// <param name="assembliesForSearch"></param>
     /// <param name="assignableTo"></param>
     /// <returns></returns>
-    public static IServiceCollection AddWithTransientLifetime(this IServiceCollection services,
+    public static IServiceCollection AddWithTransientLifetime(
+        this IServiceCollection services,
         IEnumerable<Assembly> assembliesForSearch,
         params Type[] assignableTo)
     {
-        services.Scan(s => s.FromAssemblies(assembliesForSearch)
+        services
+            .Scan(s => s.FromAssemblies(assembliesForSearch)
             .AddClasses(c => c.AssignableToAny(assignableTo))
             .AsImplementedInterfaces()
             .WithTransientLifetime());
         return services;
     }
+
     /// <summary>
-    /// 
+    /// سرویس های که لایف تایم که از نوعیت اسکوپ باشد
+    /// با این تزریق میکنیم
     /// </summary>
     /// <param name="services"></param>
     /// <param name="assembliesForSearch"></param>
@@ -74,7 +89,8 @@ public static class Extensions
     }
 
     /// <summary>
-    /// 
+    /// سرویس های که لایف تایم که از نوعیت سینگلتون باشد
+    /// با این تزریق میکنیم
     /// </summary>
     /// <param name="services"></param>
     /// <param name="assembliesForSearch"></param>
@@ -93,18 +109,17 @@ public static class Extensions
 
 
     /// <summary>
-    /// 
+    /// تمام اسیمبلی هارا براساس نام پروژه را اضافه میکنیم
     /// </summary>
     /// <param name="assmblyName"></param>
     /// <returns></returns>
-    private static List<Assembly> GetAssemblies(string[] assmblyName)
+    private static List<Assembly> GetAssemblies(string[] assemblyName)
     {
-
         var assemblies = new List<Assembly>();
         var dependencies = DependencyContext.Default.RuntimeLibraries;
         foreach (var library in dependencies)
         {
-            if (IsCandidateCompilationLibrary(library, assmblyName))
+            if (IsCandidateCompilationLibrary(library, assemblyName))
             {
                 var assembly = Assembly.Load(new AssemblyName(library.Name));
                 assemblies.Add(assembly);
@@ -114,8 +129,10 @@ public static class Extensions
     }
 
 
-    /// <summary>
-    /// 
+    /// <summary>   👆👆👆👆👆👆👆👆👆👆👆👆
+    /// این سرویس هارا دریافت میکند
+    /// که آیا این وابستگی در اسیمبلی مورد نظر است یا خیر
+    /// در متد دریافت اسیمبلی
     /// </summary>
     /// <param name="compilationLibrary"></param>
     /// <param name="assmblyName"></param>
