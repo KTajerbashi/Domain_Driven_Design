@@ -4,10 +4,10 @@ using MiniBlog.Core.RequestResponse.People.Commands.Create;
 using MiniBlog.Core.RequestResponse.People.Queries.GetAllPerson;
 using MiniBlog.Core.RequestResponse.People.Queries.GetPersonById;
 
-namespace MiniBlog.EndPoints.API.Controllers.People
+namespace MiniBlog.EndPoints.API.Controllers
 {
     [Route("api/[controller]")]
-    public class PersonController : BaseController
+    public class PeopleController : BaseController
     {
         /// <summary>
         /// 

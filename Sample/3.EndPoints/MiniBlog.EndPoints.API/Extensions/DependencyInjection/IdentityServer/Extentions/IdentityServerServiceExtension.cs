@@ -1,6 +1,6 @@
 ﻿using MiniBlog.EndPoints.API.Extensions.DependencyInjection.IdentityServer.Options;
 
-namespace MiniBlog.EndPoints.API.Extensions.DependencyInjection.IdentityServer.Extentions;
+namespace MiniBlog.EndPoints.API.Extensions.DependencyInjection.IdentityServer.Extensions;
 
 public static class IdentityServerServiceExtension
 {

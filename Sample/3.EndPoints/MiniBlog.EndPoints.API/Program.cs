@@ -1,8 +1,9 @@
-
+﻿
 using MiniBlog.EndPoints.API.Extensions;
 using SerilogRegistration.Extensions;
 using SerilogRegistration.Extensions.DependencyInjection;
 
+///این 
 SerilogExtensions.RunWithSerilogExceptionHandling(() =>
 {
     var builder = WebApplication.CreateBuilder(args);

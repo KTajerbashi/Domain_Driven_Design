@@ -29,16 +29,13 @@ namespace MiniBlog.EndPoints.API.Controllers
                 throw;
             }
         }
+
         [HttpPut("Update")]
-        public async Task<IActionResult> Update()
-        {
-            return Ok(ModelState);
-        }
+        public async Task<IActionResult> Update() => Ok(ModelState);
+
         [HttpDelete("Delete")]
-        public async Task<IActionResult> Delete()
-        {
-            return Ok(ModelState);
-        }
+        public async Task<IActionResult> Delete() => Ok(ModelState);
+
         [HttpGet("Get")]
         public async Task<IActionResult> Get()
         {

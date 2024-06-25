@@ -8,7 +8,7 @@ using Extensions.Translations.Parrot.Extensions.DependencyInjection;
 using Extensions.UsersManagement.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
-using MiniBlog.EndPoints.API.Extensions.DependencyInjection.Swaggers.Extentions;
+using MiniBlog.EndPoints.API.Extensions.DependencyInjection.Swaggers.Extensions;
 using MiniBlog.Infrastructure.Data.Sql.Commands.DatabaseContext;
 using MiniBlog.Infrastructure.Data.Sql.Queries.DatabaseContext;
 using Serilog;
@@ -24,7 +24,7 @@ namespace MiniBlog.EndPoints.API.Extensions
     public static class HostingExtensions
     {
         /// <summary>
-        /// 
+        /// چهارمین مرحله اجرا شده نرم افزار
         /// </summary>
         /// <param name="builder"></param>
         /// <returns></returns>
@@ -89,6 +89,7 @@ namespace MiniBlog.EndPoints.API.Extensions
                 //builder.Services.AddIdentityServer(configuration, "OAuth");
 
                 builder.Services.AddSwagger(configuration, "Swagger");
+
                 return builder.Build();
             }
             catch (Exception ex)
@@ -99,7 +100,8 @@ namespace MiniBlog.EndPoints.API.Extensions
         }
 
         /// <summary>
-        /// 
+        /// =====================
+        /// مرحله پنجم اجرای نرم افزار
         /// </summary>
         /// <param name="app"></param>
         /// <returns></returns>

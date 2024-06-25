@@ -15,13 +15,13 @@ public class AddParamsToHeader : IOperationFilter
             {
                 new OpenApiSecurityScheme()
                 {
-                    Name="Oauth2",
-                    Scheme= "Oauth2",
+                    Name="OAuth2",
+                    Scheme= "OAuth2",
                     In = ParameterLocation.Header,
                     Reference = new OpenApiReference()
                     {
-                        Type= ReferenceType.SecurityScheme,
-                        Id= "Oauth2"
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "OAuth2"
                     }
                 }, new List<string>()
             }

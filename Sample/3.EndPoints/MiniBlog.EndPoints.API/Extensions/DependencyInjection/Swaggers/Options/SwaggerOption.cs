@@ -1,5 +1,8 @@
 ﻿namespace MiniBlog.EndPoints.API.Extensions.DependencyInjection.Swaggers.Options;
 
+/// <summary>
+/// در ادامه مرحله چهارم
+/// </summary>
 public class SwaggerOption
 {
     public bool Enabled { get; set; } = true;
@@ -7,6 +10,9 @@ public class SwaggerOption
     public SwaggerOAuthOption OAuth { get; set; } = new();
 }
 
+/// <summary>
+/// در ادامه مرحله چهارم
+/// </summary>
 public class SwaggerDocOption
 {
     public string Version { get; set; } = "v1";
@@ -15,6 +21,9 @@ public class SwaggerDocOption
     public string URL { get; set; } = "/swagger/v1/swagger.json";
 }
 
+/// <summary>
+/// در ادامه مرحله چهارم
+/// </summary>
 public class SwaggerOAuthOption
 {
     public bool Enabled { get; set; } = false;
