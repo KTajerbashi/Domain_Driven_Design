@@ -2,6 +2,7 @@
 using DDD.Core.Domain.Library.Entities;
 using DDD.Core.Domain.Library.ValueObjects;
 using System.Linq.Expressions;
+using System.Numerics;
 
 namespace DDD.Infra.Data.Sql.Commands.Library;
 /// <summary>
@@ -28,44 +29,7 @@ public class BaseCommandRepository<TEntity, TDbContext, TId> : ICommandRepositor
         _dbContext = dbContext;
     }
 
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="id"></param>
-    public void Delete(TId id)
-    {
-        var entity = _dbContext.Set<TEntity>().Find(id);
-        _dbContext.Set<TEntity>().Remove(entity);
-    }
-
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="entity"></param>
-    public void Delete(TEntity entity)
-    {
-        _dbContext.Set<TEntity>().Remove(entity);
-    }
-
-    
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="id"></param>
-    public void DeleteGraph(TId id)
-    {
-        var entity = GetGraph(id);
-        if (entity is not null && !entity.Id.Equals(default))
-            _dbContext.Set<TEntity>().Remove(entity);
-    }
-
-
-
-
-
-    #region insert
+    #region Insert
     /// <summary>
     /// 
     /// </summary>
@@ -86,6 +50,86 @@ public class BaseCommandRepository<TEntity, TDbContext, TId> : ICommandRepositor
     {
         await _dbContext.Set<TEntity>().AddAsync(entity);
     }
+    #endregion
+
+    #region Update
+    public void Update(TEntity entity)
+    {
+        _dbContext.Set<TEntity>().Update(entity);
+    }
+
+    public void Update(TEntity entity, TId id)
+    {
+        var result = _dbContext.Set<TEntity>().Find(id);
+        result = entity;
+        _dbContext.Set<TEntity>().Update(entity);
+    }
+
+    public async Task UpdateAsync(TEntity entity)
+    {
+        _dbContext.Set<TEntity>().Update(entity);
+        await Task.CompletedTask;
+    }
+
+    public async Task UpdateAsync(TEntity entity, TId id)
+    {
+        var result = await _dbContext.Set<TEntity>().FindAsync(id);
+        result = entity;
+        _dbContext.Set<TEntity>().Update(entity);
+    }
+    #endregion
+
+    #region AddOrUpdate
+    public void AddOrUpdate(TEntity entity)
+    {
+        if (entity.Id.Equals("0"))
+            Insert(entity);
+        else
+            Update(entity);
+    }
+
+    public async Task AddOrUpdateAsync(TEntity entity)
+    {
+        if (entity.Id.Equals("0"))
+            await InsertAsync(entity);
+        else
+            await UpdateAsync(entity);
+    }
+    #endregion
+
+    #region Delete
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    public void Delete(TId id)
+    {
+        var entity = _dbContext.Set<TEntity>().Find(id);
+        _dbContext.Set<TEntity>().Remove(entity);
+    }
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="entity"></param>
+    public void Delete(TEntity entity)
+    {
+        _dbContext.Set<TEntity>().Remove(entity);
+    }
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    public void DeleteGraph(TId id)
+    {
+        var entity = GetGraph(id);
+        if (entity is not null && !entity.Id.Equals(default))
+            _dbContext.Set<TEntity>().Remove(entity);
+    }
+
     #endregion
 
     #region Get Single Item
@@ -240,7 +284,7 @@ public class BaseCommandRepository<TEntity, TDbContext, TId> : ICommandRepositor
     {
         return _dbContext.SaveChangesAsync();
     }
-    
+
     /// <summary>
     /// 
     /// </summary>
@@ -257,7 +301,7 @@ public class BaseCommandRepository<TEntity, TDbContext, TId> : ICommandRepositor
     {
         _dbContext.CommitTransaction();
     }
-    
+
     /// <summary>
     /// 
     /// </summary>
@@ -265,6 +309,7 @@ public class BaseCommandRepository<TEntity, TDbContext, TId> : ICommandRepositor
     {
         _dbContext.RollbackTransaction();
     }
+
     #endregion
 }
 

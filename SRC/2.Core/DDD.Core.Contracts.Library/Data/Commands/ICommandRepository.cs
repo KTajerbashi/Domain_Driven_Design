@@ -1,7 +1,7 @@
 ﻿using DDD.Core.Domain.Library.Entities;
 using DDD.Core.Domain.Library.ValueObjects;
 using System.Linq.Expressions;
- 
+
 namespace DDD.Core.Contracts.Library.Data.Commands;
 
 /// <summary>
@@ -49,22 +49,66 @@ public interface ICommandRepository<TEntity, TId> : IUnitOfWork
     Task InsertAsync(TEntity entity);
 
     /// <summary>
+    /// ویرایش اطلاعات
+    /// </summary>
+    /// <param name="entity"></param>
+    void Update(TEntity entity);
+   
+    /// <summary>
+    /// ویرایش اطلاعات
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="id"></param>
+    void Update(TEntity entity,TId id);
+
+
+    /// <summary>
+    /// ویرایش اطلاعات
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <returns></returns>
+    Task UpdateAsync(TEntity entity);
+    
+    /// <summary>
+    /// ویرایش اطلاعات
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    Task UpdateAsync(TEntity entity, TId id);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="entity"></param>
+    void AddOrUpdate(TEntity entity);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <returns></returns>
+    Task AddOrUpdateAsync(TEntity entity);
+
+
+
+
+    /// <summary>
     /// یک شی را با شناسه از دیتابیس یافته و بازگشت می‌دهد.
     /// </summary>
     /// <param name="id">شناسه شی مورد نیاز</param>
     /// <returns>نمونه ساخته شده از شی</returns>
     TEntity Get(TId id);
     Task<TEntity> GetAsync(TId id);
-    
+
     TEntity Get(BusinessId businessId);
     Task<TEntity> GetAsync(BusinessId businessId);
-    
+
     TEntity GetGraph(TId id);
     Task<TEntity> GetGraphAsync(TId id);
-    
+
     TEntity GetGraph(BusinessId businessId);
     Task<TEntity> GetGraphAsync(BusinessId businessId);
-   
+
     bool Exists(Expression<Func<TEntity, bool>> expression);
     Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> expression);
 }

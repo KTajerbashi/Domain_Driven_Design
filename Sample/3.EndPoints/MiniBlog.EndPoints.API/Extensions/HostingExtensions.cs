@@ -12,6 +12,8 @@ using MiniBlog.EndPoints.API.Extensions.DependencyInjection.Swaggers.Extensions;
 using MiniBlog.Infrastructure.Data.Sql.Commands.DatabaseContext;
 using MiniBlog.Infrastructure.Data.Sql.Queries.DatabaseContext;
 using Serilog;
+using Extensions.Caching.Distributed.Sql.Extensions.DependencyInjection;
+using Extensions.Caching.Distributed.Redis.Extensions.DependencyInjection;
 
 
 
@@ -36,31 +38,31 @@ namespace MiniBlog.EndPoints.API.Extensions
 
                 builder.Services.AddWebApiCore("DDD", "MiniBlog");
 
-                //microsoft
+                //  MicroSoft
                 builder.Services.AddEndpointsApiExplorer();
 
-                //zamin
+                // Shared Kernel
                 builder.Services.AddWebUserInfoService(configuration, "WebUserInfo", true);
 
-                //zamin
+                // Shared Kernel
                 builder.Services.AddParrotTranslator(configuration, "ParrotTranslator");
 
-                //zamin
+                // Shared Kernel
                 //builder.Services.AddSoftwarePartDetector(configuration, "SoftwarePart");
 
 
                 builder.Services.AddNonValidatingValidator();
 
-                //zamin
+                // Shared Kernel
                 builder.Services.AddMicrosoftSerializer();
 
-                //zamin
+                // Shared Kernel
                 builder.Services.AddAutoMapperProfiles(configuration, "AutoMapper");
 
-                //Kernel
+                // Shared Kernel
                 builder.Services.AddKernelInMemoryCaching();
                 //builder.Services.AddKernelSqlDistributedCache(configuration, "SqlDistributedCache");
-                //builder.Services.AddKernelRedisDistributedCache(configuration,"RedisDistributedCache");
+                //builder.Services.AddKernelRedisDistributedCache(configuration, "RedisDistributedCache");
 
 
 

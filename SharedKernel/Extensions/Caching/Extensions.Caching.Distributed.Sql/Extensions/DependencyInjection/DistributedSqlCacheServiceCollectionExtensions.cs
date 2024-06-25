@@ -1,18 +1,17 @@
 ﻿using Dapper;
-using Extensions.Caching.Distributed.Sql.Extensions.DependencyInjection;
+using Extensions.Caching.Abstractions;
 using Extensions.Caching.Distributed.Sql.Options;
 using Extensions.Caching.Distributed.Sql.Services;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Extensions.Caching.Abstractions;
 
 namespace Extensions.Caching.Distributed.Sql.Extensions.DependencyInjection;
 
 public static class DistributedSqlCacheServiceCollectionExtensions
 {
     /// <summary>
-    /// 
+    ///  برای تزریق کردن در سرویس های دیگر
     /// </summary>
     /// <param name="services"></param>
     /// <param name="configuration"></param>
@@ -23,7 +22,7 @@ public static class DistributedSqlCacheServiceCollectionExtensions
                                                                   string sectionName)
         => services.AddKernelSqlDistributedCache(configuration.GetSection(sectionName));
     /// <summary>
-    /// 
+    /// برای تزریق داخلی
     /// </summary>
     /// <param name="services"></param>
     /// <param name="configuration"></param>
@@ -33,6 +32,7 @@ public static class DistributedSqlCacheServiceCollectionExtensions
         services.AddTransient<ICacheAdapter, DistributedSqlCacheAdapter>();
         services.Configure<DistributedSqlCacheOptions>(configuration);
 
+        ///خواندن مدل مورد نظر از appsettings.json
         var option = configuration.Get<DistributedSqlCacheOptions>();
 
         if (option.AutoCreateTable)
@@ -75,6 +75,7 @@ public static class DistributedSqlCacheServiceCollectionExtensions
 
         return services;
     }
+
     /// <summary>
     /// 
     /// </summary>
