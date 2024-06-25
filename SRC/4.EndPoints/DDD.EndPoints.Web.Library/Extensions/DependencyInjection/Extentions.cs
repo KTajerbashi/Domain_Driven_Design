@@ -111,7 +111,7 @@ public static class Extensions
     /// <summary>
     /// تمام اسیمبلی هارا براساس نام پروژه را اضافه میکنیم
     /// </summary>
-    /// <param name="assmblyName"></param>
+    /// <param name="assemblyName"></param>
     /// <returns></returns>
     private static List<Assembly> GetAssemblies(string[] assemblyName)
     {
@@ -135,12 +135,12 @@ public static class Extensions
     /// در متد دریافت اسیمبلی
     /// </summary>
     /// <param name="compilationLibrary"></param>
-    /// <param name="assmblyName"></param>
+    /// <param name="assemblyName"></param>
     /// <returns></returns>
-    private static bool IsCandidateCompilationLibrary(RuntimeLibrary compilationLibrary, string[] assmblyName)
+    private static bool IsCandidateCompilationLibrary(RuntimeLibrary compilationLibrary, string[] assemblyName)
     {
-        return assmblyName.Any(d => compilationLibrary.Name.Contains(d))
-            || compilationLibrary.Dependencies.Any(d => assmblyName.Any(c => d.Name.Contains(c)));
+        return assemblyName.Any(d => compilationLibrary.Name.Contains(d))
+            || compilationLibrary.Dependencies.Any(d => assemblyName.Any(c => d.Name.Contains(c)));
     }
 
 }
