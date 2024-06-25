@@ -4,6 +4,9 @@ using Extensions.Caching.Abstractions;
 
 namespace Extensions.Caching.InMemory.Extensions.DependencyInjection;
 
+/// <summary>
+/// در ادامه مرحله چهارم
+/// </summary>
 public static class InMemoryCachingServiceCollectionExtensions
 {
     public static IServiceCollection AddKernelInMemoryCaching(this IServiceCollection services)

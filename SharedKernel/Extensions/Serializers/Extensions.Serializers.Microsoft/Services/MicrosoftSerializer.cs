@@ -4,6 +4,9 @@ using Extensions.Serializers.Abstractions;
 
 namespace Extensions.Serializers.Microsoft.Services;
 
+/// <summary>
+/// در ادامه مرحله پنجم
+/// </summary>
 public class MicrosoftSerializer : IJsonSerializer, IDisposable
 {
     private readonly ILogger<MicrosoftSerializer> _logger;

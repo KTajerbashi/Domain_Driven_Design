@@ -2,5 +2,5 @@
 
 public class DependencyInjectionOption
 {
-    public string AssmblyNamesForLoad { get; set; } = string.Empty;
+    public string AssemblyNamesForLoad { get; set; } = string.Empty;
 }

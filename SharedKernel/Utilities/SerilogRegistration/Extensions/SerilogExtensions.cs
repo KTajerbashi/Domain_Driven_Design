@@ -8,7 +8,18 @@ using System.Threading.Tasks;
 namespace SerilogRegistration.Extensions;
 public class SerilogExtensions
 {
-    public static void RunWithSerilogExceptionHandling(Action action, string startUpMessage = "Starting up", string exceptionMessage = "Unhandled exception", string shutdownMessage = "Shutdown complete")
+    /// <summary>
+    /// اولین مرحله اجرا شدن نرم افزار با این کلاس شروع میشود
+    /// </summary>
+    /// <param name="action"></param>
+    /// <param name="startUpMessage"></param>
+    /// <param name="exceptionMessage"></param>
+    /// <param name="shutdownMessage"></param>
+    public static void RunWithSerilogExceptionHandling(
+        Action action,
+        string startUpMessage = "Starting up",
+        string exceptionMessage = "Unhandled exception",
+        string shutdownMessage = "Shutdown complete")
     {
         Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateBootstrapLogger();
         Log.Information(startUpMessage);

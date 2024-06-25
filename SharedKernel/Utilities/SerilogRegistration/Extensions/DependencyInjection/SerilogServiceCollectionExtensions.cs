@@ -23,12 +23,28 @@ public static class SerilogServiceCollectionExtensions
         return builder.AddTKSerilog(configuration.GetSection(sectionName), enrichersType);
     }
 
-    public static WebApplicationBuilder AddTKSerilog(this WebApplicationBuilder builder, Action<SerilogApplicationEnricherOptions> setupAction, params Type[] enrichersType)
+    /// <summary>
+    /// دومین مرحله اجرای نرم افزار
+    /// </summary>
+    /// <param name="builder"></param>
+    /// <param name="setupAction"></param>
+    /// <param name="enrichersType"></param>
+    /// <returns></returns>
+    public static WebApplicationBuilder AddTKSerilog(
+        this WebApplicationBuilder builder, 
+        Action<SerilogApplicationEnricherOptions> setupAction, 
+        params Type[] enrichersType)
     {
         builder.Services.Configure(setupAction);
         return AddServices(builder, enrichersType);
     }
 
+    /// <summary>
+    /// سومین مرحله اجرا شدن نرم افزار
+    /// </summary>
+    /// <param name="builder"></param>
+    /// <param name="enrichersType"></param>
+    /// <returns></returns>
     private static WebApplicationBuilder AddServices(WebApplicationBuilder builder, params Type[] enrichersType)
     {
 
@@ -41,6 +57,7 @@ public static class SerilogServiceCollectionExtensions
             builder.Services.AddTransient(enricherType);
         }
 
+        /// یکبار دیگر در ادامه مرحله چهارم این اجرا میشود
         builder.Host.UseSerilog((ctx, services, lc) =>
         {
             logEventEnrichers.Add(services.GetRequiredService<UserInfoEnricher>());

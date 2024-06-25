@@ -3,7 +3,7 @@ using System.Security.Claims;
 
 namespace ApiAuthentication.Extensions;
 
-public static class ClaimsPrincipalExtentions
+public static class ClaimsPrincipalExtensions
 {
     public static bool HasSubClaim(this ClaimsPrincipal? principal, string userIdentifierClaimType)
         => principal?.Claims.Any(c => c.Type.Equals(userIdentifierClaimType)) ?? false;

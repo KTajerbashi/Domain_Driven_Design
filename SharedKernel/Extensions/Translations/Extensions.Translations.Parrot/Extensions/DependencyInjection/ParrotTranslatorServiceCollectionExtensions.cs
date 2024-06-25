@@ -15,7 +15,17 @@ public static class ParrotTranslatorServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection AddParrotTranslator(this IServiceCollection services, IConfiguration configuration, string sectionName)
+    /// <summary>
+    /// در ادامه مرحله چهارم اجرا میشود
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="configuration"></param>
+    /// <param name="sectionName"></param>
+    /// <returns></returns>
+    public static IServiceCollection AddParrotTranslator(
+        this IServiceCollection services,
+        IConfiguration configuration, 
+        string sectionName)
     {
         services.AddParrotTranslator(configuration.GetSection(sectionName));
         return services;

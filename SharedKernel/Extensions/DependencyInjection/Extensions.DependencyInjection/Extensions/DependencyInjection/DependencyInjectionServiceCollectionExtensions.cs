@@ -9,60 +9,60 @@ namespace Extensions.DependencyInjection.Extensions.DependencyInjection;
 
 public static class DependencyInjectionServiceCollectionExtensions
 {
-    public static IServiceCollection AddCustomeDepenecies(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddCustomDependencies(this IServiceCollection services, IConfiguration configuration)
     {
         var option = configuration.Get<DependencyInjectionOption>();
 
-        services.AddWithTransientLifetime(option.AssmblyNamesForLoad)
-            .AddWithScopeLifetime(option.AssmblyNamesForLoad)
-            .AddWithSingletoneLifetime(option.AssmblyNamesForLoad)
+        services.AddWithTransientLifetime(option.AssemblyNamesForLoad)
+            .AddWithScopeLifetime(option.AssemblyNamesForLoad)
+            .AddWithSingletonLifetime(option.AssemblyNamesForLoad)
             .Configure<DependencyInjectionOption>(configuration);
 
         return services;
     }
 
-    public static IServiceCollection AddCustomeDepenecies(this IServiceCollection services, IConfiguration configuration, string sectionName)
-        => services.AddCustomeDepenecies(configuration.GetSection(sectionName));
+    public static IServiceCollection AddCustomDependencies(this IServiceCollection services, IConfiguration configuration, string sectionName)
+        => services.AddCustomDependencies(configuration.GetSection(sectionName));
 
-    public static IServiceCollection AddCustomeDepenecies(this IServiceCollection services, Action<DependencyInjectionOption> setupAction)
+    public static IServiceCollection AddCustomDependencies(this IServiceCollection services, Action<DependencyInjectionOption> setupAction)
     {
         var option = new DependencyInjectionOption();
         setupAction.Invoke(option);
 
-        services.AddWithTransientLifetime(option.AssmblyNamesForLoad)
-            .AddWithScopeLifetime(option.AssmblyNamesForLoad)
-            .AddWithSingletoneLifetime(option.AssmblyNamesForLoad)
+        services.AddWithTransientLifetime(option.AssemblyNamesForLoad)
+            .AddWithScopeLifetime(option.AssemblyNamesForLoad)
+            .AddWithSingletonLifetime(option.AssemblyNamesForLoad)
             .Configure(setupAction);
 
         return services;
     }
 
-    private static IServiceCollection AddWithTransientLifetime(this IServiceCollection services, string assmblyNames)
-        => services.Scan(s => s.FromAssemblies(GetAssemblies(assmblyNames))
+    private static IServiceCollection AddWithTransientLifetime(this IServiceCollection services, string assemblyNames)
+        => services.Scan(s => s.FromAssemblies(GetAssemblies(assemblyNames))
         .AddClasses(c => c.AssignableToAny(typeof(ITransientLifetime)))
         .AsImplementedInterfaces()
         .WithTransientLifetime());
 
-    private static IServiceCollection AddWithScopeLifetime(this IServiceCollection services, string assmblyNames)
-        => services.Scan(s => s.FromAssemblies(GetAssemblies(assmblyNames))
+    private static IServiceCollection AddWithScopeLifetime(this IServiceCollection services, string assemblyNames)
+        => services.Scan(s => s.FromAssemblies(GetAssemblies(assemblyNames))
         .AddClasses(c => c.AssignableToAny(typeof(IScopeLifetime)))
         .AsImplementedInterfaces()
         .WithScopedLifetime());
 
-    private static IServiceCollection AddWithSingletoneLifetime(this IServiceCollection services, string assmblyNames)
-        => services.Scan(s => s.FromAssemblies(GetAssemblies(assmblyNames))
+    private static IServiceCollection AddWithSingletonLifetime(this IServiceCollection services, string assemblyNames)
+        => services.Scan(s => s.FromAssemblies(GetAssemblies(assemblyNames))
         .AddClasses(c => c.AssignableToAny(typeof(ISingletoneLifetime)))
         .AsImplementedInterfaces()
         .WithSingletonLifetime());
 
-    private static List<Assembly> GetAssemblies(string assmblyNames)
+    private static List<Assembly> GetAssemblies(string assemblyNames)
     {
         var assemblies = new List<Assembly>();
         var dependencies = DependencyContext.Default.RuntimeLibraries;
 
         foreach (var library in dependencies)
         {
-            if (IsCandidateCompilationLibrary(library, assmblyNames.Split(',')))
+            if (IsCandidateCompilationLibrary(library, assemblyNames.Split(',')))
             {
                 var assembly = Assembly.Load(new AssemblyName(library.Name));
                 assemblies.Add(assembly);
@@ -72,6 +72,6 @@ public static class DependencyInjectionServiceCollectionExtensions
         return assemblies;
     }
 
-    private static bool IsCandidateCompilationLibrary(RuntimeLibrary compilationLibrary, string[] assmblyName)
-        => assmblyName.Any(d => compilationLibrary.Name.Contains(d)) || compilationLibrary.Dependencies.Any(d => assmblyName.Any(c => d.Name.Contains(c)));
+    private static bool IsCandidateCompilationLibrary(RuntimeLibrary compilationLibrary, string[] assemblyName)
+        => assemblyName.Any(d => compilationLibrary.Name.Contains(d)) || compilationLibrary.Dependencies.Any(d => assemblyName.Any(c => d.Name.Contains(c)));
 }
