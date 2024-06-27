@@ -1,15 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using RabbitMQ.Client.Events;
-using RabbitMQ.Client;
-using Extensions.MessageBus.Abstractions;
-using Microsoft.Extensions.Options;
-using Microsoft.Extensions.Configuration;
-using System.Runtime.InteropServices;
-using System.Diagnostics;
-using System;
-using Extensions.MessageBus.RabbitMQ.Options;
+﻿using Extensions.MessageBus.Abstractions;
 using Extensions.MessageBus.RabbitMQ.Extensions;
+using Extensions.MessageBus.RabbitMQ.Options;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
+using System.Diagnostics;
 
 namespace Extensions.MessageBus.RabbitMQ;
 public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
@@ -39,6 +36,9 @@ public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
         CreateEventQueue();
     }
 
+    /// <summary>
+    /// ایجاد کیو برای رویداد
+    /// </summary>
     private void CreateEventQueue()
     {
         var consumer = new EventingBasicConsumer(_channel);
@@ -49,6 +49,9 @@ public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
         _logger.LogInformation("Event Queue With Name {queueName} Created.", queue.QueueName);
     }
 
+    /// <summary>
+    /// ایجاد کیو برای دستور
+    /// </summary>
     private void CreateCommandQueue()
     {
         var consumer = new EventingBasicConsumer(_channel);
@@ -58,6 +61,11 @@ public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
         _logger.LogInformation("Command Queue With Name {commandName} Created.", queue.QueueName);
     }
 
+    /// <summary>
+    /// دریافت کیو
+    /// </summary>
+    /// <param name="serviceId"></param>
+    /// <param name="eventName"></param>
     public void Subscribe(string serviceId, string eventName)
     {
         var route = $"{serviceId}.{RabbitMqSendMessageBusConstants.@event}.{eventName}";
@@ -65,6 +73,10 @@ public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
         _logger.LogInformation("ServiceId: {serviceId} With EventName: {eventName} Binded.", serviceId, eventName);
     }
 
+    /// <summary>
+    /// دریافت کیو
+    /// </summary>
+    /// <param name="commandName"></param>
     public void Receive(string commandName)
     {
         var route = $"{_rabbitMqOptions.ServiceName}.{RabbitMqSendMessageBusConstants.command}.{commandName}";
@@ -72,6 +84,11 @@ public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
         _logger.LogInformation("Command With CommandName: {commandName} Binded.", commandName);
     }
 
+    /// <summary>
+    /// دریافت رویداد
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void Consumer_EventReceived(object sender, BasicDeliverEventArgs e)
     {
         using IServiceScope scope = _serviceScopeFactory.CreateScope();
@@ -89,6 +106,11 @@ public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
         }
     }
 
+    /// <summary>
+    /// دریافت دستور
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void Consumer_CommandReceived(object sender, BasicDeliverEventArgs e)
     {
         using IServiceScope scope = _serviceScopeFactory.CreateScope();
@@ -107,6 +129,11 @@ public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
 
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="e"></param>
+    /// <returns></returns>
     private Activity StartChildActivity(BasicDeliverEventArgs e)
     {
         var span = new Activity("RabbitMqCommandReceived");
@@ -119,6 +146,9 @@ public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
         return span;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void Dispose()
     {
         _channel.Close();

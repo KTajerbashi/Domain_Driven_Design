@@ -8,11 +8,11 @@ namespace Extensions.ChangeDataLog.Sql.Extensions.DependencyInjection;
 /// <summary>
 /// تزریق کننده سرویس تغییرات
 /// </summary>
-public static class ChangeDatalogServiceCollectionExtensions
+public static class ChangeDataLogServiceCollectionExtensions
 {
     public static IServiceCollection AddChangeDatalogDalSql(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddScoped<IEntityChangeInterceptorItemRepository, DapperEntityChageInterceptorItemRepository>();
+        services.AddScoped<IEntityChangeInterceptorItemRepository, DapperEntityChangeInterceptorItemRepository>();
         services.Configure<ChangeDataLogSqlOptions>(configuration);
         return services;
     }
@@ -25,7 +25,7 @@ public static class ChangeDatalogServiceCollectionExtensions
 
     public static IServiceCollection AddChangeDatalogDalSql(this IServiceCollection services, Action<ChangeDataLogSqlOptions> setupAction)
     {
-        services.AddScoped<IEntityChangeInterceptorItemRepository, DapperEntityChageInterceptorItemRepository>();
+        services.AddScoped<IEntityChangeInterceptorItemRepository, DapperEntityChangeInterceptorItemRepository>();
         services.Configure(setupAction);
         return services;
     }

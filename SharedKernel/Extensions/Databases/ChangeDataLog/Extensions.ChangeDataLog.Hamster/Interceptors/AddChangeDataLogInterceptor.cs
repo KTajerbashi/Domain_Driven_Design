@@ -52,13 +52,13 @@ public class AddChangeDataLogInterceptor : SaveChangesInterceptor
         var options = eventData.Context.GetService<IOptions<ChangeDataLogHamsterOptions>>().Value;
         var changedEntities = GetChangedEntities(changeTracker);
         var transactionId = Guid.NewGuid().ToString();
-        var dateOfAccured = DateTime.Now;
+        var dateOfAccrued = DateTime.Now;
 
-        var entityChageInterceptorItems = new List<EntityChangeInterceptorItem>();
+        var entityChangeInterceptorItems = new List<EntityChangeInterceptorItem>();
 
         foreach (var entity in changedEntities)
         {
-            var entityChageInterceptorItem = new EntityChangeInterceptorItem
+            var entityChangeInterceptorItem = new EntityChangeInterceptorItem
             {
                 Id = Guid.NewGuid(),
                 TransactionId = transactionId,
@@ -66,7 +66,7 @@ public class AddChangeDataLogInterceptor : SaveChangesInterceptor
                 Ip = userInfoService.GetUserIp(),
                 EntityType = entity.Entity.GetType().FullName,
                 EntityId = entity.Property(options.BusinessIdFieldName).CurrentValue.ToString(),
-                DateOfOccurrence = dateOfAccured,
+                DateOfOccurrence = dateOfAccrued,
                 ChangeType = entity.State.ToString(),
                 ContextName = GetType().FullName
             };
@@ -75,17 +75,17 @@ public class AddChangeDataLogInterceptor : SaveChangesInterceptor
             {
                 if (entity.State == EntityState.Added || property.IsModified)
                 {
-                    entityChageInterceptorItem.PropertyChangeLogItems.Add(new PropertyChangeLogItem
+                    entityChangeInterceptorItem.PropertyChangeLogItems.Add(new PropertyChangeLogItem
                     {
-                        ChageInterceptorItemId = entityChageInterceptorItem.Id,
+                        ChangeInterceptorItemId = entityChangeInterceptorItem.Id,
                         PropertyName = property.Metadata.Name,
                         Value = property.CurrentValue?.ToString(),
                     });
                 }
             }
-            entityChageInterceptorItems.Add(entityChageInterceptorItem);
+            entityChangeInterceptorItems.Add(entityChangeInterceptorItem);
         }
-        itemRepository.Save(entityChageInterceptorItems);
+        itemRepository.Save(entityChangeInterceptorItems);
 
 
     }

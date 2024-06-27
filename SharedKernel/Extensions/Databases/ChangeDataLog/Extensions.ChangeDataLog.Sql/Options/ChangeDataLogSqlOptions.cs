@@ -7,8 +7,8 @@
     {
         public string ConnectionString { get; set; } = string.Empty;
         public bool AutoCreateSqlTable { get; set; } = true;
-        public string EntityTableName { get; set; } = "EntityChageDataLogs";
-        public string PropertyTableName { get; set; } = "PropertyChageDataLogs";
-        public string SchemaName { get; set; } = "dbo";
+        public string EntityTableName { get; set; } = "EntityChangeDataLogs";
+        public string PropertyTableName { get; set; } = "PropertyChangeDataLogs";
+        public string SchemaName { get; set; } = "Log";
     }
 }

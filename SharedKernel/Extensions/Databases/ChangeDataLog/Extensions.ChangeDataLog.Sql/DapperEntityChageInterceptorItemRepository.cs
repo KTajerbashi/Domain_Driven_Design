@@ -12,37 +12,46 @@ namespace Extensions.ChangeDataLog.Sql;
 /// SQL SERVER
 /// و ذخیره لاگ تغییرات روی پایگاه داده
 /// </summary>
-public class DapperEntityChageInterceptorItemRepository : IEntityChangeInterceptorItemRepository
+public class DapperEntityChangeInterceptorItemRepository : IEntityChangeInterceptorItemRepository
 {
     private readonly ChangeDataLogSqlOptions _options;
     private readonly IDbConnection _dbConnection;
-    private string InsertEntityChageInterceptorItemCommand = "INSERT INTO [{0}].[{1}]([Id],[ContextName],[EntityType],[EntityId],[UserId],[IP],[TransactionId],[DateOfOccurrence],[ChangeType]) VALUES (@Id,@ContextName,@EntityType,@EntityId,@UserId,@IP,@TransactionId,@DateOfOccurrence,@ChangeType) ";
-    private string InsertPropertyChangeLogItemCommand = "INSERT INTO [{0}].[{1}]([Id],[ChageInterceptorItemId],[PropertyName],[Value]) VALUES (@Id,@ChageInterceptorItemId,@PropertyName,@Value)";
+    private string InsertEntityChangeInterceptorItemCommand = @"
+    INSERT INTO [{0}].[{1}]
+            ([Id],[ContextName],[EntityType],[EntityId],[UserId],[IP],[TransactionId],[DateOfOccurrence],[ChangeType]) 
+    VALUES 
+            (@Id,@ContextName,@EntityType,@EntityId,@UserId,@IP,@TransactionId,@DateOfOccurrence,@ChangeType) ";
+   
+    private string InsertPropertyChangeLogItemCommand = @"
+    INSERT INTO [{0}].[{1}]
+            ([Id],[ChangeInterceptorItemId],[PropertyName],[Value]) 
+    VALUES
+            (@Id,@ChangeInterceptorItemId,@PropertyName,@Value) ";
 
-    public DapperEntityChageInterceptorItemRepository(IOptions<ChangeDataLogSqlOptions> options)
+    public DapperEntityChangeInterceptorItemRepository(IOptions<ChangeDataLogSqlOptions> options)
     {
         _options = options.Value;
         _dbConnection = new SqlConnection(_options.ConnectionString);
         if (_options.AutoCreateSqlTable)
         {
-            CreateEntityChageInterceptorItemTableIfNeeded();
+            CreateEntityChangeInterceptorItemTableIfNeeded();
             CreatePropertyChangeLogItemTableIfNeeded();
         }
 
-        InsertEntityChageInterceptorItemCommand = string.Format(InsertEntityChageInterceptorItemCommand, _options.SchemaName, _options.EntityTableName);
+        InsertEntityChangeInterceptorItemCommand = string.Format(InsertEntityChangeInterceptorItemCommand, _options.SchemaName, _options.EntityTableName);
         InsertPropertyChangeLogItemCommand = string.Format(InsertPropertyChangeLogItemCommand, _options.SchemaName, _options.PropertyTableName);
     }
 
-    public void Save(List<EntityChangeInterceptorItem> entityChageInterceptorItems)
+    public void Save(List<EntityChangeInterceptorItem> entityChangeInterceptorItems)
     {
-        foreach (var item in entityChageInterceptorItems)
+        foreach (var item in entityChangeInterceptorItems)
         {
             //if (_dbConnection.State == ConnectionState.Closed)
             //    _dbConnection.Open();
             //using var tran = _dbConnection.BeginTransaction();
             try
             {
-                _dbConnection.Execute(InsertEntityChageInterceptorItemCommand, new { item.Id, item.ContextName, item.EntityType, item.EntityId, item.UserId, item.Ip, item.TransactionId, item.DateOfOccurrence, item.ChangeType });
+                _dbConnection.Execute(InsertEntityChangeInterceptorItemCommand, new { item.Id, item.ContextName, item.EntityType, item.EntityId, item.UserId, item.Ip, item.TransactionId, item.DateOfOccurrence, item.ChangeType });
                 _dbConnection.Execute(InsertPropertyChangeLogItemCommand, item.PropertyChangeLogItems.ToArray());
                 // tran.Commit();
             }
@@ -55,12 +64,12 @@ public class DapperEntityChageInterceptorItemRepository : IEntityChangeIntercept
 
     }
 
-    public Task SaveAsync(List<EntityChangeInterceptorItem> entityChageInterceptorItems)
+    public Task SaveAsync(List<EntityChangeInterceptorItem> entityChangeInterceptorItems)
     {
         throw new NotImplementedException();
     }
 
-    private void CreateEntityChageInterceptorItemTableIfNeeded()
+    private void CreateEntityChangeInterceptorItemTableIfNeeded()
     {
         string table = _options.EntityTableName;
         string schema = _options.SchemaName;
@@ -90,7 +99,7 @@ public class DapperEntityChageInterceptorItemRepository : IEntityChangeIntercept
             $"TABLE_SCHEMA = '{schema}' AND  TABLE_NAME = '{table}' )) Begin " +
             $"CREATE TABLE [{schema}].[{table}]( " +
                 "Id uniqueidentifier primary key, " +
-                $"ChageInterceptorItemId uniqueidentifier references [{schema}].[{parentTable}](Id)," +
+                $"ChangeInterceptorItemId uniqueidentifier references [{schema}].[{parentTable}](Id)," +
                 "PropertyName nvarchar(200)  not null," +
                 "Value nvarchar(max) ," +
             $")" +

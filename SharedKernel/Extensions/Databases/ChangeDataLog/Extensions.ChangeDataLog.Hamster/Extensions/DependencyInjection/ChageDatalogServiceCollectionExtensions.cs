@@ -8,7 +8,7 @@ namespace Extensions.ChangeDataLog.Hamster.Extensions.DependencyInjection;
 /// سرویس تزریق کننده 
 /// Change Interceptor
 /// </summary>
-public static class ChageDatalogServiceCollectionExtensions
+public static class ChangeDataLogServiceCollectionExtensions
 {
     /// <summary>
     /// 
@@ -16,7 +16,8 @@ public static class ChageDatalogServiceCollectionExtensions
     /// <param name="services"></param>
     /// <param name="configuration"></param>
     /// <returns></returns>
-    public static IServiceCollection AddHamsterChageDatalog(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddHamsterChangeDataLog(this IServiceCollection services, 
+        IConfiguration configuration)
     {
         services.Configure<ChangeDataLogHamsterOptions>(configuration);
         return services;
@@ -29,9 +30,11 @@ public static class ChageDatalogServiceCollectionExtensions
     /// <param name="configuration"></param>
     /// <param name="sectionName"></param>
     /// <returns></returns>
-    public static IServiceCollection AddHamsterChageDatalog(this IServiceCollection services, IConfiguration configuration, string sectionName)
+    public static IServiceCollection AddHamsterChangeDataLog(this IServiceCollection services,
+        IConfiguration configuration,
+        string sectionName)
     {
-        services.AddHamsterChageDatalog(configuration.GetSection(sectionName));
+        services.AddHamsterChangeDataLog(configuration.GetSection(sectionName));
         return services;
     }
 
@@ -41,7 +44,8 @@ public static class ChageDatalogServiceCollectionExtensions
     /// <param name="services"></param>
     /// <param name="setupAction"></param>
     /// <returns></returns>
-    public static IServiceCollection AddHamsterChageDatalog(this IServiceCollection services, Action<ChangeDataLogHamsterOptions> setupAction)
+    public static IServiceCollection AddHamsterChangeDataLog(this IServiceCollection services, 
+        Action<ChangeDataLogHamsterOptions> setupAction)
     {
         services.Configure(setupAction);
         return services;

@@ -46,7 +46,7 @@ namespace Extensions.MessageBus.RabbitMQ
                 Route = $"{_rabbitMqOptions.ServiceName}.{RabbitMqSendMessageBusConstants.@event}.{messageName}",
                 Headers = new Dictionary<string, object>
                 {
-                    ["AccuredOn"] = DateTime.Now.ToString(),
+                    ["AccruedOn"] = DateTime.Now.ToString(),
                 }
             };
             Send(parcel);
@@ -118,6 +118,7 @@ namespace Extensions.MessageBus.RabbitMQ
             return child;
         }
         #endregion
+
         public void Dispose()
         {
             if (_channel != null)
