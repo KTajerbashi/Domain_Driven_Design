@@ -1,7 +1,7 @@
 ﻿using DDD.Core.Domain.ToolKits.Library.ValueObjects;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DDD.Infra.Data.Sql.Commands.Library.ValueConversions
+namespace DDD.Infra.Data.Sql.Library.ValueConversions
 {
     public class TitleConversion : ValueConverter<Title, string>
     {

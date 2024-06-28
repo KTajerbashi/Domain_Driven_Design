@@ -21,7 +21,8 @@ public static class AddApiConfigurationExtensions
         services
             .AddControllers()
             .AddFluentValidation();
-        services.AddDependencies(assemblyNamesForLoad);
+        services
+            .AddDependencies(assemblyNamesForLoad);
 
         return services;
     }

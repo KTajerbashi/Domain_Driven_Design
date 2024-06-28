@@ -12,6 +12,7 @@
     <ProjectReference Include="..\..\..\..\SRC\3.Infrastructure\Data\DDD.Infra.Data.Sql.Commands.Library\DDD.Infra.Data.Sql.Commands.Library.csproj" />
     <ProjectReference Include="..\..\..\1.Core\MiniBlog.Core.Contracts\MiniBlog.Core.Contracts.csproj" />
     <ProjectReference Include="..\..\..\1.Core\MiniBlog.Core.Domain\MiniBlog.Core.Domain.csproj" />
+    <ProjectReference Include="..\MiniBlog.Infrastructure.Data.Sql\MiniBlog.Infrastructure.Data.Sql.csproj" />
   </ItemGroup>
 
 </Project>

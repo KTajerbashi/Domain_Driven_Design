@@ -8,12 +8,12 @@ using Extensions.Translations.Parrot.Extensions.DependencyInjection;
 using Extensions.UsersManagement.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
-using MiniBlog.EndPoints.API.Extensions.DependencyInjection.Swaggers.Extensions;
 using MiniBlog.Infrastructure.Data.Sql.Commands.DatabaseContext;
 using MiniBlog.Infrastructure.Data.Sql.Queries.DatabaseContext;
 using Serilog;
 using Extensions.Caching.Distributed.Sql.Extensions.DependencyInjection;
 using Extensions.Caching.Distributed.Redis.Extensions.DependencyInjection;
+using MiniBlog.EndPoints.API.Extensions.DependencyInjection.Swaggers.Extentions;
 
 
 

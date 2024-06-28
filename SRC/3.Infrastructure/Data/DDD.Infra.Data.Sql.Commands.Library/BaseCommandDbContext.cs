@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Globalization;
-using DDD.Infra.Data.Sql.Commands.Library.ValueConversions;
 using DDD.Infra.Data.Sql.Commands.Library.Extensions;
 using DDD.Core.Domain.ToolKits.Library.ValueObjects;
 using DDD.Core.Domain.Library.ValueObjects;
+using DDD.Infra.Data.Sql.Library.ValueConversions;
 
 namespace DDD.Infra.Data.Sql.Commands.Library;
 /// <summary>

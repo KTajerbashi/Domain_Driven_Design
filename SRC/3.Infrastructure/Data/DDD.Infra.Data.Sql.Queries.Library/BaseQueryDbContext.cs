@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DDD.Core.Domain.Library.ValueObjects;
+using DDD.Core.Domain.ToolKits.Library.ValueObjects;
+using DDD.Infra.Data.Sql.Library.ValueConversions;
+using Microsoft.EntityFrameworkCore;
 
 namespace DDD.Infra.Data.Sql.Queries.Library;
 
@@ -26,6 +29,16 @@ public abstract class BaseQueryDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+    }
+
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        base.ConfigureConventions(configurationBuilder);
+        configurationBuilder.Properties<Description>().HaveConversion<DescriptionConversion>();
+        configurationBuilder.Properties<Title>().HaveConversion<TitleConversion>();
+        configurationBuilder.Properties<BusinessId>().HaveConversion<BusinessIdConversion>();
+        configurationBuilder.Properties<LegalNationalId>().HaveConversion<LegalNationalId>();
+        configurationBuilder.Properties<NationalCode>().HaveConversion<NationalCodeConversion>();
     }
 
     /// <summary>

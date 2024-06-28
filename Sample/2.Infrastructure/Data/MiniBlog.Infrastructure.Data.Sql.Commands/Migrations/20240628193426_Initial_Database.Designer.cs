@@ -12,7 +12,7 @@ using MiniBlog.Infrastructure.Data.Sql.Commands.DatabaseContext;
 namespace MiniBlog.Infrastructure.Data.Sql.Commands.Migrations
 {
     [DbContext(typeof(MiniBlogCommandsDbContext))]
-    [Migration("20240624224514_Initial_Database")]
+    [Migration("20240628193426_Initial_Database")]
     partial class Initial_Database
     {
         /// <inheritdoc />

@@ -1,10 +1,10 @@
 ﻿using Microsoft.OpenApi.Models;
-using MiniBlog.EndPoints.API.Extensions.DependencyInjection.Swaggers.Extensions;
+using MiniBlog.EndPoints.API.Extensions.DependencyInjection.Swaggers.Extentions;
 using MiniBlog.EndPoints.API.Extensions.DependencyInjection.Swaggers.Filters;
 using MiniBlog.EndPoints.API.Extensions.DependencyInjection.Swaggers.Options;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
-namespace MiniBlog.EndPoints.API.Extensions.DependencyInjection.Swaggers.Extensions;
+namespace MiniBlog.EndPoints.API.Extensions.DependencyInjection.Swaggers.Extentions;
 
 public static class SwaggerExtensions
 {

@@ -1,6 +1,4 @@
-﻿using DDD.Core.Contracts.Library.ApplicationServices.Commands;
-using DDD.Core.Contracts.Library.ApplicationServices.Events;
-using DDD.Core.Contracts.Library.ApplicationServices.Queries;
+﻿using DDD.Core.Contracts.Library.ApplicationServices.Events;
 using DDD.Utilities.Library;
 using Microsoft.AspNetCore.Http;
 
