@@ -87,7 +87,7 @@ namespace Extensions.MessageBus.RabbitMQ
 
             var basicProperties = _channel.CreateBasicProperties();
 
-            basicProperties.Persistent = _rabbitMqOptions.PerssistMessage;
+            basicProperties.Persistent = _rabbitMqOptions.PersistMessage;
             basicProperties.AppId = _rabbitMqOptions.ServiceName;
             basicProperties.CorrelationId = parcel?.CorrelationId;
             basicProperties.MessageId = parcel?.MessageId;

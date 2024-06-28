@@ -77,16 +77,16 @@ namespace MiniBlog.EndPoints.API.Extensions
                     c => c.UseSqlServer(configuration.GetConnectionString("QueryDb_ConnectionString")));
 
                 //PollingPublisher
-                //builder.Services.AddZaminPollingPublisherDalSql(configuration, "PollingPublisherSqlStore");
-                //builder.Services.AddZaminPollingPublisher(configuration, "PollingPublisher");
+                //builder.Services.AddPollingPublisherDalSql(configuration, "PollingPublisherSqlStore");
+                //builder.Services.AddPollingPublisher(configuration, "PollingPublisher");
 
                 //MessageInbox
-                //builder.Services.AddZaminMessageInboxDalSql(configuration, "MessageInboxSqlStore");
-                //builder.Services.AddZaminMessageInbox(configuration, "MessageInbox");
+                //builder.Services.AddMessageInboxDalSql(configuration, "MessageInboxSqlStore");
+                //builder.Services.AddMessageInbox(configuration, "MessageInbox");
 
-                //builder.Services.AddZaminRabbitMqMessageBus(configuration, "RabbitMq");
+                //builder.Services.AddRabbitMqMessageBus(configuration, "RabbitMq");
 
-                //builder.Services.AddZaminTraceJeager(configuration, "OpenTeletmetry");
+                //builder.Services.AddTraceJeager(configuration, "OpenTeletmetry");
 
                 //builder.Services.AddIdentityServer(configuration, "OAuth");
 

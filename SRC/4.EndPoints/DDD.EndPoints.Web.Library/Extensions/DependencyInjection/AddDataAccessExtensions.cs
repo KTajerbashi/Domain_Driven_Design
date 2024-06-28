@@ -30,7 +30,9 @@ public static class AddDataAccessExtensions
     public static IServiceCollection AddRepositories(
         this IServiceCollection services,
         IEnumerable<Assembly> assembliesForSearch) =>
-        services.AddWithTransientLifetime(assembliesForSearch, typeof(ICommandRepository<,>), typeof(IQueryRepository));
+        services.AddWithTransientLifetime(assembliesForSearch,
+            typeof(ICommandRepository<,>),
+            typeof(IQueryRepository));
 
     /// <summary>
     /// تزریق تمام ریپازیتوری هایکه از 

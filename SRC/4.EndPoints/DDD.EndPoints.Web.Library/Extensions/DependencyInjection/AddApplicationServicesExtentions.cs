@@ -198,5 +198,6 @@ public static class AddApplicationServicesExtensions
     /// <returns></returns>
     private static IServiceCollection AddFluentValidators(this IServiceCollection services, IEnumerable<Assembly> assembliesForSearch)
         => services.AddValidatorsFromAssemblies(assembliesForSearch);
+
 }
 

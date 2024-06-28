@@ -1,4 +1,5 @@
-﻿using Extensions.DependencyInjection.Abstractions;
+﻿
+using Extensions.DependencyInjection.Abstractions;
 
 namespace DDD.EndPoints.Web.Library.Extensions.DependencyInjection;
 
