@@ -92,8 +92,14 @@ public static class AddApplicationServicesExtensions
     /// <param name="services"></param>
     /// <param name="assembliesForSearch"></param>
     /// <returns></returns>
-    private static IServiceCollection AddQueryHandlers(this IServiceCollection services, IEnumerable<Assembly> assembliesForSearch)
-        => services.AddWithTransientLifetime(assembliesForSearch, typeof(IQueryHandler<,>));
+    private static IServiceCollection AddQueryHandlers(
+        this IServiceCollection services, 
+        IEnumerable<Assembly> assembliesForSearch)
+        => services
+        .AddWithTransientLifetime(
+            assembliesForSearch, 
+            typeof(IQueryHandler<,>)
+        );
 
     /// <summary>
     /// تزریق تمام دیسپچر های که از 
