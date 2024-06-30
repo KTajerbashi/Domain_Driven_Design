@@ -11,8 +11,4 @@
     <ProjectReference Include="..\..\..\SRC\2.Core\DDD.Core.RequestResponse.Library\DDD.Core.RequestResponse.Library.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Advertisments\Queries\" />
-  </ItemGroup>
-
 </Project>

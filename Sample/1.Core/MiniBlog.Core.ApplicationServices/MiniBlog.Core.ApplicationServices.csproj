@@ -13,10 +13,4 @@
     <ProjectReference Include="..\MiniBlog.Core.Domain\MiniBlog.Core.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Advertisments\Commands\Delete\" />
-    <Folder Include="Advertisments\Events\" />
-    <Folder Include="Advertisments\Queries\" />
-  </ItemGroup>
-
 </Project>

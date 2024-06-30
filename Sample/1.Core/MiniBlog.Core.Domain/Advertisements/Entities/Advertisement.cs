@@ -4,15 +4,6 @@ using MiniBlog.Core.Domain.Advertisements.Parameters;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MiniBlog.Core.Domain.Advertisements.Entities;
-
-[Table("Courses", Schema ="Blog")]
-public class Course : Entity
-{
-    public string Name { get; private set; }
-    public int Lenght { get; private set; }
-    public DateTime From { get; private set; }
-    public DateTime To { get; private set; }
-}
 [Table("Advertisements", Schema ="Blog")]
 public class Advertisement : AggregateRoot
 {
@@ -43,7 +34,9 @@ public class Advertisement : AggregateRoot
         CityId = parameter.CityId;
         Salary = parameter.Salary;
         IsRemote = parameter.IsRemote;
-        AddEvent(new AdvertisementCreated(BusinessId.Value,Title,Description,Salary,CityId,IsRemote));
+     
+
+        AddEvent(new AdvertisementCreated(BusinessId.Value, Title, Description, Salary, CityId, IsRemote));
     }
     #endregion
 
@@ -57,6 +50,10 @@ public class Advertisement : AggregateRoot
         Salary = parameter.Salary;
         IsRemote = parameter.IsRemote;
         AddEvent(new AdvertisementUpdated(Id, BusinessId.Value, Title, Description, Salary, CityId, IsRemote));
+    }
+    public void Delete()
+    {
+        AddEvent(new AdvertisementDeleted(BusinessId.Value, Id));
     }
     #endregion
 }

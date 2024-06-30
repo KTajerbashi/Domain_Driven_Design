@@ -1,7 +1,9 @@
 ﻿using DDD.EndPoints.Web.Library.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using MiniBlog.Core.RequestResponse.Advertisments.Commands.Create;
+using MiniBlog.Core.RequestResponse.Advertisments.Commands.Delete;
 using MiniBlog.Core.RequestResponse.Advertisments.Commands.Update;
+using MiniBlog.Core.RequestResponse.Advertisments.Queries.GetById;
 
 namespace MiniBlog.EndPoints.API.Controllers.Advertisements;
 
@@ -16,9 +18,9 @@ public sealed class AdvertisementController : BaseController
     public async Task<IActionResult> UpdateAdvertisement([FromBody] AdvertisementUpdateCommand command)
         => await Edit(command);
 
-    //[HttpDelete("Delete")]
-    //public async Task<IActionResult> DeleteAdvertisement([FromBody] AdvertisementDeleteCommand command)
-    //    => await Delete(command);
+    [HttpDelete("Delete")]
+    public async Task<IActionResult> DeleteAdvertisement([FromBody] AdvertisementDeleteCommand command)
+        => await Delete(command);
 
     //[HttpPut("Publishe")]
     //public async Task<IActionResult> PublisheAdvertisement([FromBody] AdvertisementPublisheCommand command)
@@ -30,9 +32,9 @@ public sealed class AdvertisementController : BaseController
     #endregion
 
     #region Queries
-    //[HttpGet("GetById")]
-    //public async Task<IActionResult> GetAdvertisementById([FromQuery] AdvertisementGetByIdQuery query)
-    //    => await Query<AdvertisementGetByIdQuery, AdvertisementQr?>(query);
+    [HttpGet("GetById")]
+    public async Task<IActionResult> GetAdvertisementById([FromQuery] AdvertisementGetByIdQuery query)
+        => await Query<AdvertisementGetByIdQuery, AdvertisementQr?>(query);
 
     //[HttpGet("GetSelectList")]
     //public async Task<IActionResult> GetAdvertisementSelectList([FromQuery] AdvertisementGetSelectListQuery query)

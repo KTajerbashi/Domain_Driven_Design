@@ -2,4 +2,4 @@
 
 namespace MiniBlog.Core.Domain.Advertisements.DomainEvents;
 
-public sealed record AdvertisementDeleted(Guid BusinessId) : IDomainEvent;
+public sealed record AdvertisementDeleted(Guid BusinessId, long Id) : IDomainEvent;
