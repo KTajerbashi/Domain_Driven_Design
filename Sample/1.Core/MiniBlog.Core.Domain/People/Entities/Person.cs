@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MiniBlog.Core.Domain.People.Entities
 {
-    [Table("People",Schema ="Test"),Description("Users System")]
+    [Table("People",Schema ="Security"),Description("Users System")]
     public class Person : AggregateRoot<int>
     {
         #region Properties

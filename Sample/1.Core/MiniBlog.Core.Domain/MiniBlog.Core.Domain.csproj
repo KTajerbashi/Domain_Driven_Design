@@ -11,4 +11,8 @@
     <ProjectReference Include="..\..\..\SRC\2.Core\DDD.Core.Domain.Library\DDD.Core.Domain.Library.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Advertisements\ValueObjects\" />
+  </ItemGroup>
+
 </Project>

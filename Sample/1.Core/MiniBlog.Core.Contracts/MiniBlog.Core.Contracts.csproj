@@ -12,4 +12,8 @@
     <ProjectReference Include="..\MiniBlog.Core.RequestResponse\MiniBlog.Core.RequestResponse.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Advertisments\Queries\" />
+  </ItemGroup>
+
 </Project>

@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Blogs\Queries\" />
+    <Folder Include="Advertisments\Queries\" />
   </ItemGroup>
 
 </Project>

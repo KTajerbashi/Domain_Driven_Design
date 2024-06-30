@@ -7,9 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\SharedKernel\Extensions\ObjectMappers\Extensions.ObjectMappers.AutoMapper\Extensions.ObjectMappers.AutoMapper.csproj" />
     <ProjectReference Include="..\..\..\SRC\2.Core\DDD.Core.ApplicationServices.Library\DDD.Core.ApplicationServices.Library.csproj" />
     <ProjectReference Include="..\MiniBlog.Core.Contracts\MiniBlog.Core.Contracts.csproj" />
     <ProjectReference Include="..\MiniBlog.Core.Domain\MiniBlog.Core.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Advertisments\Commands\Delete\" />
+    <Folder Include="Advertisments\Commands\Update\" />
+    <Folder Include="Advertisments\Events\" />
+    <Folder Include="Advertisments\Queries\" />
   </ItemGroup>
 
 </Project>
