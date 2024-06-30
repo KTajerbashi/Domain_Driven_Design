@@ -1,6 +1,5 @@
 ﻿using DDD.Infra.Data.Sql.Commands.Library;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
 using MiniBlog.Core.Domain.Advertisements.Entities;
 using MiniBlog.Core.Domain.People.Entities;
 using MiniBlog.Core.Domain.People.ValueObjects;

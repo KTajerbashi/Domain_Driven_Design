@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Advertisements\Commands\UnPublish\**" />
+    <EmbeddedResource Remove="Advertisements\Commands\UnPublish\**" />
+    <None Remove="Advertisements\Commands\UnPublish\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\SharedKernel\Extensions.Abstractions\Extensions.Translations.Abstractions\Extensions.Translations.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\SRC\2.Core\DDD.Core.RequestResponse.Library\DDD.Core.RequestResponse.Library.csproj" />
   </ItemGroup>

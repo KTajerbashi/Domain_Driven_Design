@@ -7,12 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\SRC\1.Utilities\DDD.Utilities.Library\DDD.Utilities.Library.csproj" />
-    <ProjectReference Include="..\..\..\SRC\2.Core\DDD.Core.Domain.Library\DDD.Core.Domain.Library.csproj" />
+    <Compile Remove="Advertisements\ValueObjects\**" />
+    <EmbeddedResource Remove="Advertisements\ValueObjects\**" />
+    <None Remove="Advertisements\ValueObjects\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Advertisements\ValueObjects\" />
+    <ProjectReference Include="..\..\..\SRC\1.Utilities\DDD.Utilities.Library\DDD.Utilities.Library.csproj" />
+    <ProjectReference Include="..\..\..\SRC\2.Core\DDD.Core.Domain.Library\DDD.Core.Domain.Library.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,9 +1,11 @@
 ﻿using DDD.EndPoints.Web.Library.Controllers;
 using Microsoft.AspNetCore.Mvc;
-using MiniBlog.Core.RequestResponse.Advertisments.Commands.Create;
-using MiniBlog.Core.RequestResponse.Advertisments.Commands.Delete;
-using MiniBlog.Core.RequestResponse.Advertisments.Commands.Update;
-using MiniBlog.Core.RequestResponse.Advertisments.Queries.GetById;
+using MiniBlog.Core.RequestResponse.Advertisements.Commands.Create;
+using MiniBlog.Core.RequestResponse.Advertisements.Commands.Delete;
+using MiniBlog.Core.RequestResponse.Advertisements.Commands.Update;
+using MiniBlog.Core.RequestResponse.Advertisements.Commands.Publishe;
+using MiniBlog.Core.RequestResponse.Advertisements.Commands.UnPublishe;
+using MiniBlog.Core.RequestResponse.Advertisements.Queries.GetById;
 
 namespace MiniBlog.EndPoints.API.Controllers.Advertisements;
 
@@ -22,13 +24,13 @@ public sealed class AdvertisementController : BaseController
     public async Task<IActionResult> DeleteAdvertisement([FromBody] AdvertisementDeleteCommand command)
         => await Delete(command);
 
-    //[HttpPut("Publishe")]
-    //public async Task<IActionResult> PublisheAdvertisement([FromBody] AdvertisementPublisheCommand command)
-    //=> await Edit(command);
+    [HttpPut("Publish")]
+    public async Task<IActionResult> PublishAdvertisement([FromBody] AdvertisementPublishCommand command)
+    => await Edit(command);
 
 
-    //[HttpPut("UnPublishe")]
-    //public async Task<IActionResult> UnPublisheAdvertisement([FromBody] AdvertisementUnPublisheCommand command)=> await Edit(command);
+    [HttpPut("UnPublish")]
+    public async Task<IActionResult> UnPublishAdvertisement([FromBody] AdvertisementUnPublishCommand command) => await Edit(command);
     #endregion
 
     #region Queries

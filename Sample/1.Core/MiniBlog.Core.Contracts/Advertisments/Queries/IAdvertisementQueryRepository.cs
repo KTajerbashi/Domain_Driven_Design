@@ -1,8 +1,8 @@
 ﻿using DDD.Core.Contracts.Library.Data.Queries;
 using DDD.Core.RequestResponse.Library.Queries;
-using MiniBlog.Core.RequestResponse.Advertisments.Queries.GetById;
-using MiniBlog.Core.RequestResponse.Advertisments.Queries.GetPagedFilter;
-using MiniBlog.Core.RequestResponse.Advertisments.Queries.GetSelectList;
+using MiniBlog.Core.RequestResponse.Advertisements.Queries.GetById;
+using MiniBlog.Core.RequestResponse.Advertisements.Queries.GetPagedFilter;
+using MiniBlog.Core.RequestResponse.Advertisements.Queries.GetSelectList;
 
 namespace MiniBlog.Core.Contracts.Advertisments.Queries;
 

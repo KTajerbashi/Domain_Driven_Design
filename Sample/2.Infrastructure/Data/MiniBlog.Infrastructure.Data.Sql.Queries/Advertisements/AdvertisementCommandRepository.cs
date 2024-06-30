@@ -2,9 +2,9 @@
 using DDD.Infra.Data.Sql.Queries.Library;
 using MiniBlog.Core.Contracts.Advertisments.Queries;
 using MiniBlog.Core.Domain.Advertisements.Entities;
-using MiniBlog.Core.RequestResponse.Advertisments.Queries.GetById;
-using MiniBlog.Core.RequestResponse.Advertisments.Queries.GetPagedFilter;
-using MiniBlog.Core.RequestResponse.Advertisments.Queries.GetSelectList;
+using MiniBlog.Core.RequestResponse.Advertisements.Queries.GetById;
+using MiniBlog.Core.RequestResponse.Advertisements.Queries.GetPagedFilter;
+using MiniBlog.Core.RequestResponse.Advertisements.Queries.GetSelectList;
 using MiniBlog.Infrastructure.Data.Sql.Queries.DatabaseContext;
 
 namespace MiniBlog.Infrastructure.Data.Sql.Queries.Advertisements;

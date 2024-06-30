@@ -1,10 +1,12 @@
 ﻿using DDD.Core.Domain.Library.Entities;
+using DDD.Core.Domain.Library.Exceptions;
 using MiniBlog.Core.Domain.Advertisements.DomainEvents;
 using MiniBlog.Core.Domain.Advertisements.Parameters;
+using MiniBlog.Core.Domain.Resources;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MiniBlog.Core.Domain.Advertisements.Entities;
-[Table("Advertisements", Schema ="Blog")]
+[Table("Advertisements", Schema = "Blog")]
 public class Advertisement : AggregateRoot
 {
     #region Properties
@@ -34,9 +36,15 @@ public class Advertisement : AggregateRoot
         CityId = parameter.CityId;
         Salary = parameter.Salary;
         IsRemote = parameter.IsRemote;
-     
-
         AddEvent(new AdvertisementCreated(BusinessId.Value, Title, Description, Salary, CityId, IsRemote));
+        if (parameter.Courses.Count > 0)
+        {
+            _courses = new List<Course>();
+            foreach (var course in parameter.Courses)
+            {
+                _courses.Add(new Course(course.Name, course.Length, course.From, course.To));
+            }
+        }
     }
     #endregion
 
@@ -49,11 +57,38 @@ public class Advertisement : AggregateRoot
         CityId = parameter.CityId;
         Salary = parameter.Salary;
         IsRemote = parameter.IsRemote;
+        if (parameter.Courses.Count > 0)
+        {
+            _courses = new List<Course>();
+            foreach (var course in parameter.Courses)
+            {
+                _courses.Add(new Course(course.Name, course.Length, course.From, course.To));
+            }
+        }
         AddEvent(new AdvertisementUpdated(Id, BusinessId.Value, Title, Description, Salary, CityId, IsRemote));
     }
     public void Delete()
     {
         AddEvent(new AdvertisementDeleted(BusinessId.Value, Id));
+    }
+
+    public void Publish()
+    {
+        if (PublishDate.HasValue)
+        {
+            throw new InvalidEntityStateException(ProjectValidationError.VALIDATION_ERROR_NOT_VALID, nameof(PublishDate));
+        }
+        PublishDate = DateTime.Now;
+        AddEvent(new AdvertisementPublished(BusinessId.Value, Id, PublishDate.Value));
+    }
+    public void UnPublish()
+    {
+        if (!PublishDate.HasValue)
+        {
+            throw new InvalidEntityStateException(ProjectValidationError.VALIDATION_ERROR_NOT_VALID, nameof(PublishDate));
+        }
+        PublishDate = null;
+        AddEvent(new AdvertisementUnPublished(BusinessId.Value, Id));
     }
     #endregion
 }
