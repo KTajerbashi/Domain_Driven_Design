@@ -1,6 +1,7 @@
 ﻿using DDD.EndPoints.Web.Library.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using MiniBlog.Core.RequestResponse.Advertisments.Commands.Create;
+using MiniBlog.Core.RequestResponse.Advertisments.Commands.Update;
 
 namespace MiniBlog.EndPoints.API.Controllers.Advertisements;
 
@@ -11,9 +12,9 @@ public sealed class AdvertisementController : BaseController
     public async Task<IActionResult> CreateAdvertisement([FromBody] AdvertisementCreateCommand command)
         => await Create<AdvertisementCreateCommand, long>(command);
 
-    //[HttpPut("Update")]
-    //public async Task<IActionResult> UpdateAdvertisement([FromBody] AdvertisementUpdateCommand command)
-    //    => await Edit(command);
+    [HttpPut("Update")]
+    public async Task<IActionResult> UpdateAdvertisement([FromBody] AdvertisementUpdateCommand command)
+        => await Edit(command);
 
     //[HttpDelete("Delete")]
     //public async Task<IActionResult> DeleteAdvertisement([FromBody] AdvertisementDeleteCommand command)

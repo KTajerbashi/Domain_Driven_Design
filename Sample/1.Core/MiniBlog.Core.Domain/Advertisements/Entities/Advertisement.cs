@@ -49,5 +49,14 @@ public class Advertisement : AggregateRoot
 
 
     #region Commands
+    public void Update(AdvertisementUpdateParameter parameter)
+    {
+        Title = parameter.Title;
+        Description = parameter.Description;
+        CityId = parameter.CityId;
+        Salary = parameter.Salary;
+        IsRemote = parameter.IsRemote;
+        AddEvent(new AdvertisementUpdated(Id, BusinessId.Value, Title, Description, Salary, CityId, IsRemote));
+    }
     #endregion
 }

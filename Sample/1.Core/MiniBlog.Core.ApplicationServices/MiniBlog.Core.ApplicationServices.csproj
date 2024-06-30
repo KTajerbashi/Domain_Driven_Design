@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <Folder Include="Advertisments\Commands\Delete\" />
-    <Folder Include="Advertisments\Commands\Update\" />
     <Folder Include="Advertisments\Events\" />
     <Folder Include="Advertisments\Queries\" />
   </ItemGroup>

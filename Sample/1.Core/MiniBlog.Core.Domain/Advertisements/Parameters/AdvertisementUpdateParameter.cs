@@ -1,5 +1,3 @@
 ﻿namespace MiniBlog.Core.Domain.Advertisements.Parameters;
 
-public class AdvertisementUpdateParameter
-{
-}
+public sealed record class AdvertisementUpdateParameter(string Title, string Description, int Salary, int CityId, bool IsRemote);

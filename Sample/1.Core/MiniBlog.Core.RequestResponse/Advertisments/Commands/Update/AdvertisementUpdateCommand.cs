@@ -2,8 +2,9 @@
 
 namespace MiniBlog.Core.RequestResponse.Advertisments.Commands.Update;
 
-public sealed class AdvertisementUpdateCommand : ICommand<long>
+public sealed class AdvertisementUpdateCommand : ICommand
 {
+    public long Id { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
     public int CityId { get; set; }

@@ -42,7 +42,10 @@ public class SetPersianYeKeInterceptor : DbCommandInterceptor
     /// <param name="eventData"></param>
     /// <param name="result"></param>
     /// <returns></returns>
-    public override InterceptionResult<DbDataReader> ReaderExecuting(DbCommand command, CommandEventData eventData, InterceptionResult<DbDataReader> result)
+    public override InterceptionResult<DbDataReader> ReaderExecuting(
+        DbCommand command, 
+        CommandEventData eventData, 
+        InterceptionResult<DbDataReader> result)
     {
         command.ApplyCorrectYeKe();
         return base.ReaderExecuting(command, eventData, result);
@@ -56,7 +59,11 @@ public class SetPersianYeKeInterceptor : DbCommandInterceptor
     /// <param name="result"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public override ValueTask<InterceptionResult<DbDataReader>> ReaderExecutingAsync(DbCommand command, CommandEventData eventData, InterceptionResult<DbDataReader> result, CancellationToken cancellationToken = default)
+    public override ValueTask<InterceptionResult<DbDataReader>> ReaderExecutingAsync(
+        DbCommand command, 
+        CommandEventData eventData, 
+        InterceptionResult<DbDataReader> result, 
+        CancellationToken cancellationToken = default)
     {
         command.ApplyCorrectYeKe();
         return base.ReaderExecutingAsync(command, eventData, result, cancellationToken);
