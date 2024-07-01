@@ -1,6 +1,7 @@
 ﻿using DDD.Core.Domain.Library.Entities;
 using DDD.Core.Domain.Library.Exceptions;
 using MiniBlog.Core.Domain.Advertisements.DomainEvents;
+using MiniBlog.Core.Domain.Advertisements.DomainEvents.Courses;
 using MiniBlog.Core.Domain.Advertisements.Parameters;
 using MiniBlog.Core.Domain.Resources;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -42,7 +43,7 @@ public class Advertisement : AggregateRoot
             _courses = new List<Course>();
             foreach (var course in parameter.Courses)
             {
-                _courses.Add(new Course(course.Name, course.Length, course.From, course.To));
+                _courses.Add(new Course(course));
             }
         }
     }
@@ -57,14 +58,6 @@ public class Advertisement : AggregateRoot
         CityId = parameter.CityId;
         Salary = parameter.Salary;
         IsRemote = parameter.IsRemote;
-        if (parameter.Courses.Count > 0)
-        {
-            _courses = new List<Course>();
-            foreach (var course in parameter.Courses)
-            {
-                _courses.Add(new Course(course.Name, course.Length, course.From, course.To));
-            }
-        }
         AddEvent(new AdvertisementUpdated(Id, BusinessId.Value, Title, Description, Salary, CityId, IsRemote));
     }
     public void Delete()
@@ -89,6 +82,11 @@ public class Advertisement : AggregateRoot
         }
         PublishDate = null;
         AddEvent(new AdvertisementUnPublished(BusinessId.Value, Id));
+    }
+
+    public void UpdateCourse()
+    {
+
     }
     #endregion
 }

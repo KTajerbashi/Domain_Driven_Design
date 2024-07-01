@@ -1,4 +1,5 @@
 ﻿using DDD.Core.Domain.Library.Events;
+using MiniBlog.Core.Domain.Advertisements.DomainEvents.Courses;
 
 namespace MiniBlog.Core.Domain.Advertisements.DomainEvents;
 

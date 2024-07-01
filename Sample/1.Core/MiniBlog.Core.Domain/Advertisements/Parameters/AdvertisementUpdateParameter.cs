@@ -1,4 +1,7 @@
-﻿namespace MiniBlog.Core.Domain.Advertisements.Parameters;
+﻿using MiniBlog.Core.Domain.Advertisements.Parameters.Admins;
+using MiniBlog.Core.Domain.Advertisements.Parameters.Courses;
+
+namespace MiniBlog.Core.Domain.Advertisements.Parameters;
 
 public sealed record class AdvertisementUpdateParameter(
     string Title,
@@ -6,9 +9,4 @@ public sealed record class AdvertisementUpdateParameter(
     int Salary,
     int CityId, 
     bool IsRemote,
-    List<AdvertisementCourseUpdateParameter> Courses);
-public record AdvertisementCourseUpdateParameter(
-    string Name, 
-    int Length, 
-    DateTime From, 
-    DateTime To);
+    List<CourseUpdateParameter> Courses);
