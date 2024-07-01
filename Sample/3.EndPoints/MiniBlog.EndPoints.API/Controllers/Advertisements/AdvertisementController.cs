@@ -2,13 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using MiniBlog.Core.RequestResponse.Advertisements.Commands.Create;
 using MiniBlog.Core.RequestResponse.Advertisements.Commands.Delete;
-using MiniBlog.Core.RequestResponse.Advertisements.Commands.Update;
 using MiniBlog.Core.RequestResponse.Advertisements.Commands.Publishe;
 using MiniBlog.Core.RequestResponse.Advertisements.Commands.UnPublishe;
+using MiniBlog.Core.RequestResponse.Advertisements.Commands.Update;
 using MiniBlog.Core.RequestResponse.Advertisements.Queries.GetById;
 
 namespace MiniBlog.EndPoints.API.Controllers.Advertisements;
-
 public sealed class AdvertisementController : BaseController
 {
     #region Commands
