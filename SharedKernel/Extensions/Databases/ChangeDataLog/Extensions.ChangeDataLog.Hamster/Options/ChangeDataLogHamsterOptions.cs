@@ -10,6 +10,8 @@
         /// </summary>
         public List<string> propertyForReject { get; set; } = new List<string>
             {
+                "IsActive",
+                "IsDeleted",
                 "CreatedByUserId",
                 "CreatedDateTime",
                 "ModifiedByUserId",
