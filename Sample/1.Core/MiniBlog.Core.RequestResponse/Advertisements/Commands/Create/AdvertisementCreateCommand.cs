@@ -1,6 +1,5 @@
 ﻿using DDD.Core.RequestResponse.Library.Commands;
-using Extensions.Translations.Abstractions;
-using FluentValidation;
+using MiniBlog.Core.RequestResponse.Courses.Commands.Create;
 
 namespace MiniBlog.Core.RequestResponse.Advertisements.Commands.Create;
 
@@ -11,13 +10,6 @@ public sealed class AdvertisementCreateCommand : ICommand<long>
     public int CityId { get; set; }
     public int Salary { get; set; }
     public bool IsRemote { get; set; }
-    public List<AdvertisementCoursesCreateCommand> Courses { get; set; }
+    public List<CourseCreateCommand> Courses { get; set; }
 
-}
-public sealed class AdvertisementCreateValidator : AbstractValidator<AdvertisementCreateCommand>
-{
-    public AdvertisementCreateValidator(ITranslator translator)
-    {
-        RuleFor(x => x.CityId).GreaterThan(0).WithMessage(translator["خالی نباشد"]);
-    }
 }

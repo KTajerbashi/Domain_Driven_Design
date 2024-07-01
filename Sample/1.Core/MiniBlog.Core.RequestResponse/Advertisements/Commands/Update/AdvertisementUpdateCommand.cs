@@ -10,6 +10,6 @@ public sealed class AdvertisementUpdateCommand : ICommand
     public int CityId { get; set; }
     public int Salary { get; set; }
     public bool IsRemote { get; set; }
-    public List<AdvertisementCoursesUpdateCommand> Courses { get; set; }
+    public List<CoursesUpdateCommand> Courses { get; set; }
 }
 

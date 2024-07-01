@@ -1,8 +1,8 @@
 ﻿using DDD.Core.RequestResponse.Library.Commands;
 
-namespace MiniBlog.Core.RequestResponse.Advertisements.Commands.Create;
+namespace MiniBlog.Core.RequestResponse.Admins.Commands.Update;
 
-public sealed class AdvertisementCoursesCreateCommand : ICommand<long>
+public sealed class AdminUpdateCommand : ICommand
 {
     public string Name { get; set; }
     public int Length { get; set; }
