@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MiniBlog.Infrastructure.Data.Sql.Queries.DatabaseContext;
 
@@ -11,9 +12,11 @@ using MiniBlog.Infrastructure.Data.Sql.Queries.DatabaseContext;
 namespace MiniBlog.Infrastructure.Data.Sql.Queries.Migrations
 {
     [DbContext(typeof(MiniBlogQueriesDbContext))]
-    partial class MiniBlogQueriesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240701120910_Initial_Database_Query")]
+    partial class Initial_Database_Query
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

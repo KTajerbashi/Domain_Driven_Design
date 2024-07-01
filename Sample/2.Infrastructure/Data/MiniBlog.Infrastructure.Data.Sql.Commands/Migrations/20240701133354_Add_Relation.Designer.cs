@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MiniBlog.Infrastructure.Data.Sql.Queries.DatabaseContext;
+using MiniBlog.Infrastructure.Data.Sql.Commands.DatabaseContext;
 
 #nullable disable
 
-namespace MiniBlog.Infrastructure.Data.Sql.Queries.Migrations
+namespace MiniBlog.Infrastructure.Data.Sql.Commands.Migrations
 {
-    [DbContext(typeof(MiniBlogQueriesDbContext))]
-    partial class MiniBlogQueriesDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(MiniBlogCommandsDbContext))]
+    [Migration("20240701133354_Add_Relation")]
+    partial class Add_Relation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,8 +36,32 @@ namespace MiniBlog.Infrastructure.Data.Sql.Queries.Migrations
                     b.Property<Guid?>("BusinessId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<long?>("CourseId")
+                    b.Property<long>("CourseId")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("CreatedByUserId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("CreatedDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("ModifiedByUserId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("ModifiedDateTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
@@ -64,12 +91,36 @@ namespace MiniBlog.Infrastructure.Data.Sql.Queries.Migrations
                     b.Property<int>("CityId")
                         .HasColumnType("int");
 
+                    b.Property<string>("CreatedByUserId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("CreatedDateTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<bool>("IsRemote")
                         .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedByUserId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("ModifiedDateTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("PublishDate")
                         .HasColumnType("datetime2");
@@ -94,17 +145,41 @@ namespace MiniBlog.Infrastructure.Data.Sql.Queries.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<long?>("AdvertisementId")
+                    b.Property<long>("AdvertisementId")
                         .HasColumnType("bigint");
 
                     b.Property<Guid?>("BusinessId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("CreatedByUserId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("CreatedDateTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("From")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<int>("Length")
                         .HasColumnType("int");
+
+                    b.Property<string>("ModifiedByUserId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("ModifiedDateTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -131,13 +206,37 @@ namespace MiniBlog.Infrastructure.Data.Sql.Queries.Migrations
                     b.Property<Guid?>("BusinessId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("CreatedByUserId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("CreatedDateTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModifiedByUserId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("ModifiedDateTime")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -146,16 +245,24 @@ namespace MiniBlog.Infrastructure.Data.Sql.Queries.Migrations
 
             modelBuilder.Entity("MiniBlog.Core.Domain.Advertisements.Entities.Admin", b =>
                 {
-                    b.HasOne("MiniBlog.Core.Domain.Advertisements.Entities.Course", null)
+                    b.HasOne("MiniBlog.Core.Domain.Advertisements.Entities.Course", "Course")
                         .WithMany("Admins")
-                        .HasForeignKey("CourseId");
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
                 });
 
             modelBuilder.Entity("MiniBlog.Core.Domain.Advertisements.Entities.Course", b =>
                 {
-                    b.HasOne("MiniBlog.Core.Domain.Advertisements.Entities.Advertisement", null)
+                    b.HasOne("MiniBlog.Core.Domain.Advertisements.Entities.Advertisement", "Advertisement")
                         .WithMany("Courses")
-                        .HasForeignKey("AdvertisementId");
+                        .HasForeignKey("AdvertisementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Advertisement");
                 });
 
             modelBuilder.Entity("MiniBlog.Core.Domain.Advertisements.Entities.Advertisement", b =>

@@ -22,6 +22,58 @@ namespace MiniBlog.Infrastructure.Data.Sql.Commands.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("MiniBlog.Core.Domain.Advertisements.Entities.Admin", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<Guid?>("BusinessId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<long>("CourseId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CreatedByUserId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("CreatedDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("ModifiedByUserId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("ModifiedDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("Admins", "Blog");
+                });
+
             modelBuilder.Entity("MiniBlog.Core.Domain.Advertisements.Entities.Advertisement", b =>
                 {
                     b.Property<long>("Id")
@@ -46,6 +98,16 @@ namespace MiniBlog.Infrastructure.Data.Sql.Commands.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<bool>("IsRemote")
                         .HasColumnType("bit");
@@ -80,7 +142,7 @@ namespace MiniBlog.Infrastructure.Data.Sql.Commands.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<long?>("AdvertisementId")
+                    b.Property<long>("AdvertisementId")
                         .HasColumnType("bigint");
 
                     b.Property<Guid?>("BusinessId")
@@ -95,6 +157,16 @@ namespace MiniBlog.Infrastructure.Data.Sql.Commands.Migrations
 
                     b.Property<DateTime>("From")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<int>("Length")
                         .HasColumnType("int");
@@ -142,6 +214,16 @@ namespace MiniBlog.Infrastructure.Data.Sql.Commands.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -158,16 +240,36 @@ namespace MiniBlog.Infrastructure.Data.Sql.Commands.Migrations
                     b.ToTable("People", "Security");
                 });
 
+            modelBuilder.Entity("MiniBlog.Core.Domain.Advertisements.Entities.Admin", b =>
+                {
+                    b.HasOne("MiniBlog.Core.Domain.Advertisements.Entities.Course", "Course")
+                        .WithMany("Admins")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
             modelBuilder.Entity("MiniBlog.Core.Domain.Advertisements.Entities.Course", b =>
                 {
-                    b.HasOne("MiniBlog.Core.Domain.Advertisements.Entities.Advertisement", null)
+                    b.HasOne("MiniBlog.Core.Domain.Advertisements.Entities.Advertisement", "Advertisement")
                         .WithMany("Courses")
-                        .HasForeignKey("AdvertisementId");
+                        .HasForeignKey("AdvertisementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Advertisement");
                 });
 
             modelBuilder.Entity("MiniBlog.Core.Domain.Advertisements.Entities.Advertisement", b =>
                 {
                     b.Navigation("Courses");
+                });
+
+            modelBuilder.Entity("MiniBlog.Core.Domain.Advertisements.Entities.Course", b =>
+                {
+                    b.Navigation("Admins");
                 });
 #pragma warning restore 612, 618
         }

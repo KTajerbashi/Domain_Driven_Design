@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MiniBlog.Infrastructure.Data.Sql.Commands.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial_Command_Database : Migration
+    public partial class Initial_Database : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -69,7 +69,7 @@ namespace MiniBlog.Infrastructure.Data.Sql.Commands.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Lenght = table.Column<int>(type: "int", nullable: false),
+                    Length = table.Column<int>(type: "int", nullable: false),
                     From = table.Column<DateTime>(type: "datetime2", nullable: false),
                     To = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AdvertisementId = table.Column<long>(type: "bigint", nullable: true),
@@ -90,6 +90,39 @@ namespace MiniBlog.Infrastructure.Data.Sql.Commands.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Admins",
+                schema: "Blog",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false),
+                    CourseId = table.Column<long>(type: "bigint", nullable: true),
+                    CreatedByUserId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedByUserId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ModifiedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    BusinessId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Admins", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Admins_Courses_CourseId",
+                        column: x => x.CourseId,
+                        principalSchema: "Blog",
+                        principalTable: "Courses",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Admins_CourseId",
+                schema: "Blog",
+                table: "Admins",
+                column: "CourseId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Courses_AdvertisementId",
                 schema: "Blog",
@@ -101,12 +134,16 @@ namespace MiniBlog.Infrastructure.Data.Sql.Commands.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Courses",
+                name: "Admins",
                 schema: "Blog");
 
             migrationBuilder.DropTable(
                 name: "People",
                 schema: "Security");
+
+            migrationBuilder.DropTable(
+                name: "Courses",
+                schema: "Blog");
 
             migrationBuilder.DropTable(
                 name: "Advertisements",

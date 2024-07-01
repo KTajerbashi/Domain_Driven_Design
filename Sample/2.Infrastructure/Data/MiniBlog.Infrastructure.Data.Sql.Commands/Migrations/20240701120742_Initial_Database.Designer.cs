@@ -12,8 +12,8 @@ using MiniBlog.Infrastructure.Data.Sql.Commands.DatabaseContext;
 namespace MiniBlog.Infrastructure.Data.Sql.Commands.Migrations
 {
     [DbContext(typeof(MiniBlogCommandsDbContext))]
-    [Migration("20240630200827_Change_Prop_Length")]
-    partial class Change_Prop_Length
+    [Migration("20240701120742_Initial_Database")]
+    partial class Initial_Database
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,48 @@ namespace MiniBlog.Infrastructure.Data.Sql.Commands.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("MiniBlog.Core.Domain.Advertisements.Entities.Admin", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<Guid?>("BusinessId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<long?>("CourseId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CreatedByUserId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("CreatedDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ModifiedByUserId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("ModifiedDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("Admins", "Blog");
+                });
 
             modelBuilder.Entity("MiniBlog.Core.Domain.Advertisements.Entities.Advertisement", b =>
                 {
@@ -161,6 +203,13 @@ namespace MiniBlog.Infrastructure.Data.Sql.Commands.Migrations
                     b.ToTable("People", "Security");
                 });
 
+            modelBuilder.Entity("MiniBlog.Core.Domain.Advertisements.Entities.Admin", b =>
+                {
+                    b.HasOne("MiniBlog.Core.Domain.Advertisements.Entities.Course", null)
+                        .WithMany("Admins")
+                        .HasForeignKey("CourseId");
+                });
+
             modelBuilder.Entity("MiniBlog.Core.Domain.Advertisements.Entities.Course", b =>
                 {
                     b.HasOne("MiniBlog.Core.Domain.Advertisements.Entities.Advertisement", null)
@@ -171,6 +220,11 @@ namespace MiniBlog.Infrastructure.Data.Sql.Commands.Migrations
             modelBuilder.Entity("MiniBlog.Core.Domain.Advertisements.Entities.Advertisement", b =>
                 {
                     b.Navigation("Courses");
+                });
+
+            modelBuilder.Entity("MiniBlog.Core.Domain.Advertisements.Entities.Course", b =>
+                {
+                    b.Navigation("Admins");
                 });
 #pragma warning restore 612, 618
         }

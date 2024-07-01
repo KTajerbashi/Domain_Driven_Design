@@ -30,6 +30,7 @@ public class MiniBlogCommandsDbContext : BaseCommandDbContext
     public DbSet<Person> People { get; set; }
     public DbSet<Advertisement> Advertisements { get; set; }
     public DbSet<Course> Courses { get; set; }
+    public DbSet<Admin> Admins { get; set; }
 }
 
 //public class MiniBlogCommandsDbContextFactory : IDesignTimeDbContextFactory<MiniBlogCommandsDbContext>
