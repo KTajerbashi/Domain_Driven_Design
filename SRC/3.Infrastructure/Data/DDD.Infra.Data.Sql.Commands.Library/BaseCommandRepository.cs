@@ -23,10 +23,12 @@ public class BaseCommandRepository<TEntity, TDbContext, TId> : ICommandRepositor
 {
 
     protected readonly TDbContext _dbContext;
+    protected readonly DbSet<TEntity> _db;
 
     public BaseCommandRepository(TDbContext dbContext)
     {
         _dbContext = dbContext;
+        _db = dbContext.Set<TEntity>();
     }
 
     #region Insert

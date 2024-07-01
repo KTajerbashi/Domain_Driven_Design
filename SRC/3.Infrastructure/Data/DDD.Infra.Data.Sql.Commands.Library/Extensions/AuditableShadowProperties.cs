@@ -10,6 +10,14 @@ namespace DDD.Infra.Data.Sql.Commands.Library.Extensions;
 /// </summary>
 public static class AuditableShadowProperties
 {
+    public static readonly Func<object, string> EFPropertyIsActive =
+                                    entity => EF.Property<string>(entity, IsActive);
+    public static readonly string IsActive = nameof(IsActive);
+
+    public static readonly Func<object, string> EFPropertyIsDeleted =
+                                    entity => EF.Property<string>(entity, IsDeleted);
+    public static readonly string IsDeleted = nameof(IsDeleted);
+
     public static readonly Func<object, string> EFPropertyCreatedByUserId =
                                     entity => EF.Property<string>(entity, CreatedByUserId);
     public static readonly string CreatedByUserId = nameof(CreatedByUserId);
@@ -38,6 +46,10 @@ public static class AuditableShadowProperties
         /// و این فقط فبلد دیتابیس ساخته میشود
         foreach (var entityType in modelBuilder.Model.GetEntityTypes().Where(c => typeof(IAuditableEntity).IsAssignableFrom(c.ClrType)))
         {
+            modelBuilder.Entity(entityType.ClrType)
+                        .Property<bool>(IsDeleted).IsRequired().HasDefaultValue(false);
+            modelBuilder.Entity(entityType.ClrType)
+                        .Property<bool>(IsActive).IsRequired().HasDefaultValue(true);
             modelBuilder.Entity(entityType.ClrType)
                         .Property<string>(CreatedByUserId).HasMaxLength(50);
             modelBuilder.Entity(entityType.ClrType)

@@ -5,6 +5,9 @@ using DDD.Infra.Data.Sql.Commands.Library.Extensions;
 using DDD.Core.Domain.ToolKits.Library.ValueObjects;
 using DDD.Core.Domain.Library.ValueObjects;
 using DDD.Infra.Data.Sql.Library.ValueConversions;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
+using DDD.Core.Domain.Library.Entities;
 
 namespace DDD.Infra.Data.Sql.Commands.Library;
 /// <summary>
@@ -91,6 +94,7 @@ public abstract class BaseCommandDbContext : DbContext
     {
         base.OnModelCreating(builder);
         builder.AddAuditableShadowProperties();
+        
     }
 
     /// <summary>
