@@ -9,4 +9,5 @@ namespace DDD.Core.Contracts.Library.ApplicationServices.Events;
 public interface IEventDispatcher
 {
     Task PublishDomainEventAsync<TDomainEvent>(TDomainEvent @event) where TDomainEvent : class, IDomainEvent;
+    Task PublishDomainEventAsync<TDomainEvent>(IEnumerable<TDomainEvent> @events) where TDomainEvent : class, IDomainEvent;
 }

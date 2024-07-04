@@ -9,9 +9,9 @@ using MiniBlog.Infrastructure.Data.Sql.Queries.DatabaseContext;
 
 namespace MiniBlog.Infrastructure.Data.Sql.Queries.Advertisements;
 
-public sealed class AdvertisementCommandRepository : BaseQueryRepository<MiniBlogQueriesDbContext>, IAdvertisementQueryRepository
+public sealed class AdvertisementQueriesRepository : BaseQueryRepository<MiniBlogQueriesDbContext>, IAdvertisementQueryRepository
 {
-    public AdvertisementCommandRepository(MiniBlogQueriesDbContext dbContext) : base(dbContext)
+    public AdvertisementQueriesRepository(MiniBlogQueriesDbContext dbContext) : base(dbContext)
     {
     }
 

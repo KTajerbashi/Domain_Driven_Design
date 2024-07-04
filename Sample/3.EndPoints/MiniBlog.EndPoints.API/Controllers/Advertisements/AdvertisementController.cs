@@ -25,11 +25,15 @@ public sealed class AdvertisementController : BaseController
 
     [HttpPut("Publish")]
     public async Task<IActionResult> PublishAdvertisement([FromBody] AdvertisementPublishCommand command)
-    => await Edit(command);
+        => await Edit(command);
 
 
     [HttpPut("UnPublish")]
-    public async Task<IActionResult> UnPublishAdvertisement([FromBody] AdvertisementUnPublishCommand command) => await Edit(command);
+    public async Task<IActionResult> UnPublishAdvertisement([FromBody] AdvertisementUnPublishCommand command)
+        => await Edit(command);
+
+
+
     #endregion
 
     #region Queries

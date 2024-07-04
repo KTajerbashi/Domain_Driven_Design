@@ -56,6 +56,31 @@ public class EventDispatcherValidationDecorator : EventDispatcherDecorator
             await _eventDispatcher.PublishDomainEventAsync(@event);
         }
     }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TDomainEvent"></typeparam>
+    /// <param name="event"></param>
+    /// <returns></returns>
+    public override async Task PublishDomainEventAsync<TDomainEvent>(IEnumerable<TDomainEvent> @event)
+    {
+        foreach (var @item in @event)
+        {
+            _logger.LogDebug(LoggingEventId.EventValidation, "Validating Event of type {EventType} With value {Event}  start at :{StartDateTime}", @item.GetType(), @item, DateTime.Now);
+
+            List<string> errorMessages = Validate(@item);
+
+            if (errorMessages.Any())
+            {
+                _logger.LogInformation(LoggingEventId.EventValidation, "Validating query of type {QueryType} With value {Query}  failed. Validation errors are: {ValidationErrors}", @item.GetType(), @item, errorMessages);
+            }
+            else
+            {
+                _logger.LogDebug(LoggingEventId.EventValidation, "Validating query of type {QueryType} With value {Query}  finished at :{EndDateTime}", @item.GetType(), @item, DateTime.Now);
+                await _eventDispatcher.PublishDomainEventAsync(@item);
+            }
+        }
+    }
     #endregion
 
     #region Privaite Methods

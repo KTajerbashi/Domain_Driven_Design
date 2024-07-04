@@ -51,6 +51,38 @@ public class EventDispatcher : IEventDispatcher
     /// <typeparam name="TDomainEvent"></typeparam>
     /// <param name="event"></param>
     /// <returns></returns>
+    public async Task PublishDomainEventAsync<TDomainEvent>(IEnumerable<TDomainEvent> @events) where TDomainEvent : class, IDomainEvent
+    {
+        _stopwatch.Start();
+        int counter = 0;
+
+        foreach (var @item in @events)
+        {
+            try
+            {
+                _logger.LogDebug("Routing event of type {EventType} With value {Event}  Start at {StartDateTime}", @item.GetType(), @item, DateTime.Now);
+                var handlers = _serviceProvider.GetServices<IDomainEventHandler<TDomainEvent>>();
+                List<Task> tasks = new List<Task>();
+                foreach (var handler in handlers)
+                {
+                    counter++;
+                    tasks.Add(handler.Handle(@item));
+                }
+                await Task.WhenAll(tasks);
+            }
+            catch (InvalidOperationException ex)
+            {
+                _logger.LogError(ex, "There is not suitable handler for {EventType} Routing failed at {StartDateTime}.", @item.GetType(), DateTime.Now);
+                throw;
+            }
+            finally
+            {
+                _stopwatch.Stop();
+                _logger.LogDebug("Total number of handler for {EventType} is {Count} ,EventHandlers tooks {Millisecconds} Millisecconds", @item.GetType(), counter, _stopwatch.ElapsedMilliseconds);
+            }
+        }
+        
+    }
     public async Task PublishDomainEventAsync<TDomainEvent>(TDomainEvent @event) where TDomainEvent : class, IDomainEvent
     {
         _stopwatch.Start();
@@ -78,5 +110,7 @@ public class EventDispatcher : IEventDispatcher
             _logger.LogDebug("Total number of handler for {EventType} is {Count} ,EventHandlers tooks {Millisecconds} Millisecconds", @event.GetType(), counter, _stopwatch.ElapsedMilliseconds);
         }
     }
+
+  
     #endregion
 }

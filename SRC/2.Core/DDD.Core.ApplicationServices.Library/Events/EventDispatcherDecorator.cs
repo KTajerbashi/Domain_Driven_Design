@@ -31,6 +31,7 @@ public abstract class EventDispatcherDecorator : IEventDispatcher
     /// <param name="event"></param>
     /// <returns></returns>
     public abstract Task PublishDomainEventAsync<TDomainEvent>(TDomainEvent @event) where TDomainEvent : class, IDomainEvent;
+    public abstract Task PublishDomainEventAsync<TDomainEvent>(IEnumerable<TDomainEvent> @events) where TDomainEvent : class, IDomainEvent;
 
     /// <summary>
     /// 
@@ -40,5 +41,7 @@ public abstract class EventDispatcherDecorator : IEventDispatcher
     {
         _eventDispatcher = eventDispatcher;
     }
+
+    
     #endregion
 }
