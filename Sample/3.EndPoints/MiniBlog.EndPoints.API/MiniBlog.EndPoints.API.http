@@ -1,6 +1,0 @@
-@MiniBlog.EndPoints.API_HostAddress = http://localhost:5234
-
-GET {{MiniBlog.EndPoints.API_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
