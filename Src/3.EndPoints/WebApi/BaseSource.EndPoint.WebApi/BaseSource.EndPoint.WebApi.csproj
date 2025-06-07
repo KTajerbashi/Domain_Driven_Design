@@ -10,4 +10,9 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\2.Infrastructure\SQLCommand\BaseSource.Infrastructure.SQL.Command\BaseSource.Infrastructure.SQL.Command.csproj" />
+    <ProjectReference Include="..\..\..\2.Infrastructure\SQLQuery\BaseSource.Infrastructure.SQL.Query\BaseSource.Infrastructure.SQL.Query.csproj" />
+  </ItemGroup>
+
 </Project>
