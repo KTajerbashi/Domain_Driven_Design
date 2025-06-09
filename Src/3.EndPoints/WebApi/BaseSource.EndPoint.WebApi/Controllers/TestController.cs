@@ -11,3 +11,13 @@ public class TestController : BaseController
         return Ok("Test endpoint is working!");
     }
 }
+
+
+public class AuthTestController : AuthorizeController
+{
+    [HttpGet]
+    public IActionResult Get()
+    {
+        return Ok("Test endpoint is working!");
+    }
+}
