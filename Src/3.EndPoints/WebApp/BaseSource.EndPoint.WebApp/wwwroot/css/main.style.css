@@ -1,0 +1,36 @@
+
+/* =====================
+   Buttons
+===================== */
+
+.app-btn {
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    margin: 5px;
+    min-width: 100px;
+    padding: 3px 10px
+}
+
+.app-btn-glass {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--text-light);
+    transition: all 0.3s ease;
+}
+
+    .app-btn-glass:hover {
+        background: rgba(255, 255, 255, 0.4);
+        transform: translateY(-2px);
+    }
+
+.app-btn-primary-glass {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    transition: background 0.3s ease;
+}
+
+    .app-btn-primary-glass:hover {
+        background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+    }

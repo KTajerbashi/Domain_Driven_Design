@@ -1,0 +1,129 @@
+/* =====================
+   Glassmorphism Theme
+===================== */
+:root {
+    --primary-color: rgba(106, 90, 205, 0.85);
+    --secondary-color: rgba(70, 130, 180, 0.85);
+    --glass-blur: 10px;
+    --text-light: #f8f9fa;
+    --text-dark: #212529;
+}
+
+/* =====================
+   Base Layout Styles
+===================== */
+body {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    background: linear-gradient(45deg, #131e3d, #0f344b);
+    min-height: 94vh;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 60px;
+    color: var(--text-light)
+}
+
+.page-container {
+    padding-top: 80px;
+    flex: 1;
+}
+
+/* =====================
+   Glass Components
+===================== */
+.glass-container,
+.glass-navbar,
+.glass-footer {
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    margin: 8px;
+}
+
+.glass-container {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.glass-navbar {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+.glass-footer {
+    background: rgba(255, 255, 255, 0.15);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    bottom: 0;
+    position: fixed;
+    width: 100vw;
+    margin: 1px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* =====================
+   Navbar Styles
+===================== */
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent !important;
+}
+
+.nav-link {
+    position: relative;
+    color: var(--text-light) !important;
+    font-weight: 500;
+    margin: 0 0.5rem;
+    transition: all 0.3s ease;
+}
+
+    .nav-link:hover {
+        color: #ffe082 !important;
+    }
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: var(--primary-color);
+        transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+        width: 100%;
+    }
+
+/* =====================
+   Footer Links
+===================== */
+footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+    footer a:hover {
+        color: var(--secondary-color);
+        text-decoration: underline;
+    }
+
+/* =====================
+   Responsive
+===================== */
+@media (max-width: 768px) {
+    .glass-container {
+        padding: 1.5rem;
+        margin: 0 -1rem 1.5rem;
+        border-radius: 0;
+    }
+}
