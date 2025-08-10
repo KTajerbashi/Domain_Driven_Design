@@ -4,45 +4,69 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - BaseSource.EndPoint.WebApp</title>
-    <script type="importmap"></script>
+
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <!-- Custom Styles -->
+    <link href="~/css/main.style.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/layout.style.css" rel="stylesheet" asp-append-version="true" />
     <link rel="stylesheet" href="~/BaseSource.EndPoint.WebApp.styles.css" asp-append-version="true" />
 </head>
+
 <body>
-    <header class="bg-dark bg-gradient text-light">
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar navbar-expand-lg glass-navbar fixed-top">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">BaseSource.EndPoint.WebApp</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand" asp-area="" asp-page="/App/Index">Domain Driven-Design</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                        aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link" asp-area="" asp-page="/App/Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                            <a class="nav-link" asp-area="" asp-page="/App/Common/Privacy">Privacy</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/App/Test/SwaggerJs">SwaggerJs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/App/Test/SwaggerRazor">SwaggerRazor</a>
+                        </li>
+
                     </ul>
+                    <div class="d-flex">
+                        <button class="app-btn app-btn-glass me-2">Login</button>
+                        <button class="app-btn app-btn-primary-glass">Register</button>
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
+    <!-- Main Content -->
+    <main class="container page-container">
+        <div class="glass-container">
+            @RenderBody()
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-footer text-center py-3">
         <div class="container">
-            &copy; 2025 - BaseSource.EndPoint.WebApp - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; @DateTime.Now.Year - Domain Driven Design -
+            <a asp-area="" asp-page="/Privacy">Privacy Policy</a>
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

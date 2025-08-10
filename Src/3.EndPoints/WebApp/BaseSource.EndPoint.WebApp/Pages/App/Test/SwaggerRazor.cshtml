@@ -1,0 +1,54 @@
+﻿@page
+@model SwaggerRazorModel
+
+
+
+
+<div class="container mt-4">
+    <h2>API Tester (Server-side)</h2>
+
+    <form method="post">
+        <div class="mb-3">
+            <label class="form-label fw-bold">HTTP Method</label>
+            <select asp-for="Method" class="form-select">
+                <option>GET</option>
+                <option>POST</option>
+                <option>PUT</option>
+                <option>DELETE</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label fw-bold">Request URL</label>
+            <input asp-for="Url" class="form-control" placeholder="/Controller/Action">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label fw-bold">Request Body (JSON)</label>
+            <textarea asp-for="Body" class="form-control" rows="4" placeholder="{ }"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Send Request</button>
+    </form>
+
+    @if (Model.StatusCode != 0)
+    {
+        <div class="card mt-4 shadow-sm">
+            <div class="card-header fw-bold">Response Details</div>
+            <div class="card-body">
+                <p><strong>Status:</strong> @Model.StatusCode @Model.StatusText</p>
+                <p><strong>Headers:</strong></p>
+                <pre class="bg-light p-2 border rounded">
+                    @foreach (var header in Model.Headers)
+                    {
+                        @($"{header.Key}: {header.Value}\n")
+                    }
+                    </pre>
+                <p><strong>Body:</strong></p>
+                <pre class="bg-light p-2 border rounded">@Model.ResponseBody</pre>
+            </div>
+        </div>
+    }
+</div>
+
+

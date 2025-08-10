@@ -1,0 +1,92 @@
+﻿@page
+@model SwaggerJsModel
+
+
+
+<div class="container mt-4">
+    <h2>Mini API Tester</h2>
+
+    <div class="card p-3 shadow-sm">
+        <div class="mb-3">
+            <label class="form-label fw-bold">HTTP Method</label>
+            <select id="method" class="form-select">
+                <option value="GET">GET</option>
+                <option value="POST">POST</option>
+                <option value="PUT">PUT</option>
+                <option value="DELETE">DELETE</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label fw-bold">Request URL</label>
+            <input type="text" id="url" class="form-control" value="https://localhost:7205/api/Test">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label fw-bold">Request Body (JSON)</label>
+            <textarea id="body" class="form-control" rows="4" placeholder="{ }"></textarea>
+        </div>
+
+        <button class="btn btn-primary" onclick="sendRequest()">Send Request</button>
+    </div>
+
+    <div class="card mt-4 shadow-sm">
+        <div class="card-header fw-bold">Response Details</div>
+        <div class="card-body">
+            <p><strong>Status:</strong> <span id="status"></span></p>
+            <p><strong>Headers:</strong></p>
+            <pre id="headers" class="bg-light p-2 border rounded"></pre>
+            <p><strong>Body:</strong></p>
+            <pre id="response" class="bg-light p-2 border rounded"></pre>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        async function sendRequest() {
+            const method = document.getElementById("method").value;
+            const url = document.getElementById("url").value;
+            const body = document.getElementById("body").value;
+
+            let options = { method: method, headers: { "Content-Type": "application/json" } };
+
+            if (method !== "GET" && method !== "DELETE" && body.trim()) {
+                options.body = body;
+            }
+
+            try {
+                const res = await fetch(url, options);
+
+                // Status
+                document.getElementById("status").textContent = `${res.status} ${res.statusText}`;
+
+                // Headers
+                let headerText = "";
+                for (let [key, value] of res.headers.entries()) {
+                    headerText += `${key}: ${value}\n`;
+                }
+                document.getElementById("headers").textContent = headerText;
+
+                // Body
+                const text = await res.text();
+                let displayText;
+                try {
+                    displayText = JSON.stringify(JSON.parse(text), null, 2);
+                } catch {
+                    displayText = text;
+                }
+                document.getElementById("response").textContent = displayText;
+
+            } catch (err) {
+                document.getElementById("status").textContent = "Error";
+                document.getElementById("headers").textContent = "";
+                document.getElementById("response").textContent = "Error: " + err;
+            }
+        }
+    </script>
+}
+
+
+
+
