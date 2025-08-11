@@ -63,6 +63,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Core", "1.Core", "{F08100
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseSource.Core.Application.UnitTests", "Src\4.Tests\UnitTests\1.Core\BaseSource.Core.Application.UnitTests\BaseSource.Core.Application.UnitTests.csproj", "{439EC779-306A-4BEE-8ECF-7F4A7894CDE3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{0887C5BB-F937-428A-8377-F27A81B043B7}"
+	ProjectSection(SolutionItems) = preProject
+		Solution Structure.MD = Solution Structure.MD
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -1,7 +1,6 @@
-﻿using BaseSource.Core.Domain.Common.Aggregate.Interfaces;
-using BaseSource.Core.Domain.Common.Event;
+﻿using BaseSource.Core.Domain.Common.Event;
 
-namespace BaseSource.Core.Domain.Common.Aggregate.Implementions;
+namespace BaseSource.Core.Domain.Common.Aggregate;
 
 // Base entity implementation
 public abstract class Entity<TId> : IEntity<TId>, IEquatable<Entity<TId>>

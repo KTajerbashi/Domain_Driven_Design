@@ -1,4 +1,4 @@
-﻿namespace BaseSource.Core.Domain.Common.Aggregate.Interfaces;
+﻿namespace BaseSource.Core.Domain.Common.Aggregate;
 
 // Interface for auditable entities
 public interface IAuditableEntity<TId> : IEntity<TId> where TId : notnull

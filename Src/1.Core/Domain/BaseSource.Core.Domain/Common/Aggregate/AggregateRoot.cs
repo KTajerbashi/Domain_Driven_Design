@@ -1,7 +1,6 @@
-﻿using BaseSource.Core.Domain.Common.Aggregate.Interfaces;
-using BaseSource.Core.Domain.Common.Event;
+﻿using BaseSource.Core.Domain.Common.Event;
 
-namespace BaseSource.Core.Domain.Common.Aggregate.Implementions;
+namespace BaseSource.Core.Domain.Common.Aggregate;
 
 // Base aggregate root implementation
 public abstract class AggregateRoot<TId> : AuditableEntity<TId>, IAggregateRoot<TId>

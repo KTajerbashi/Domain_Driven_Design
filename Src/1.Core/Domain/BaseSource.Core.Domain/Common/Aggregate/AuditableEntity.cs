@@ -1,6 +1,4 @@
-﻿using BaseSource.Core.Domain.Common.Aggregate.Interfaces;
-
-namespace BaseSource.Core.Domain.Common.Aggregate.Implementions;
+﻿namespace BaseSource.Core.Domain.Common.Aggregate;
 
 // Base auditable entity implementation
 public abstract class AuditableEntity<TId> : Entity<TId>, IAuditableEntity<TId>
