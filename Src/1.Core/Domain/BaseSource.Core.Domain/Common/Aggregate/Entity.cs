@@ -12,11 +12,6 @@ public abstract class Entity<TId> : IEntity<TId>, IEquatable<Entity<TId>>
 
     public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
-    protected Entity(TId id)
-    {
-        Id = id ?? throw new ArgumentNullException(nameof(id));
-    }
-
     protected void AddDomainEvent(IDomainEvent domainEvent)
     {
         _domainEvents.Add(domainEvent);

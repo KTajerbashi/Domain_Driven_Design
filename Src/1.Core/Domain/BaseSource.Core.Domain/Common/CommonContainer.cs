@@ -2,4 +2,5 @@
 
 public static class CommonContainer
 {
+    public static string Commercial = nameof(Commercial);
 }

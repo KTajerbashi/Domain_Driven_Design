@@ -9,10 +9,6 @@ public abstract class AuditableEntity<TId> : Entity<TId>, IAuditableEntity<TId>
     public DateTime? LastModifiedAt { get; protected set; }
     public TId? LastModifiedBy { get; protected set; }
 
-    protected AuditableEntity(TId id) : base(id)
-    {
-    }
-
     protected void SetCreationAudit(DateTime createdAt, TId createdBy)
     {
         CreatedAt = createdAt;
@@ -24,4 +20,9 @@ public abstract class AuditableEntity<TId> : Entity<TId>, IAuditableEntity<TId>
         LastModifiedAt = modifiedAt;
         LastModifiedBy = modifiedBy;
     }
+}
+
+public abstract class AuditableEntity: AuditableEntity<long>
+{
+
 }
