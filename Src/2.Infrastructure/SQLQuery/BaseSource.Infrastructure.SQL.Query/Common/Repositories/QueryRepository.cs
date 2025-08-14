@@ -16,7 +16,7 @@ public class QueryRepository<TEntity, TId, TContext> : IQueryRepository<TEntity,
           IConvertible,
           IEquatable<TId>,
           IFormattable
-    where TContext : BaseQueryDatabaseContext
+    where TContext : BaseQueryDatabaseContext<TContext>
 {
 
     private readonly TContext _context;

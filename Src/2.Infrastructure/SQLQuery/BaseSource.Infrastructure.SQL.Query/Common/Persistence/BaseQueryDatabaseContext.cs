@@ -4,13 +4,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BaseSource.Infrastructure.SQL.Query.Common.Persistence;
 
-public abstract class BaseQueryDatabaseContext : BaseDatabaseContext
+public abstract class BaseQueryDatabaseContext<TContext> : BaseDatabaseContext<TContext>
+    where TContext : DbContext
 {
     protected BaseQueryDatabaseContext()
     {
     }
 
-    protected BaseQueryDatabaseContext(DbContextOptions options) : base(options)
+    protected BaseQueryDatabaseContext(DbContextOptions<TContext> options) : base(options)
     {
     }
 

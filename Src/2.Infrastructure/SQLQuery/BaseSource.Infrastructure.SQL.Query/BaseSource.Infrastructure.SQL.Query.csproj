@@ -6,6 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.8" />
+	</ItemGroup>
+	
   <ItemGroup>
     <ProjectReference Include="..\..\SQL\BaseSource.Infrastructure.SQL\BaseSource.Infrastructure.SQL.csproj" />
   </ItemGroup>

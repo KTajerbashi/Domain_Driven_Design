@@ -3,12 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BaseSource.Infrastructure.SQL.Query.Persistence;
 
-public class QueryDatabaseContext : BaseQueryDatabaseContext
+public class QueryDatabaseContext : BaseQueryDatabaseContext<QueryDatabaseContext>
 {
-    public QueryDatabaseContext()
-    {
-    }
-
     public QueryDatabaseContext(DbContextOptions<QueryDatabaseContext> options) : base(options)
     {
     }
