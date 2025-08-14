@@ -1,9 +1,15 @@
-﻿global using BaseSource.Core.Application.Common.Patterns;
-global using BaseSource.Core.Application.Common.Repositories;
+﻿global using BaseSource.Core.Application.Common.Repositories;
+global using BaseSource.Core.Application.Providers.Scrutor;
 global using BaseSource.Core.Domain.Common.Aggregate;
 global using BaseSource.Core.Domain.Common.ValueObjects;
 global using BaseSource.Infrastructure.SQL.Command.Common.Persistence;
+global using BaseSource.Infrastructure.SQL.Command.Contants;
 global using BaseSource.Infrastructure.SQL.Command.Exceptions;
+global using BaseSource.Infrastructure.SQL.Common.Identity.Entities;
+global using BaseSource.Infrastructure.SQL.Common.Identity.Entities.Parameters;
+global using Microsoft.AspNetCore.Identity;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.EntityFrameworkCore.Storage;
+global using Microsoft.Extensions.Logging;
+global using System.Data;
 global using System.Linq.Expressions;

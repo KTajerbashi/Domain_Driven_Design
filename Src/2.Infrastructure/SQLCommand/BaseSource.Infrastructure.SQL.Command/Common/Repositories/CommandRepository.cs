@@ -8,7 +8,7 @@ public abstract class CommandRepository<TEntity, TId, TContext> : ICommandReposi
           IConvertible,
           IEquatable<TId>,
           IFormattable
-    where TContext : BaseCommandDatabaseContext
+    where TContext : BaseCommandDatabaseContext<TContext>
 {
     private readonly TContext _context;
     protected DbSet<TEntity> Entity { get; }
