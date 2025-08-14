@@ -1,4 +1,6 @@
-﻿using BaseSource.Core.Application.Providers.Autofac;
+﻿using Autofac.Core;
+using BaseSource.Core.Application.Providers;
+using BaseSource.Core.Application.Providers.Autofac;
 using BaseSource.Core.Application.Providers.CacheSystem;
 using BaseSource.Core.Application.Providers.DapperQuery;
 using BaseSource.Core.Application.Providers.MapperObjects;
@@ -15,29 +17,32 @@ public class ApplicationOption
 public static class DependencyInjections
 {
     public static IServiceCollection AddApplicationServices(
-        this IServiceCollection service, 
+        this IServiceCollection services, 
         IConfiguration configuration,
         Assembly[] assemblies)
     {
         //  Autofac
-        service.BuildAutofacServiceProvider(assemblies);
+        services.BuildAutofacServiceProvider(assemblies);
 
         //  Cache
-        service.AddSqlDistributedCache(configuration, "SqlCache");
+        services.AddSqlDistributedCache(configuration, "SqlCache");
 
         //  Dapper
-        service.AddQueryExecute(configuration,"Query");
+        services.AddQueryExecute(configuration,"Query");
 
         //  Mapper
-        service.AddAutoMapperProfiles(configuration,assemblies);
+        services.AddAutoMapperProfiles(configuration,assemblies);
 
         //  scrutor
-        service.AddScrutorProvider(assemblies);
+        services.AddScrutorProvider(assemblies);
 
         //  Serializer
-        service.AddMicrosoftSerializer();
+        services.AddMicrosoftSerializer();
+        
+        //  Factory
+        services.AddScoped<ProviderFactory>();
 
-        return service;
+        return services;
     }
 
 }

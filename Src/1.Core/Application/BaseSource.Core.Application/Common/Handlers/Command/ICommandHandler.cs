@@ -17,10 +17,10 @@ public interface ICommandHandler<TCommand> : IRequestHandler<TCommand>
 public abstract class CommandHandler<TCommand> : ICommandHandler<TCommand>
     where TCommand : Command
 {
-    private readonly ProviderFacade ProviderFacade;
-    protected CommandHandler(ProviderFacade providers)
+    private readonly ProviderFactory Factory;
+    protected CommandHandler(ProviderFactory factory)
     {
-        ProviderFacade = providers;
+        Factory = factory;
     }
     public abstract Task Handle(TCommand command, CancellationToken cancellationToken);
 
@@ -33,10 +33,10 @@ public interface ICommandHandler<TCommand, TResponse> : IRequestHandler<TCommand
 public abstract class CommandHandler<TCommand, TResponse> : ICommandHandler<TCommand, TResponse>
     where TCommand : Command<TResponse>
 {
-    private readonly ProviderFacade ProviderFacade;
-    protected CommandHandler(ProviderFacade providers)
+    private readonly ProviderFactory Factory;
+    protected CommandHandler(ProviderFactory factory)
     {
-        ProviderFacade = providers;
+        Factory = factory;
     }
     public abstract Task<TResponse> Handle(TCommand request, CancellationToken cancellationToken);
 
