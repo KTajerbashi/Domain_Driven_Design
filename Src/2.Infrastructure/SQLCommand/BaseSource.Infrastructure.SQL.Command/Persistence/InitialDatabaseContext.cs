@@ -1,4 +1,6 @@
-﻿namespace BaseSource.Infrastructure.SQL.Command.Persistence;
+﻿using BaseSource.Infrastructure.SQL.Command.Constants;
+
+namespace BaseSource.Infrastructure.SQL.Command.Persistence;
 
 public class InitialDatabaseContext : IScopedLifetime
 {

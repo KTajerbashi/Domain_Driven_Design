@@ -3,7 +3,6 @@ global using BaseSource.Core.Application.Providers.Scrutor;
 global using BaseSource.Core.Domain.Common.Aggregate;
 global using BaseSource.Core.Domain.Common.ValueObjects;
 global using BaseSource.Infrastructure.SQL.Command.Common.Persistence;
-global using BaseSource.Infrastructure.SQL.Command.Contants;
 global using BaseSource.Infrastructure.SQL.Command.Exceptions;
 global using BaseSource.Infrastructure.SQL.Common.Identity.Entities;
 global using BaseSource.Infrastructure.SQL.Common.Identity.Entities.Parameters;

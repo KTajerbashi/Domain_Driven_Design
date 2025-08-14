@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace BaseSource.Infrastructure.SQL.Command.Contants;
+namespace BaseSource.Infrastructure.SQL.Command.Constants;
 
 public static class Roles
 {
