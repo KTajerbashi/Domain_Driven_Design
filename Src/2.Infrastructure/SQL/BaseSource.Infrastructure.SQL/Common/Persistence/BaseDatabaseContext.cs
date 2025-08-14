@@ -1,22 +1,37 @@
 ﻿using BaseSource.Infrastructure.SQL.Common.Identity.Entities;
+using BaseSource.Infrastructure.SQL.Common.Persistence.Conversions;
+using BaseSource.Infrastructure.SQL.Common.Persistence.Interceptors;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BaseSource.Infrastructure.SQL.Common.Persistence;
 
-public abstract class BaseDatabaseContext : IdentityDbContext
+
+public abstract class BaseDatabaseContext<TContext> : IdentityDbContext
     <UserIdentity, RoleIdentity, long, UserClaimIdentity, UserRoleIdentity, UserLoginIdentity, RoleClaimIdentity, UserTokenIdentity>
+    where TContext : DbContext
 {
     protected BaseDatabaseContext()
     {
     }
 
-    protected BaseDatabaseContext(DbContextOptions options) : base(options)
+    protected BaseDatabaseContext(DbContextOptions<TContext> options)
+        : base(options)
     {
     }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+        builder.AddShadowProperty();
+        builder.ApplyIdentityConfiguration();
+
+    }
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        base.ConfigureConventions(configurationBuilder);
+        configurationBuilder.Properties<EntityId>().HaveConversion<EntityIdConversion>();
+
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
