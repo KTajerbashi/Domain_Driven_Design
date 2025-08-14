@@ -1,1 +1,9 @@
-﻿
+﻿global using BaseSource.Core.Application.Common.Patterns;
+global using BaseSource.Core.Application.Common.Repositories;
+global using BaseSource.Core.Domain.Common.Aggregate;
+global using BaseSource.Core.Domain.Common.ValueObjects;
+global using BaseSource.Infrastructure.SQL.Command.Common.Persistence;
+global using BaseSource.Infrastructure.SQL.Command.Exceptions;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.Storage;
+global using System.Linq.Expressions;
