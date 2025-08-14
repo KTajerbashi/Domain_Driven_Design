@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+	<ItemGroup>
+		<PackageReference Include="MediatR.Contracts" Version="2.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\SharedKernel\Utilities\BaseSource.Kernel.Utilities\BaseSource.Kernel.Utilities.csproj" />
+	</ItemGroup>
+	
+	
 </Project>

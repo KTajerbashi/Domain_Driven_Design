@@ -1,7 +1,9 @@
-﻿namespace BaseSource.Core.Domain.Common.Event;
+﻿using MediatR;
+
+namespace BaseSource.Core.Domain.Common.Event;
 
 // Marker interface for domain events
-public interface IDomainEvent
+public interface IDomainEvent : INotification
 {
     DateTime OccurredOn { get; }
 }
