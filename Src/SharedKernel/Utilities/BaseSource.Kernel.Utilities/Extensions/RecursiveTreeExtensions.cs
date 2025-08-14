@@ -1,10 +1,8 @@
-﻿using BaseSource.Kernel.Utilities.Extensions;
-
-namespace BaseSource.Kernel.Utilities.Extensions;
+﻿namespace BaseSource.Kernel.Utilities.Extensions;
 
 public static class RecursiveTreeExtensions
 {
-    public static List<TTree> RecursiveTree<TTree>(List<TTree> list)
+    public static List<TTree> RecursiveTree<TTree>(this List<TTree> list)
         where TTree : class, ITreeViewModel<TTree>
     {
         list.ForEach(r => r.Children = list.Where(ch => ch.ParentId == r.Id).ToList());//Cast<ITreeViewModel<TTree>>()

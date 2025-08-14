@@ -1,0 +1,7 @@
+{
+  "Migrations": {
+    "Add": "Add-Migration Name -Context CommandDatabaseContext",
+    "Update": "Update-Database -Context CommandDatabaseContext",
+    "Remove": "Remove-Migration -Context CommandDatabaseContext -Force"
+  }
+}
