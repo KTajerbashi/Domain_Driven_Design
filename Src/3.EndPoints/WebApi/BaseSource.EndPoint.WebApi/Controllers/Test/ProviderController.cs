@@ -38,15 +38,10 @@ public class ProviderController : BaseController
         //_loggerFactory = Factory.LoggerFactory.CreateLogger("ProviderController");
     }
 
-    [HttpGet("JsonSerializer")]
-    public IActionResult JsonSerializer()
+    [HttpPost("JsonSerializer")]
+    public IActionResult JsonSerializer(ModelTestJson parameter)
     {
-        var result = Factory.Serializer.Serialize(new ModelTestJson()
-        {
-            Name = "Kamran",
-            Family = "Kamrani",
-            EndDate = DateTime.Now,
-        });
+        var result = Factory.Serializer.Serialize(parameter);
         return Ok(new
         {
             json = result,

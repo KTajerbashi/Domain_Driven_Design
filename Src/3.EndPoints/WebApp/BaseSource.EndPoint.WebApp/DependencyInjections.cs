@@ -1,21 +1,14 @@
-﻿using BaseSource.EndPoint.WebApi;
-using BaseSource.EndPoint.WebApi.Providers.Swagger;
-using BaseSource.Infrastructure.SQL.Command.Persistence;
-using System.Reflection;
-
-namespace BaseSource.EndPoint.WebApp;
+﻿namespace BaseSource.EndPoint.WebApp;
 
 public static class DependencyInjections
 {
-    public static IServiceCollection AddWebAppServices(this IServiceCollection services, IConfiguration configuration, Assembly[] assemblies)
+    public static WebApplicationBuilder AddWebAppServices(this WebApplicationBuilder builder)
     {
-        services.AddControllers();
+        builder.Services.AddControllers();
 
-        services.AddRazorPages();
+        builder.Services.AddRazorPages();
 
-        services.AddWebApiServices(configuration);
-
-        return services;
+        return builder;
     }
     public static async Task InitialiseDatabaseAsync(this WebApplication app)
     {

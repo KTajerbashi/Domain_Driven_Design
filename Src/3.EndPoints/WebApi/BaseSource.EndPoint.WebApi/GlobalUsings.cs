@@ -1,2 +1,12 @@
-﻿global using System.Text;
+﻿global using Autofac;
+global using Autofac.Extensions.DependencyInjection;
+global using BaseSource.Core.Application;
+global using BaseSource.Core.Application.Providers.Autofac;
+global using BaseSource.EndPoint.WebApi.Extensions;
+global using BaseSource.EndPoint.WebApi.Providers.Identity;
+global using BaseSource.EndPoint.WebApi.Providers.Logger;
+global using BaseSource.EndPoint.WebApi.Providers.Logger.SerilogProvider;
+global using BaseSource.Infrastructure.SQL.Command;
+global using BaseSource.Infrastructure.SQL.Query;
+global using System.Text;
 global using System.Text.Json;

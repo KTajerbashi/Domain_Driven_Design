@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 
 namespace BaseSource.EndPoint.WebApi.Providers.Identity;
+
 public static class DependencyInjections
 {
     public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration configuration, string sectionName)

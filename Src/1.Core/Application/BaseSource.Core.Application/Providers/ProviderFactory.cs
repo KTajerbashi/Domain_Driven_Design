@@ -1,9 +1,6 @@
 ﻿using BaseSource.Core.Application.Interfaces;
 using BaseSource.Core.Application.Providers.CacheSystem;
 using BaseSource.Core.Application.Providers.MapperObjects;
-using Microsoft.Identity.Client;
-using Microsoft.IdentityModel.Abstractions;
-using System.Security.Principal;
 
 namespace BaseSource.Core.Application.Providers;
 
@@ -12,11 +9,11 @@ public class ProviderFactory(
     ICacheAdapter cacheAdapter,
     IMapperAdapter mapper,
     IUserSystem user,
-    ICurrentUserServiceFactory userFactory,
-    ILoggerFactory loggerFactory,
-    IIdentity identity,
-    IIdentityLogger identityLogger,
-    IManagedIdentityApplication managedIdentityApplication
+    ICurrentUserServiceFactory userFactory
+    //ILoggerFactory loggerFactory,
+    //IIdentity identity,
+    //IIdentityLogger identityLogger,
+    //IManagedIdentityApplication managedIdentityApplication
     )
 {
     public IJsonSerializer Serializer = jsonSerializer;
@@ -24,9 +21,9 @@ public class ProviderFactory(
     public IMapperAdapter Mapper = mapper;
     public IUserSystem User = user;
     public ICurrentUserServiceFactory UserFactory = userFactory;
-    public ILoggerFactory LoggerFactory = loggerFactory;
-    public IIdentity Identity = identity;
-    public IIdentityLogger IdentityLogger = identityLogger;
-    public IManagedIdentityApplication ManagedIdentityApplication = managedIdentityApplication;
+    //public ILoggerFactory LoggerFactory = loggerFactory;
+    //public IIdentity Identity = identity;
+    //public IIdentityLogger IdentityLogger = identityLogger;
+    //public IManagedIdentityApplication ManagedIdentityApplication = managedIdentityApplication;
 
 }
