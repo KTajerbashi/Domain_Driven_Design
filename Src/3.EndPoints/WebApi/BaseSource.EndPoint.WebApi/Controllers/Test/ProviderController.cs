@@ -1,13 +1,31 @@
+using AutoMapper;
 using BaseSource.EndPoint.WebApi.Common.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BaseSource.EndPoint.WebApi.Controllers.Test;
+
+public class MapperProfile : Profile
+{
+    public MapperProfile()
+    {
+        CreateMap<ModelTestJson, ModelTestJsonDTO>().ReverseMap();
+    }
+}
 
 public class ModelTestJson
 {
     public string Name { get; set; }
     public string Family { get; set; }
     public DateTime EndDate { get; set; }
+}
+
+
+public class ModelTestJsonDTO
+{
+    public string Name { get; set; }
+    public string Family { get; set; }
+    public DateTime EndDate { get; set; }
+    public string StartDate { get; set; }
 }
 
 public class ProviderController : BaseController
@@ -30,7 +48,7 @@ public class ProviderController : BaseController
     }
 
     [HttpGet("CacheAdapter/{key}/{value}")]
-    public IActionResult CacheAdapter(string key,string value)
+    public IActionResult CacheAdapter(string key, string value)
     {
         Factory.Cache.Add($"{key}", $"{value}", DateTime.Now.AddHours(5), TimeSpan.FromHours(5));
         var result = Factory.Cache.Get<string>(key);
@@ -41,4 +59,24 @@ public class ProviderController : BaseController
             data = result
         });
     }
+
+    [HttpGet("Mapper")]
+    public IActionResult Mapper()
+    {
+        var result = new ModelTestJson()
+        {
+            Name = "Kamran",
+            Family = "Kamrani",
+            EndDate = DateTime.Now,
+        };
+
+        var mapped = Factory.Mapper.Map<ModelTestJson, ModelTestJsonDTO>(result);
+        var reversed = Factory.Mapper.Map<ModelTestJsonDTO, ModelTestJson>(mapped);
+        return Ok(new { 
+            Model = result,
+            Result = mapped,
+            Reversed = reversed
+        });
+    }
 }
+
