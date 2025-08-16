@@ -8,11 +8,13 @@ public class ProviderFactory(
     IJsonSerializer jsonSerializer, 
     ICacheAdapter cacheAdapter, 
     IMapperAdapter mapper,
-    IUser user
+    IUser user,
+    ICurrentUserServiceFactory userFactory
     )
 {
     public IJsonSerializer Serializer = jsonSerializer;
     public ICacheAdapter Cache = cacheAdapter;
     public IMapperAdapter Mapper = mapper;
     public IUser User = user;
+    public ICurrentUserServiceFactory UserFactory = userFactory;
 }

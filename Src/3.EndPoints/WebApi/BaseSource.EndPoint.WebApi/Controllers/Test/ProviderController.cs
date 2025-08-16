@@ -72,11 +72,33 @@ public class ProviderController : BaseController
 
         var mapped = Factory.Mapper.Map<ModelTestJson, ModelTestJsonDTO>(result);
         var reversed = Factory.Mapper.Map<ModelTestJsonDTO, ModelTestJson>(mapped);
-        return Ok(new { 
+        return Ok(new
+        {
             Model = result,
             Result = mapped,
             Reversed = reversed
         });
+    }
+
+    [HttpGet("User")]
+    public IActionResult User()
+    {
+        var user = Factory.UserFactory.GetCurrentUser();
+
+        if (!user.IsAuthenticated)
+        {
+            return Unauthorized();
+        }
+
+        var userInfo = new
+        {
+            user.DisplayName,
+            user.Email,
+            user.RoleName,
+            user.Permissions
+        };
+
+        return Ok(userInfo);
     }
 }
 
