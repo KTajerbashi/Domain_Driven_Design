@@ -1,8 +1,9 @@
 ﻿using BaseSource.Core.Application.Interfaces;
+using BaseSource.EndPoint.WebApi.Extensions;
 using System.Security.Claims;
 
 namespace BaseSource.EndPoint.WebApi.Providers.Identity.Services;
-public class CurrentUserService : IUser
+public class CurrentUserService : IUserSystem
 {
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly ClaimsPrincipal? _user;
@@ -13,56 +14,30 @@ public class CurrentUserService : IUser
         _user = _httpContextAccessor.HttpContext?.User;
     }
 
-    private string GetStringClaim(string claimType)
-    {
-        if (_user == null) return string.Empty;
 
-        var claim = _user.FindFirst(claimType);
-        return claim?.Value ?? string.Empty;
-    }
 
-    private long GetLongClaim(string claimType)
-    {
-        var value = GetStringClaim(claimType);
-        return long.TryParse(value, out var result) ? result : 0;
-    }
-
-    private bool GetBoolClaim(string claimType)
-    {
-        var value = GetStringClaim(claimType);
-        return bool.TryParse(value, out var result) && result;
-    }
-
-    private IEnumerable<string> GetArrayClaim(string claimType)
-    {
-        var value = GetStringClaim(claimType);
-        return string.IsNullOrEmpty(value)
-            ? Enumerable.Empty<string>()
-            : value.Split(',', StringSplitOptions.RemoveEmptyEntries);
-    }
-
-    public string Name => GetStringClaim("Name");
-    public string Family => GetStringClaim("Family");
+    public string Name => _user?.GetStringClaim("Name");
+    public string Family => _user?.GetStringClaim("Family");
     public string DisplayName => $"{Name} {Family}".Trim();
-    public long UserId => GetLongClaim("UserId");
-    public string Username => GetStringClaim("Username");
-    public string Email => GetStringClaim(ClaimTypes.Email);
-    public long UserRoleId => GetLongClaim("UserRoleId");
-    public string RoleName => GetStringClaim("RoleName");
-    public string RoleTitle => GetStringClaim("RoleTitle");
+    public long UserId => _user.GetLongClaim("UserId");
+    public string Username => _user?.GetStringClaim("Username");
+    public string Email => _user?.GetStringClaim(ClaimTypes.Email);
+    public long UserRoleId => _user.GetLongClaim("UserRoleId");
+    public string RoleName => _user.GetStringClaim("RoleName");
+    public string RoleTitle => _user?.GetStringClaim("RoleTitle");
     public bool IsAuthenticated => _user?.Identity?.IsAuthenticated ?? false;
 
     // Additional claims that might be useful
-    public string PhoneNumber => GetStringClaim(ClaimTypes.MobilePhone);
-    public bool EmailVerified => GetBoolClaim("email_verified");
-    public IEnumerable<string> Permissions => GetArrayClaim("permissions");
-    public string TenantId => GetStringClaim("TenantId");
+    public string PhoneNumber => _user?.GetStringClaim(ClaimTypes.MobilePhone);
+    public bool EmailVerified => _user.GetBoolClaim("email_verified");
+    public IEnumerable<string> Permissions => _user?.GetArrayClaim("permissions");
+    public string TenantId => _user.GetStringClaim("TenantId");
 
     public string Ip => _httpContextAccessor.HttpContext?.Connection.RemoteIpAddress?.ToString() ?? string.Empty;
     public string Agent => _httpContextAccessor.HttpContext?.Request.Headers.UserAgent.ToString() ?? string.Empty;
 
     // Method to get any custom claim
-    public string GetClaim(string claimType) => GetStringClaim(claimType);
+    public string GetClaim(string claimType) => _user?.GetStringClaim(claimType);
 
     // Method to check if user has a specific role
     public bool IsInRole(string roleName) => _user?.IsInRole(roleName) ?? false;

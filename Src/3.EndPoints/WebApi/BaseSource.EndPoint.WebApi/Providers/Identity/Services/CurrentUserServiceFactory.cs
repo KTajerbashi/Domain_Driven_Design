@@ -12,7 +12,7 @@ public class CurrentUserServiceFactory : ICurrentUserServiceFactory
         _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
     }
 
-    public IUser GetCurrentUser()
+    public IUserSystem GetCurrentUser()
     {
         return new CurrentUserService(_httpContextAccessor);
     }

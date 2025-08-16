@@ -6,12 +6,12 @@ namespace BaseSource.Core.Application.Interfaces;
 
 public interface ICurrentUserServiceFactory : IAutofacScopedLifetime
 {
-    IUser GetCurrentUser();
+    IUserSystem GetCurrentUser();
     ClaimsPrincipal? GetCurrentClaimsPrincipal();
 }
 
 
-public interface IUser : IAutofacScopedLifetime
+public interface IUserSystem : IAutofacScopedLifetime
 {
     // Basic user information
     string Name { get; }

@@ -10,8 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 
 namespace BaseSource.EndPoint.WebApi.Providers.Identity;
-
-public static class IdentityExtensions
+public static class DependencyInjections
 {
     public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration configuration, string sectionName)
     {
@@ -23,7 +22,6 @@ public static class IdentityExtensions
 
         return services;
     }
-
     private static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddHttpContextAccessor();
@@ -59,8 +57,6 @@ public static class IdentityExtensions
 
         return services;
     }
-
-
     private static IServiceCollection AddIdentityPolicies(this IServiceCollection services, IConfiguration configuration, string sectionName)
     {
         var identityOption = new IdentityOption();
@@ -244,7 +240,5 @@ public static class IdentityExtensions
 
         return services;
     }
-
-
 }
 

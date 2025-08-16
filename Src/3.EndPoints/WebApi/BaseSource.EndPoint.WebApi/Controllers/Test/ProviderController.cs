@@ -1,6 +1,7 @@
 using AutoMapper;
 using BaseSource.EndPoint.WebApi.Common.Controllers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace BaseSource.EndPoint.WebApi.Controllers.Test;
 
@@ -30,6 +31,12 @@ public class ModelTestJsonDTO
 
 public class ProviderController : BaseController
 {
+    private readonly ILogger<ProviderController> _logger;
+    public ProviderController(ILogger<ProviderController> logger)
+    {
+        _logger = logger;
+        //_loggerFactory = Factory.LoggerFactory.CreateLogger("ProviderController");
+    }
 
     [HttpGet("JsonSerializer")]
     public IActionResult JsonSerializer()
@@ -78,6 +85,33 @@ public class ProviderController : BaseController
             Result = mapped,
             Reversed = reversed
         });
+    }
+
+    [HttpGet("LoggerFactory")]
+    public IActionResult LoggerFactory()
+    {
+        
+        try
+        {
+            _logger.LogDebug("Log Level ~> LogDebug");
+            _logger.LogInformation("Log Level ~> LogInformation");
+            _logger.LogWarning("Log Level ~> LogWarning");
+            _logger.LogError("Log Level ~> LogError");
+            _logger.LogCritical("Log Level ~> LogCritical");
+
+            _logger.LogInformation("Processing sample request");
+
+            // Your business logic here
+            throw new Exception("Hello");
+
+            //return Ok(new { Message = "Success" });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error processing sample request");
+            return StatusCode(500, "Internal server error");
+        }
+        //return Ok();
     }
 
     [HttpGet("User")]

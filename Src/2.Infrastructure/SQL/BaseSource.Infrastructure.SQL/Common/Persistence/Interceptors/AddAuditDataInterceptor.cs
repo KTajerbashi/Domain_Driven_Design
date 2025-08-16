@@ -22,7 +22,7 @@ public class AddAuditDataInterceptor : SaveChangesInterceptor
     private static void AddShadowProperties(DbContextEventData eventData)
     {
         var changeTracker = eventData.Context?.ChangeTracker;
-        var userInfoService = eventData.Context?.GetService<IUser>();
+        var userInfoService = eventData.Context?.GetService<IUserSystem>();
         changeTracker?.SetAuditableEntityPropertyValues(userInfoService!);
     }
 }
@@ -128,7 +128,7 @@ public static class AuditableShadowProperties
     /// <param name="userInfoService"></param>
     public static void SetAuditableEntityPropertyValues(
         this ChangeTracker changeTracker,
-        IUser user)
+        IUserSystem user)
     {
 
         var userAgent = user.Agent;
