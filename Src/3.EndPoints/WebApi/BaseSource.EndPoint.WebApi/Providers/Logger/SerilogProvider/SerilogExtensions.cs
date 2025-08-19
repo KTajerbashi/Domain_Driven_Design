@@ -81,6 +81,7 @@ public class SerilogEnrichmentMiddleware
 
         string userIp = context.Connection.RemoteIpAddress?.ToString() ?? "N/A";
 
+
         using (LogContext.PushProperty("RequestId", requestId))
         using (LogContext.PushProperty("HttpMethod", httpMethod))
         using (LogContext.PushProperty("Controller", controller))
@@ -93,12 +94,19 @@ public class SerilogEnrichmentMiddleware
 
             sw.Stop();
 
-            using (LogContext.PushProperty("Duration", sw.ElapsedMilliseconds))
-            using (LogContext.PushProperty("StatusCode", context.Response?.StatusCode))
-            {
-                // Serilog picks up properties automatically
-            }
+
         }
+        // Format duration as HH:mm:ss.fff
+        string formattedDuration = TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds)
+                                        .ToString(@"hh\:mm\:ss\.fff");
+
+        using (LogContext.PushProperty("Duration", formattedDuration))
+        using (LogContext.PushProperty("StatusCode", context.Response?.StatusCode))
+        {
+        
+            // Serilog picks up properties automatically
+        }
+
     }
 
     private static async Task<string> ReadRequestBodyAsync(HttpContext context)
