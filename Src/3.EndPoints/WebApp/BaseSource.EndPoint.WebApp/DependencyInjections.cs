@@ -1,4 +1,6 @@
-﻿namespace BaseSource.EndPoint.WebApp;
+﻿using BaseSource.EndPoint.WebApi.Middlewares.Exceptions;
+
+namespace BaseSource.EndPoint.WebApp;
 
 public static class DependencyInjections
 {
@@ -18,34 +20,61 @@ public static class DependencyInjections
     }
     public static WebApplication UseWebAppServices(this WebApplication app)
     {
-
+        // ========================
+        // 1. Environment-specific middleware
+        // ========================
         if (!app.Environment.IsDevelopment())
         {
+            // Production error page
             app.UseExceptionHandler("/Error");
             app.UseHsts();
         }
         else
         {
+            // Swagger in development
             app.UseSwaggerProvider();
         }
 
+        // ========================
+        // 2. Global API exception handler
+        // ========================
+        app.UseApiExceptionHandler(); // logs exceptions with all context properties
+
+        // ========================
+        // 3. Security & HTTPS
+        // ========================
         app.UseHttpsRedirection();
 
+        // ========================
+        // 4. Static files & assets
+        // ========================
+        app.MapStaticAssets();
+
+        // ========================
+        // 5. Serilog enrichment for requests
+        // ========================
+        app.UseSerilog(); // logs request info, duration, user, controller/action, etc.
+
+        // ========================
+        // 6. Routing
+        // ========================
         app.UseRouting();
 
+        // ========================
+        // 7. Authentication & Authorization
+        // ========================
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.UseSerilog();
-        
-        app.MapStaticAssets();
-
+        // ========================
+        // 8. Endpoint mapping
+        // ========================
         app.MapControllers();
 
-        // Map Razor Pages (with /App prefix thanks to convention)
         app.MapRazorPages()
-           .WithStaticAssets();
+           .WithStaticAssets(); // custom convention for /App prefix
 
+        // Redirect root to /App
         app.MapGet("/", () => Results.Redirect("/App"));
 
         return app;

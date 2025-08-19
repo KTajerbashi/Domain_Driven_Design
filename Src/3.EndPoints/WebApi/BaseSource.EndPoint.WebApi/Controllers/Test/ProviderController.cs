@@ -88,14 +88,6 @@ public class ProviderController : BaseController
         
         try
         {
-            _logger.LogDebug("Log Level ~> LogDebug");
-            _logger.LogInformation("Log Level ~> LogInformation");
-            _logger.LogWarning("Log Level ~> LogWarning");
-            _logger.LogError("Log Level ~> LogError");
-            _logger.LogCritical("Log Level ~> LogCritical");
-
-            _logger.LogInformation("Processing sample request");
-
             // Your business logic here
             throw new Exception("Hello");
 
