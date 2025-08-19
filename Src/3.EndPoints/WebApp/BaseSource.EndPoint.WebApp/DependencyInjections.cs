@@ -33,8 +33,11 @@ public static class DependencyInjections
 
         app.UseRouting();
 
+        app.UseAuthentication();
         app.UseAuthorization();
 
+        app.UseSerilog();
+        
         app.MapStaticAssets();
 
         app.MapControllers();

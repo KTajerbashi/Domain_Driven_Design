@@ -1,14 +1,7 @@
-﻿using BaseSource.Kernel.Utilities.Extensions;
-using Microsoft.AspNetCore.Mvc.Controllers;
-using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Microsoft.AspNetCore.Mvc.Controllers;
 using Serilog;
 using Serilog.Context;
-using Serilog.Events;
-using Serilog.Sinks.MSSqlServer;
-using System.Collections.ObjectModel;
-using System.Data;
-using System.Security.Claims;
-using System.Text;
+using System.Diagnostics;
 
 namespace BaseSource.EndPoint.WebApi.Providers.Logger.SerilogProvider;
 
@@ -16,101 +9,113 @@ public static class SerilogExtensions
 {
     public static WebApplicationBuilder AddSerilog(this WebApplicationBuilder builder)
     {
-        // Configure Serilog
+        // Read configuration from appsettings.json
         Log.Logger = new LoggerConfiguration()
-            .ReadFrom.Configuration(builder.Configuration)
+            .ReadFrom.Configuration(builder.Configuration)  // reads Serilog section
             .Enrich.FromLogContext()
+            .Enrich.WithMachineName()
+            .Enrich.WithThreadId()
             .CreateLogger();
 
-        builder.Host.UseSerilog();
-
-        builder.Services.AddControllers(options =>
-        {
-            options.Filters.Add<LogActionFilter>();
-        });
-
+        builder.Host.UseSerilog(Log.Logger, dispose: true);
         return builder;
     }
 
     public static WebApplication UseSerilog(this WebApplication app)
     {
-        app.UseMiddleware<RequestLoggingMiddleware>();
+
+        app.UseMiddleware<SerilogEnrichmentMiddleware>();
+        //app.UseSerilogRequestLogging(opts =>
+        //{
+        //    opts.MessageTemplate =
+        //        "HTTP {RequestMethod} {RequestPath} ({Controller}/{Action}) responded {StatusCode} in {Elapsed:0.0000} ms | Duration: {DurationMs} ms | RequestId: {RequestId}";
+        //});
+
+        //app.UseSerilogRequestLogging(opts =>
+        //{
+        //    opts.MessageTemplate =
+        //        "HTTP {RequestMethod} {RequestPath} ({Controller}/{Action}) responded {StatusCode} in {Elapsed:0.0000} ms (RequestId: {RequestId})";
+        //});
+
+        app.UseSerilogRequestLogging();
+
         return app;
     }
 }
-public class RequestLoggingMiddleware
+
+public class SerilogEnrichmentMiddleware
 {
     private readonly RequestDelegate _next;
-    private readonly ILogger<RequestLoggingMiddleware> _logger;
 
-    public RequestLoggingMiddleware(RequestDelegate next, ILogger<RequestLoggingMiddleware> logger)
+    public SerilogEnrichmentMiddleware(RequestDelegate next)
     {
         _next = next;
-        _logger = logger;
     }
 
     public async Task InvokeAsync(HttpContext context)
     {
-        var request = context.Request;
+        var sw = Stopwatch.StartNew();
+        var requestId = context.TraceIdentifier ?? Guid.NewGuid().ToString();
+        var descriptor = context.GetControllerActionNames();
 
-        // Read request body (buffered copy)
-        request.EnableBuffering();
-        var bodyReader = new StreamReader(request.Body);
-        string requestBody = await bodyReader.ReadToEndAsync();
-        request.Body.Position = 0;
+        string controller = descriptor.Controller ?? "N/A";
+        string action = descriptor.Action ?? "N/A";
+        string httpMethod = context.Request.Method;
+        string parameters = string.Empty;
 
-        // Get route data
-        var controller = context.GetRouteValue("controller")?.ToString();
-        var action = context.GetRouteValue("action")?.ToString();
-
-        using (LogContext.PushProperty("Controller", controller))
-        using (LogContext.PushProperty("Action", action))
-        using (LogContext.PushProperty("RequestBody", requestBody))
+        // ✅ Capture parameters by HTTP method
+        if (httpMethod == HttpMethods.Get || httpMethod == HttpMethods.Delete)
         {
-            _logger.LogInformation("Handled request {Method} {Path}", request.Method, request.Path);
+            parameters = context.Request.QueryString.HasValue
+                ? context.Request.QueryString.Value!
+                : "";
+        }
+        else if (httpMethod == HttpMethods.Post || httpMethod == HttpMethods.Put || httpMethod == HttpMethods.Patch)
+        {
+            parameters = await ReadRequestBodyAsync(context);
         }
 
-        await _next(context);
+        string userId = context.User?.Identity?.IsAuthenticated == true
+            ? context.User.Identity?.Name ?? "Unknown"
+            : "Anonymous";
+
+        string userIp = context.Connection.RemoteIpAddress?.ToString() ?? "N/A";
+
+        using (LogContext.PushProperty("RequestId", requestId))
+        using (LogContext.PushProperty("HttpMethod", httpMethod))
+        using (LogContext.PushProperty("Controller", controller))
+        using (LogContext.PushProperty("Action", action))
+        using (LogContext.PushProperty("Parameters", parameters))
+        using (LogContext.PushProperty("UserId", userId))
+        using (LogContext.PushProperty("UserIp", userIp))
+        {
+            await _next(context);
+
+            sw.Stop();
+
+            using (LogContext.PushProperty("Duration", sw.ElapsedMilliseconds))
+            using (LogContext.PushProperty("StatusCode", context.Response?.StatusCode))
+            {
+                // Serilog picks up properties automatically
+            }
+        }
+    }
+
+    private static async Task<string> ReadRequestBodyAsync(HttpContext context)
+    {
+        context.Request.EnableBuffering();
+
+        using var reader = new StreamReader(
+            context.Request.Body,
+            Encoding.UTF8,
+            detectEncodingFromByteOrderMarks: false,
+            bufferSize: 1024,
+            leaveOpen: true);
+
+        string body = await reader.ReadToEndAsync();
+        context.Request.Body.Position = 0; // rewind so controller can still read
+
+        return body;
     }
 }
 
-public class LogActionFilter : IActionFilter
-{
-    private readonly ILogger<LogActionFilter> _logger;
-
-    public LogActionFilter(ILogger<LogActionFilter> logger)
-    {
-        _logger = logger;
-    }
-
-    public void OnActionExecuting(ActionExecutingContext context)
-    {
-        var request = context.HttpContext.Request;
-
-        var controller = context.RouteData.Values["controller"];
-        var action = context.RouteData.Values["action"];
-        var parameters = JsonSerializer.Serialize(context.ActionArguments);
-        // Read request body (buffered copy)
-        request.EnableBuffering();
-        var bodyReader = new StreamReader(request.Body);
-        string requestBody = bodyReader.ReadToEnd();
-        request.Body.Position = 0;
-
-        using (LogContext.PushProperty("Controller", controller))
-        using (LogContext.PushProperty("Action", action))
-        using (LogContext.PushProperty("RequestBody", requestBody))
-        {
-            _logger.LogInformation("Handled request {Method} {Path}", request.Method, request.Path);
-        }
-        _logger.LogInformation("Executing Controller={Controller}, Action={Action}, Parameters={Parameters}",
-            controller, action, parameters);
-    }
-
-    public void OnActionExecuted(ActionExecutedContext context)
-    {
-        if (context.Exception == null && context.Result != null)
-        {
-            _logger.LogInformation("Executed Action Result: {Result}", context.Result.ToString());
-        }
-    }
-}

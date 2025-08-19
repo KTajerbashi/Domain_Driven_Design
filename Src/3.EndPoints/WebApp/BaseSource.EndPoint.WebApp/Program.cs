@@ -8,7 +8,6 @@ var app = builder
     .Build();
 
 await app
-    .UseSerilog()
     .UseWebAppServices()
     .InitialiseDatabaseAsync();
 app.Run();
