@@ -36,35 +36,35 @@ public static class DependencyInjections
         }
 
         // ========================
-        // 2. Global API exception handler
-        // ========================
-        app.UseApiExceptionHandler(); // logs exceptions with all context properties
-
-        // ========================
-        // 3. Security & HTTPS
+        // 2. Security & HTTPS
         // ========================
         app.UseHttpsRedirection();
 
         // ========================
-        // 4. Static files & assets
+        // 3. Static files & assets
         // ========================
         app.MapStaticAssets();
 
         // ========================
-        // 5. Serilog enrichment for requests
-        // ========================
-        app.UseSerilog(); // logs request info, duration, user, controller/action, etc.
-
-        // ========================
-        // 6. Routing
+        // 4. Routing
         // ========================
         app.UseRouting();
 
         // ========================
-        // 7. Authentication & Authorization
+        // 5. Global API exception handler
+        // ========================
+        app.UseApiExceptionHandler(); // logs exceptions with all context properties
+
+        // ========================
+        // 6. Authentication & Authorization
         // ========================
         app.UseAuthentication();
         app.UseAuthorization();
+
+        // ========================
+        // 7. Serilog enrichment for requests
+        // ========================
+        app.UseSerilog(); // logs request info, duration, user, controller/action, etc.
 
         // ========================
         // 8. Endpoint mapping

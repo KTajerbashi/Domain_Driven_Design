@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics;
+﻿using Microsoft.AspNetCore.Diagnostics;
 using Serilog;
 using Serilog.Context;
 using System.Net;
@@ -22,7 +21,7 @@ public static class ExceptionHandler
                     var exception = exceptionHandlerFeature.Error;
 
                     // Get controller/action/parameters if available
-                    var descriptor = context.GetControllerActionNames();
+                    var descriptor = context.GetControllerAction();
                     string controller = descriptor.Controller ?? "N/A";
                     string action = descriptor.Action ?? "N/A";
                     string parameters = string.Empty;
@@ -66,15 +65,14 @@ public static class ExceptionHandler
                             exception.Message,
                             exception.StackTrace);
                     }
-
-                    // Prepare API response
+                    var reqRes = exception.GetExceptionMessage();
                     var response = new
                     {
-                        StatusCode = (int)HttpStatusCode.InternalServerError,
-                        Message = "An unexpected error occurred. Please try again later."
+                        StatusCode = (int)(HttpStatusCode)(reqRes.StatusCode),
+                        Message = reqRes.Message,
                     };
 
-                    context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                    context.Response.StatusCode = reqRes.StatusCode;
                     await context.Response.WriteAsJsonAsync(response);
                 }
             });
@@ -82,6 +80,8 @@ public static class ExceptionHandler
 
         return app;
     }
+
+
 
     private static async Task<string> ReadRequestBodyAsync(HttpContext context)
     {

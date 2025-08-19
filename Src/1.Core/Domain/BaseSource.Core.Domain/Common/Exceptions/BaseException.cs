@@ -14,10 +14,8 @@ public abstract class BaseException : Exception
 
     public override string ToString()
     {
-        if (Parameters?.Length < 1)
-        {
-            return Message;
-        }
+        if (Parameters is null) return Message;
+        if (Parameters?.Length < 1) return Message;
 
 
         string result = Message;

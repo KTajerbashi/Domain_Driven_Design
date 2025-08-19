@@ -1,5 +1,6 @@
-using AutoMapper;
+﻿using AutoMapper;
 using BaseSource.EndPoint.WebApi.Common.Controllers;
+using BaseSource.EndPoint.WebApi.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -85,20 +86,19 @@ public class ProviderController : BaseController
     [HttpGet("LoggerFactory")]
     public IActionResult LoggerFactory()
     {
-        
+
         try
         {
             // Your business logic here
-            throw new Exception("Hello");
+            throw new WebApiException("This Error is With Controller WebApi Handled !!!❌");
 
             //return Ok(new { Message = "Success" });
+            return Ok();
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error processing sample request");
-            return StatusCode(500, "Internal server error");
+            throw ex;
         }
-        //return Ok();
     }
 
     [HttpGet("User")]
