@@ -1,48 +1,8 @@
-﻿using BaseSource.Core.Application.Exceptions;
-using BaseSource.Core.Application.Providers;
-using BaseSource.Core.Domain.Exceptions;
-using BaseSource.EndPoint.WebApi.Exceptions;
-using BaseSource.Infrastructure.SQL.Command.Exceptions;
-using BaseSource.Infrastructure.SQL.Query.Exceptions;
+﻿using BaseSource.Core.Application.Providers;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using System.Security.Claims;
-using ValidationException = FluentValidation.ValidationException;
 
 namespace BaseSource.EndPoint.WebApi.Extensions;
-
-public static class ExceptionExtensions
-{
-    /// <summary>
-    /// Returns a user-friendly message for known exception types, or a generic message for unknown exceptions.
-    /// </summary>
-    public static (int StatusCode, string Message) GetExceptionMessage(this Exception exception)
-    {
-        if (exception == null) return (500, "An unexpected error occurred.");
-
-        var message = exception switch
-        {
-            DomainException domainEx => domainEx.Message,   // domain validation or business rules
-            AppException appEx => appEx.Message,           // application-specific errors
-            InfrastructureCommandException cmdEx => cmdEx.Message, // errors from commands
-            InfrastructureQueryException queryEx => queryEx.Message, // errors from queries
-            WebApiException apiEx => apiEx.Message,       // API-specific errors
-            ValidationException validationEx => string.Join("; ", validationEx.Errors.Select(e => e.ErrorMessage)),
-            _ => "An unexpected error occurred. Please try again later." // unknown exception
-        };
-
-        var statusCode = exception switch
-        {
-            DomainException or   // domain validation or business rules
-            AppException or // application-specific errors
-            InfrastructureCommandException or // errors from commands
-            InfrastructureQueryException or // errors from queries
-            WebApiException => 400,       // API-specific errors
-            _ => 500 // unknown exception
-        };
-
-        return (statusCode, message);
-    }
-}
 
 
 
