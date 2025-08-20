@@ -1,11 +1,15 @@
 ﻿global using Autofac;
 global using Autofac.Extensions.DependencyInjection;
+global using BaseSource.Core.Application.Common.Handlers.Command;
 global using BaseSource.Core.Application.Common.Models;
+global using BaseSource.Core.Application.Providers;
 global using BaseSource.Core.Application.Providers.Scrutor;
 global using BaseSource.Core.Application.Providers.SerializerProvider;
 global using BaseSource.Core.Domain.Common.Event;
 global using BaseSource.Core.Domain.Common.Exceptions;
 global using Dapper;
+global using FluentValidation;
+global using MediatR;
 global using Microsoft.Data.SqlClient;
 global using Microsoft.Extensions.Caching.Distributed;
 global using Microsoft.Extensions.Caching.Memory;

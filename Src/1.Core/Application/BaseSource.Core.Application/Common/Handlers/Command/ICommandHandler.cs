@@ -1,21 +1,18 @@
-﻿using BaseSource.Core.Application.Providers;
-using MediatR;
-
-namespace BaseSource.Core.Application.Common.Handlers.Command;
+﻿namespace BaseSource.Core.Application.Common.Handlers.Command;
 
 public interface ICommand : IRequest { }
-public abstract class Command : ICommand { }
+//public abstract class Command : ICommand { }
 public interface ICommand<TResponse> : IRequest<TResponse> { }
-public abstract class Command<TResponse> : ICommand<TResponse> { }
+//public abstract class Command<TResponse> : ICommand<TResponse> { }
 
 public interface ICommandHandler<TCommand> : IRequestHandler<TCommand>
-    where TCommand : Command
+    where TCommand : ICommand
 
 {
 }
 
 public abstract class CommandHandler<TCommand> : ICommandHandler<TCommand>
-    where TCommand : Command
+    where TCommand : ICommand
 {
     private readonly ProviderFactory Factory;
     protected CommandHandler(ProviderFactory factory)
@@ -27,11 +24,11 @@ public abstract class CommandHandler<TCommand> : ICommandHandler<TCommand>
 }
 
 public interface ICommandHandler<TCommand, TResponse> : IRequestHandler<TCommand, TResponse>
-    where TCommand : Command<TResponse>
+    where TCommand : ICommand<TResponse>
 {
 }
 public abstract class CommandHandler<TCommand, TResponse> : ICommandHandler<TCommand, TResponse>
-    where TCommand : Command<TResponse>
+    where TCommand : ICommand<TResponse>
 {
     private readonly ProviderFactory Factory;
     protected CommandHandler(ProviderFactory factory)

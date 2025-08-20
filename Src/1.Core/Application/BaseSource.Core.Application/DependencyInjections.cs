@@ -1,17 +1,11 @@
-﻿using BaseSource.Core.Application.Providers;
+﻿using BaseSource.Core.Application.Common.Handlers.Behaviors;
+using BaseSource.Core.Application.Providers;
 using BaseSource.Core.Application.Providers.Autofac;
 using BaseSource.Core.Application.Providers.CacheSystem;
 using BaseSource.Core.Application.Providers.DapperQuery;
 using BaseSource.Core.Application.Providers.MapperObjects;
 
 namespace BaseSource.Core.Application;
-
-public class ApplicationOption
-{
-    public string CacheSection { get; set; }
-    public string QueryConnection { get; set; }
-}
-
 
 public static class DependencyInjections
 {
@@ -40,6 +34,25 @@ public static class DependencyInjections
 
         //  Factory
         services.AddScoped<ProviderFactory>();
+
+        //  MediateR
+        services.AddMediatR(cfg =>
+        {
+            cfg.RegisterServicesFromAssemblies(assemblies);
+
+            // Register behaviors in specific order
+            cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
+            cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
+            cfg.AddOpenBehavior(typeof(PerformanceBehavior<,>));
+            cfg.AddOpenBehavior(typeof(AuthorizationBehavior<,>));
+            //cfg.AddOpenBehavior(typeof(TransactionBehavior<,>));
+            //cfg.AddOpenBehavior(typeof(DomainEventDispatchBehavior<,>));
+        });
+
+        //  Fluent Validation
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+        //services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+
 
         return services;
     }

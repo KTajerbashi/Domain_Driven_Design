@@ -9,7 +9,8 @@ public class ProviderFactory(
     ICacheAdapter cacheAdapter,
     IMapperAdapter mapper,
     IUserSystem user,
-    ICurrentUserServiceFactory userFactory
+    ICurrentUserServiceFactory userFactory,
+    IMediator mediator
     //ILoggerFactory loggerFactory,
     //IIdentity identity,
     //IIdentityLogger identityLogger,
@@ -21,6 +22,7 @@ public class ProviderFactory(
     public IMapperAdapter Mapper = mapper;
     public IUserSystem User = user;
     public ICurrentUserServiceFactory UserFactory = userFactory;
+    public IMediator Mediator = mediator;
     //public ILoggerFactory LoggerFactory = loggerFactory;
     //public IIdentity Identity = identity;
     //public IIdentityLogger IdentityLogger = identityLogger;
