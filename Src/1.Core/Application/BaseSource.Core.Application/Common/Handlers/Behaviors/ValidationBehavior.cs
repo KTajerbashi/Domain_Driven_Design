@@ -1,7 +1,4 @@
-﻿using FluentValidation;
-using MediatR;
-
-namespace BaseSource.Core.Application.Common.Handlers.Behaviors;
+﻿namespace BaseSource.Core.Application.Common.Handlers.Behaviors;
 public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
 {
@@ -36,10 +33,16 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
 
         if (failures.Any())
         {
-            _logger.LogWarning("Validation failed for request {RequestName} with {ErrorCount} errors: {Errors}",
-                typeof(TRequest).Name, failures.Count, string.Join("; ", failures.Select(f => f.ErrorMessage)));
+            var indexedErrors = failures
+                .Select((f, i) => $"{i + 1}: {f.PropertyName} => {f.ErrorMessage}")
+                .ToList();
 
-            throw new ValidationException(failures);
+            _logger.LogWarning("Validation failed for request {RequestName} with {ErrorCount} errors: {Errors}",
+                typeof(TRequest).Name, failures.Count, string.Join(" | ", indexedErrors));
+
+            // throw with indexed errors (optional enhancement)
+            throw new ValidationException(indexedErrors.Select((msg, i) =>
+                new FluentValidation.Results.ValidationFailure("", msg)).ToList());
         }
 
         _logger.LogDebug("Validation successful for request {RequestName}", typeof(TRequest).Name);
@@ -47,3 +50,5 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
         return await next();
     }
 }
+
+

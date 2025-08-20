@@ -1,5 +1,4 @@
-﻿using BaseSource.Core.Application.Common.Handlers.Query;
-using BaseSource.Core.Application.UseCases.Workflow.Tasks.Models.DTOs;
+﻿using BaseSource.Core.Application.UseCases.Workflow.Tasks.Models.DTOs;
 using BaseSource.Core.Domain.Aggregates.Workflow.Tasks.Repositories;
 
 namespace BaseSource.Core.Application.UseCases.Workflow.Tasks.Queries.GetTaskById;

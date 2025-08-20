@@ -1,6 +1,7 @@
 ﻿global using Autofac;
 global using Autofac.Extensions.DependencyInjection;
 global using BaseSource.Core.Application.Common.Handlers.Command;
+global using BaseSource.Core.Application.Common.Handlers.Query;
 global using BaseSource.Core.Application.Common.Models;
 global using BaseSource.Core.Application.Providers;
 global using BaseSource.Core.Application.Providers.Scrutor;

@@ -6,6 +6,7 @@ using BaseSource.Infrastructure.SQL.Command.Exceptions;
 using BaseSource.Infrastructure.SQL.Query.Exceptions;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using System.Security.Claims;
+using ValidationException = FluentValidation.ValidationException;
 
 namespace BaseSource.EndPoint.WebApi.Extensions;
 
@@ -14,7 +15,7 @@ public static class ExceptionExtensions
     /// <summary>
     /// Returns a user-friendly message for known exception types, or a generic message for unknown exceptions.
     /// </summary>
-    public static (int StatusCode,string Message) GetExceptionMessage(this Exception exception)
+    public static (int StatusCode, string Message) GetExceptionMessage(this Exception exception)
     {
         if (exception == null) return (500, "An unexpected error occurred.");
 
@@ -25,6 +26,7 @@ public static class ExceptionExtensions
             InfrastructureCommandException cmdEx => cmdEx.Message, // errors from commands
             InfrastructureQueryException queryEx => queryEx.Message, // errors from queries
             WebApiException apiEx => apiEx.Message,       // API-specific errors
+            ValidationException validationEx => string.Join("; ", validationEx.Errors.Select(e => e.ErrorMessage)),
             _ => "An unexpected error occurred. Please try again later." // unknown exception
         };
 
