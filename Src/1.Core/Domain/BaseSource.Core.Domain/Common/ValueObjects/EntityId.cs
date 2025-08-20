@@ -27,11 +27,9 @@ public class EntityId : BaseValueObject<EntityId>
 
     public Guid Value { get; private set; }
 
-    public override string ToString()
-    {
-        return Value.ToString();
-    }
+    public override string ToString() => Value.ToString();
 
+    public Guid ToValue() => Value;
     protected override IEnumerable<object> GetEqualityComponents()
     {
         yield return Value;

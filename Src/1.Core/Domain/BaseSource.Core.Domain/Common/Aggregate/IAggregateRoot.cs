@@ -163,6 +163,8 @@ public abstract class AggregateRoot<TId> : Entity<TId>, IAggregateRoot<TId>
     /// </summary>
     /// <returns>لیست Eventها</returns>
     public IEnumerable<IDomainEvent> GetEvents() => _events.AsEnumerable();
+    //public IReadOnlyCollection<IDomainEvent> DomainEvents => _events.AsReadOnly();
+
 
     /// <summary>
     /// Eventهای موجود در این Aggregate را پاک می‌کند
