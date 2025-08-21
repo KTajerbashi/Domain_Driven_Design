@@ -1,4 +1,4 @@
-﻿namespace BaseSource.Core.Domain.ValueObjects;
+﻿namespace BaseSource.Core.Domain.ValueObjects.Common;
 
 public class Priority : BaseValueObject<Priority>
 {
