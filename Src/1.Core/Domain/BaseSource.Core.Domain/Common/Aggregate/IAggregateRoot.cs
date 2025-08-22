@@ -1,4 +1,6 @@
-﻿using System.Security.Principal;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Principal;
 
 namespace BaseSource.Core.Domain.Common.Aggregate;
 
@@ -57,6 +59,7 @@ public abstract class Entity<TId> : IAuditableEntity<TId>
     /// شناسه عددی Entityها
     /// صرفا برای ذخیره در دیتابیس و سادگی کار مورد استفاده قرار بگیرید.
     /// </summary>
+    [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public TId Id { get; protected set; }
     public bool IsDeleted { get; protected set; }
     public bool IsActive { get; protected set; }

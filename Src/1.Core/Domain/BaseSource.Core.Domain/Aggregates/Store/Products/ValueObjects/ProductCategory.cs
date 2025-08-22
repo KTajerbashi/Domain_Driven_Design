@@ -1,12 +1,17 @@
-﻿namespace BaseSource.Core.Domain.Aggregates.Store.Products.ValueObjects;
+﻿
+namespace BaseSource.Core.Domain.Aggregates.Store.Products.ValueObjects;
 
 // Domain/ValueObjects/ProductCategory.cs
-public record ProductCategory
+public class ProductCategory : BaseValueObject<ProductCategory>
 {
     public string Name { get; }
     public string Slug { get; }
     public long? ParentCategoryId { get; }
 
+    private ProductCategory()
+    {
+        
+    }
     public ProductCategory(string name, string slug, long? parentCategoryId = null)
     {
         Name = name;
@@ -24,54 +29,42 @@ public record ProductCategory
         if (string.IsNullOrWhiteSpace(Slug))
             throw new DomainException("Category slug is required");
     }
-}
 
-// Domain/ValueObjects/ProductWeight.cs
-public record ProductWeight
-{
-    public decimal Value { get; }
-    public WeightUnit Unit { get; }
-
-    public ProductWeight(decimal value, WeightUnit unit)
+    protected override IEnumerable<object> GetEqualityComponents()
     {
-        Value = value;
-        Unit = unit;
-
-        Validate();
+        yield return Name;
+        yield return Slug;
+        yield return ParentCategoryId ?? null;
     }
 
-    private void Validate()
+    public override string ToString()
     {
-        if (Value <= 0)
-            throw new DomainException("Weight must be greater than 0");
+        return $"{Name}|{Slug}|{ParentCategoryId}";
     }
-}
-
-public enum WeightUnit { Gram, Kilogram, Pound, Ounce }
-
-// Domain/ValueObjects/ProductDimensions.cs
-public record ProductDimensions
-{
-    public decimal Length { get; }
-    public decimal Width { get; }
-    public decimal Height { get; }
-    public LengthUnit Unit { get; }
-
-    public ProductDimensions(decimal length, decimal width, decimal height, LengthUnit unit)
+    public static ProductCategory FromString(string value)
     {
-        Length = length;
-        Width = width;
-        Height = height;
-        Unit = unit;
+        if (string.IsNullOrEmpty(value))
+            return new ProductCategory(); // Or throw exception
 
-        Validate();
-    }
+        var result = value.Split('|');
 
-    private void Validate()
-    {
-        if (Length <= 0 || Width <= 0 || Height <= 0)
-            throw new DomainException("Dimensions must be greater than 0");
+        if (result.Length < 3)
+            throw new ArgumentException("Invalid string format for ProductCategory", nameof(value));
+
+        var name = result[0];
+        var slug = result[1];
+
+        // Handle null/empty parent category ID
+        long? parentCategoryId = null;
+        if (!string.IsNullOrEmpty(result[2]) && result[2] != "null")
+        {
+            if (long.TryParse(result[2], out long parsedId))
+            {
+                parentCategoryId = parsedId;
+            }
+        }
+
+        return new ProductCategory(name, slug, parentCategoryId);
     }
 }
 
-public enum LengthUnit { Centimeter, Meter, Inch, Foot }
