@@ -2,6 +2,7 @@
 using BaseSource.Infrastructure.SQL.Common.Persistence.Interceptors;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace BaseSource.Infrastructure.SQL.Command;
 
@@ -9,18 +10,8 @@ public static class DependencyInjections
 {
     public static IServiceCollection AddInfrastructureCommandsServices(this IServiceCollection services, IConfiguration configuration,string connectionString)
     {
-        services.AddDbContext<CommandDatabaseContext>(options =>
+        services.AddDbContext<CommandDatabaseContext>((options) =>
         {
-            //options.UseSqlServer(configuration.GetConnectionString(connectionString),
-            //    sqlOptions =>
-            //    {
-            //        sqlOptions.MigrationsAssembly(typeof(CommandDatabaseContext).Assembly.FullName);
-            //        sqlOptions.EnableRetryOnFailure(
-            //            maxRetryCount: 5,
-            //            maxRetryDelay: TimeSpan.FromSeconds(30),
-            //            errorNumbersToAdd: null);
-            //    });
-
             options.UseSqlServer(configuration.GetConnectionString(connectionString), options =>
             {
                 options.MigrationsAssembly(typeof(CommandDatabaseContext).Assembly.FullName);
@@ -30,7 +21,7 @@ public static class DependencyInjections
             .LogTo(Console.WriteLine, LogLevel.Information)
             .EnableSensitiveDataLogging();
 
-            options.AddInterceptors(new AddAuditDataInterceptor());
+            options.AddInterceptors(new AuditableEntityInterceptor());
         });
 
         services.AddScoped<InitialDatabaseContext>();

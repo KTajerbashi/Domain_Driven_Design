@@ -22,17 +22,17 @@ public abstract class BaseDatabaseContext<TContext> : IdentityDbContext
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        builder.ApplyConfigurationsFromAssembly(typeof(BaseDatabaseContext<TContext>).Assembly);
         base.OnModelCreating(builder);
-        builder.AddShadowProperty();
         builder.ApplyIdentityConfiguration();
+        builder
+            .AddAuditableShadowProperties()
+            .AddSoftDeleteQueryFilter();
 
     }
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {
         base.ConfigureConventions(configurationBuilder);
         configurationBuilder.Properties<EntityId>().HaveConversion<EntityIdConversion>();
-
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
