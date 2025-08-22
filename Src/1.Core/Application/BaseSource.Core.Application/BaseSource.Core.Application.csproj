@@ -37,8 +37,4 @@
 		<ProjectReference Include="..\..\Domain\BaseSource.Core.Domain\BaseSource.Core.Domain.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="UseCases\Store\Products\Handlers\" />
-	</ItemGroup>
-
 </Project>
