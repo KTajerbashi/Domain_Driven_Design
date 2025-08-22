@@ -4,7 +4,12 @@ public class EntityId : BaseValueObject<EntityId>
 {
     public static EntityId FromString(string value) => new(value);
     public static EntityId FromGuid(Guid value) => new() { Value = value };
-
+    // Add this convenience method
+    public static EntityId NewId() => new(Guid.NewGuid());
+    public EntityId(Guid value)
+    {
+        Value = value;
+    }
     public EntityId(string value)
     {
         if (string.IsNullOrWhiteSpace(value))
@@ -40,7 +45,7 @@ public class EntityId : BaseValueObject<EntityId>
 
 
     public static explicit operator Guid(EntityId title) => title.Value;
-    public static implicit operator EntityId(Guid value) => new() { Value = value };
+    public static implicit operator EntityId(Guid value) => new(value);
 
 }
 

@@ -13,7 +13,7 @@ public class Product : AggregateRoot
     public string Sku { get; private set; }
 
     // Value Objects
-    public ProductWeight Category { get; private set; }
+    public ProductCategory Category { get; private set; }
     public ProductWeight Weight { get; private set; }
     public ProductDimensions Dimensions { get; private set; }
 
@@ -30,7 +30,7 @@ public class Product : AggregateRoot
     private Product() { } // For EF Core
 
     public Product(string title, string description, decimal price, string sku,
-                  ProductWeight category, ProductWeight weight, ProductDimensions dimensions)
+                  ProductCategory category, ProductWeight weight, ProductDimensions dimensions)
     {
         Title = title;
         Description = description;

@@ -14,7 +14,7 @@ public interface ICommandHandler<TCommand> : IRequestHandler<TCommand>
 public abstract class CommandHandler<TCommand> : ICommandHandler<TCommand>
     where TCommand : ICommand
 {
-    private readonly ProviderFactory Factory;
+    protected readonly ProviderFactory Factory;
     protected CommandHandler(ProviderFactory factory)
     {
         Factory = factory;
@@ -30,7 +30,7 @@ public interface ICommandHandler<TCommand, TResponse> : IRequestHandler<TCommand
 public abstract class CommandHandler<TCommand, TResponse> : ICommandHandler<TCommand, TResponse>
     where TCommand : ICommand<TResponse>
 {
-    private readonly ProviderFactory Factory;
+    protected readonly ProviderFactory Factory;
     protected CommandHandler(ProviderFactory factory)
     {
         Factory = factory;

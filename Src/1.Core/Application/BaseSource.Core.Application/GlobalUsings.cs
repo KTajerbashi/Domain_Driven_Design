@@ -20,3 +20,4 @@ global using Microsoft.Extensions.Logging;
 global using System.Data;
 global using System.Reflection;
 global using System.Text;
+global using BaseSource.Core.Application.Exceptions;

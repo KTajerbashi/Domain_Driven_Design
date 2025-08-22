@@ -9,8 +9,8 @@ public class Customer : AggregateRoot
     public string Username { get; private set; }
     public string Password { get; private set; }
 
-    private readonly List<CustomerAddress> _items = new();
-    public IReadOnlyCollection<CustomerAddress> Items => _items.AsReadOnly();
+    private readonly List<CustomerAddress> _customerAddresses = new();
+    public IReadOnlyCollection<CustomerAddress> CustomerAddresses => _customerAddresses.AsReadOnly();
 
     private Customer()
     {
