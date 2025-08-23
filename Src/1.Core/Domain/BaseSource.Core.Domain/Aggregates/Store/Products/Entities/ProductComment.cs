@@ -1,8 +1,8 @@
-﻿using BaseSource.Core.Domain.ValueObjects.Common;
-
-namespace BaseSource.Core.Domain.Aggregates.Store.Products.Entities;
+﻿namespace BaseSource.Core.Domain.Aggregates.Store.Products.Entities;
 
 // Domain/Entities/ProductComment.cs
+
+[Table("ProductComments", Schema ="Store")]
 public class ProductComment : Entity
 {
     public long CustomerId { get; private set; }

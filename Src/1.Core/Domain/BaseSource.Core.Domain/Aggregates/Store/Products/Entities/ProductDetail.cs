@@ -1,6 +1,7 @@
 ﻿namespace BaseSource.Core.Domain.Aggregates.Store.Products.Entities;
 
 // Domain/Entities/ProductDetail.cs
+[Table("ProductDetails", Schema = "Store")]
 public class ProductDetail : Entity
 {
     public long ProductId { get; private set; }

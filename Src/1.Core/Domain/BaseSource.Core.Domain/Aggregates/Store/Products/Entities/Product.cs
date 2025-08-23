@@ -1,9 +1,9 @@
 ﻿using BaseSource.Core.Domain.Aggregates.Store.Products.ValueObjects;
-using BaseSource.Core.Domain.ValueObjects.Common;
 
 namespace BaseSource.Core.Domain.Aggregates.Store.Products.Entities;
 
 // Domain/Entities/Product.cs
+[Table("Products", Schema = "Store")]
 public class Product : AggregateRoot
 {
     public Title Title { get; private set; }

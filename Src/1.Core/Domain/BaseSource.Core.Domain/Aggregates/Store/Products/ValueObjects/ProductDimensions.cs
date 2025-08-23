@@ -1,4 +1,6 @@
 ﻿using BaseSource.Core.Domain.Aggregates.Store.Products.Enums;
+using Newtonsoft.Json.Linq;
+using System.Xml.Linq;
 
 namespace BaseSource.Core.Domain.Aggregates.Store.Products.ValueObjects;
 
@@ -9,12 +11,10 @@ public class ProductDimensions : BaseValueObject<ProductDimensions>
     public decimal Width { get; }
     public decimal Height { get; }
     public LengthUnitEnum Unit { get; }
-    protected override IEnumerable<object> GetEqualityComponents()
+    private void Validate()
     {
-        yield return Length;
-        yield return Width;
-        yield return Height;
-        yield return Unit;
+        if (Length <= 0 || Width <= 0 || Height <= 0)
+            throw new DomainException("Dimensions must be greater than 0");
     }
     public ProductDimensions(decimal length, decimal width, decimal height, LengthUnitEnum unit)
     {
@@ -25,16 +25,47 @@ public class ProductDimensions : BaseValueObject<ProductDimensions>
 
         Validate();
     }
-
-    private void Validate()
+    private ProductDimensions() { }
+    protected override IEnumerable<object> GetEqualityComponents()
     {
-        if (Length <= 0 || Width <= 0 || Height <= 0)
-            throw new DomainException("Dimensions must be greater than 0");
+        yield return Length;
+        yield return Width;
+        yield return Height;
+        yield return Unit;
     }
 
-    public static ProductDimensions FromString(string v)
+
+    
+    public override string ToString()
     {
-        throw new NotImplementedException();
+        return $"{Length}|{Width}|{Height}|{Unit}";
+    }
+    public static ProductDimensions FromString(string value)
+    {
+        if (string.IsNullOrEmpty(value))
+            return new ProductDimensions(); // Or throw exception
+
+        var result = value.Split('|');
+
+        if (result.Length < 3)
+            throw new ArgumentException("Invalid string format for ProductDimensions", nameof(value));
+
+        decimal length;
+        decimal.TryParse(result[0], out length);
+
+        decimal width;
+        decimal.TryParse(result[1], out width);
+
+        decimal height;
+        decimal.TryParse(result[2], out height);
+
+        byte unit;
+        byte.TryParse(result[3], out unit);
+
+
+
+
+        return new ProductDimensions(length, width, height, unit.To<LengthUnitEnum>());
     }
 }
 

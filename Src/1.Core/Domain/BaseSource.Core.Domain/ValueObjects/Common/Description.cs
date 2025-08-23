@@ -20,6 +20,8 @@ public class Description : BaseValueObject<Description>
     private Description()
     {
     }
+    public override string ToString() => Value;
+
     #endregion
 
     #region Equality Check

@@ -15,7 +15,7 @@ public class ProductWeight : BaseValueObject<ProductWeight>
 
         Validate();
     }
-
+    private ProductWeight() { }
     private void Validate()
     {
         if (Value <= 0)
@@ -27,10 +27,25 @@ public class ProductWeight : BaseValueObject<ProductWeight>
         yield return Value;
         yield return Unit;
     }
-
-    public static ProductWeight FromString(string v)
+    public override string ToString()
     {
-        throw new NotImplementedException();
+        return $"{Value}|{Unit}";
+    }
+
+    public static ProductWeight FromString(string stringValue)
+    {
+        if (string.IsNullOrEmpty(stringValue))
+            return new();
+        
+        var data = stringValue.Split("|");
+
+        decimal value;
+        decimal.TryParse(data[0],out value);
+
+        byte unit;
+        byte.TryParse(data[1],out unit);
+
+        return new ProductWeight(value,unit.To<WeightUnitEnum>());
     }
 }
 

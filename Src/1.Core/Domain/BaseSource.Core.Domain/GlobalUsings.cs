@@ -6,3 +6,5 @@ global using BaseSource.Core.Domain.Exceptions;
 global using BaseSource.Core.Domain.ValueObjects;
 global using BaseSource.Kernel.Utilities.Extensions;
 global using System.Reflection;
+global using BaseSource.Core.Domain.ValueObjects.Common;
+global using System.ComponentModel.DataAnnotations.Schema;
