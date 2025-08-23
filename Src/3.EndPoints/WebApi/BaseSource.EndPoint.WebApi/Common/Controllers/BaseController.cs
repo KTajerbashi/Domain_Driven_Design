@@ -1,13 +1,10 @@
 ﻿using BaseSource.Core.Application.Common.Handlers.Command;
 using BaseSource.Core.Application.Common.Handlers.Query;
-using BaseSource.Core.Application.Common.Models;
 using BaseSource.Core.Application.Providers;
 using BaseSource.EndPoint.WebApi.Common.Models;
-using BaseSource.EndPoint.WebApi.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
-using System.Data.Common;
 
 namespace BaseSource.EndPoint.WebApi.Common.Controllers;
 
@@ -24,7 +21,10 @@ public abstract class BaseController : Controller
     protected virtual async Task<IActionResult> CreateAsync<TCommand, TResponse>(TCommand command) where TCommand : ICommand<TResponse> => Ok(await Factory.Mediator.Send(command));
     protected virtual async Task<IActionResult> UpdateAsync<TCommand, TResponse>(TCommand command) where TCommand : ICommand<TResponse> => Ok(await Factory.Mediator.Send(command));
     protected virtual async Task<IActionResult> DeleteAsync<TCommand, TResponse>(TCommand command) where TCommand : ICommand<TResponse> => Ok(await Factory.Mediator.Send(command));
+    protected virtual async Task<IActionResult> GetByIdAsync<TQuery, TResponse>(TQuery query) where TQuery : IQuery<TResponse> => Ok(await Factory.Mediator.Send(query));
+    protected virtual async Task<IActionResult> GetAllAsync<TQuery, TResponse>(TQuery query) where TQuery : IQuery<TResponse> => Ok(await Factory.Mediator.Send(query));
 
+    protected virtual async Task<IActionResult> CommandAsync<TCommand, TResponse>(TCommand command) where TCommand : ICommand<TResponse> => Ok(await Factory.Mediator.Send(command));
     protected virtual async Task<IActionResult> CommandAsync<TCommand>(TCommand command)
         where TCommand : ICommand
     {
@@ -32,11 +32,9 @@ public abstract class BaseController : Controller
         return base.Ok(ApiResult.Success("Success"));
     }
 
-    protected virtual async Task<IActionResult> CommandAsync<TCommand, TResponse>(TCommand command) where TCommand : ICommand<TResponse> => Ok(await Factory.Mediator.Send(command));
 
-    protected virtual async Task<IActionResult> QueryAsync<TCommand, TResponse>(TCommand command) where TCommand : IQuery<TResponse> => Ok(await Factory.Mediator.Send(command));
-
-    protected virtual async Task<IActionResult> QueryListAsync<TCommand, TResponse>(TCommand command) where TCommand : IQuery<List<TResponse>> => Ok(await Factory.Mediator.Send(command));
+    protected virtual async Task<IActionResult> QueryAsync<TQuery, TResponse>(TQuery query) where TQuery : IQuery<TResponse> => Ok(await Factory.Mediator.Send(query));
+    protected virtual async Task<IActionResult> QueryListAsync<TQuery, TResponse>(TQuery query) where TQuery : IQuery<List<TResponse>> => Ok(await Factory.Mediator.Send(query));
 
     public override OkObjectResult Ok([ActionResultObjectValue] object? value)
     {

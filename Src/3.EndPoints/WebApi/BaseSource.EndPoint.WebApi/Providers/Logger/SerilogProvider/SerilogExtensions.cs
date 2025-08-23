@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Controllers;
+﻿using BaseSource.Kernel.Utilities.Extensions;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Serilog;
 using Serilog.Context;
 using System.Diagnostics;
@@ -9,6 +10,8 @@ public static class SerilogExtensions
 {
     public static WebApplicationBuilder AddSerilog(this WebApplicationBuilder builder)
     {
+        builder.Services.AddLogging(); // ILogger is usually registered by default
+
         // Read configuration from appsettings.json
         Log.Logger = new LoggerConfiguration()
             .ReadFrom.Configuration(builder.Configuration)  // reads Serilog section
@@ -68,7 +71,7 @@ public class SerilogEnrichmentMiddleware
         {
             parameters = context.Request.QueryString.HasValue
                 ? context.Request.QueryString.Value!
-                : "";
+                : context.Request.RouteValues.ToJson();
         }
         else if (httpMethod == HttpMethods.Post || httpMethod == HttpMethods.Put || httpMethod == HttpMethods.Patch)
         {
@@ -103,7 +106,7 @@ public class SerilogEnrichmentMiddleware
         using (LogContext.PushProperty("Duration", formattedDuration))
         using (LogContext.PushProperty("StatusCode", context.Response?.StatusCode))
         {
-        
+
             // Serilog picks up properties automatically
         }
 

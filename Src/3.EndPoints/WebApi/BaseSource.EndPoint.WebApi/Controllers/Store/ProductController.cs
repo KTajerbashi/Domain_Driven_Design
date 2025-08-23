@@ -1,4 +1,5 @@
 ﻿using BaseSource.Core.Application.UseCases.Store.Products.Handlers.Commands.Create;
+using BaseSource.Core.Application.UseCases.Store.Products.Handlers.Queries.GetById;
 using BaseSource.EndPoint.WebApi.Common.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +11,12 @@ public class ProductController : BaseController
     public async Task<IActionResult> Create(ProductCreateCommand command)
     {
         return await CreateAsync<ProductCreateCommand, ProductCreateResponse>(command);
+    }
+    
+    [HttpGet("{entityId}")]
+    public async Task<IActionResult> GetById(Guid entityId)
+    {
+        return await GetByIdAsync<ProductGetByIdQuery, ProductGetByIdResponse>(new ProductGetByIdQuery(entityId));
     }
 }
 

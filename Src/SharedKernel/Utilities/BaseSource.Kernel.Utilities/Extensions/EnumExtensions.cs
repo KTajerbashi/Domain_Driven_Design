@@ -17,4 +17,22 @@ public static class EnumExtensions
         var description = attributes != null ? ((DescriptionAttribute)attributes.FirstOrDefault()!).Description : enumValue.ToString();
         return description;
     }
+
+
+    /// <summary>
+    /// تبدیل byte به Enum
+    /// </summary>
+    public static TEnum To<TEnum>(this byte value)
+        where TEnum : Enum
+    {
+        if (Enum.IsDefined(typeof(TEnum), value))
+        {
+            return (TEnum)(object)value;
+        }
+        else
+        {
+            throw new ArgumentOutOfRangeException(nameof(value),
+                $"The value {value} is not defined in enum {typeof(TEnum).Name}");
+        }
+    }
 }

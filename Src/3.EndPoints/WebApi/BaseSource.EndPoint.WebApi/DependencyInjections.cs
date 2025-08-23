@@ -13,13 +13,16 @@ public static class DependencyInjections
 
         builder.Services.AddSwaggerProvider(configuration);
 
-        // Configure Autofac
-        builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
-            .ConfigureContainer<ContainerBuilder>(containerBuilder =>
-            {
-                containerBuilder.AddAutofacLifetimeServices(assemblies);
-            });
 
+        #region Autofac
+        // Tell ASP.NET Core to use Autofac
+        builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+        // Configure Autofac container
+        builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
+        {
+            containerBuilder.AddAutofacLifetimeServices(assemblies);
+        });
+        #endregion
         //  Add Application Libraries
         builder.Services.AddApplicationServices(configuration, assemblies);
 
