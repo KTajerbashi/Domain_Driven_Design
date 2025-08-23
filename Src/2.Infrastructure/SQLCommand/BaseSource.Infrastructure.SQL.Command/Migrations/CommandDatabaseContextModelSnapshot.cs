@@ -1051,7 +1051,7 @@ namespace BaseSource.Infrastructure.SQL.Command.Migrations
             modelBuilder.Entity("BaseSource.Core.Domain.Aggregates.Store.Customers.Entities.CustomerAddress", b =>
                 {
                     b.HasOne("BaseSource.Core.Domain.Aggregates.Store.Customers.Entities.Customer", null)
-                        .WithMany("Items")
+                        .WithMany("CustomerAddresses")
                         .HasForeignKey("CustomerId");
                 });
 
@@ -1158,7 +1158,7 @@ namespace BaseSource.Infrastructure.SQL.Command.Migrations
 
             modelBuilder.Entity("BaseSource.Core.Domain.Aggregates.Store.Customers.Entities.Customer", b =>
                 {
-                    b.Navigation("Items");
+                    b.Navigation("CustomerAddresses");
                 });
 
             modelBuilder.Entity("BaseSource.Core.Domain.Aggregates.Store.Orders.Entities.Order", b =>

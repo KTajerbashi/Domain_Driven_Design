@@ -3,12 +3,11 @@ using BaseSource.Core.Domain.Common.Aggregate;
 using BaseSource.Core.Domain.Common.ValueObjects;
 using BaseSource.Infrastructure.SQL.Query.Common.Persistence;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 using System.Linq.Expressions;
 
 namespace BaseSource.Infrastructure.SQL.Query.Common.Repositories;
 
-public class QueryRepository<TEntity, TId, TContext> : IQueryRepository<TEntity, TId>
+public abstract class QueryRepository<TEntity, TId, TContext> : IQueryRepository<TEntity, TId>
     where TEntity : AggregateRoot<TId>
     where TId : struct,
           IComparable,
@@ -54,6 +53,18 @@ public class QueryRepository<TEntity, TId, TContext> : IQueryRepository<TEntity,
         }
 
         return await query.FirstOrDefaultAsync(item => item.Id.Equals(id), cancellation);
+    }
+    public async Task<TEntity> GetGraphAsync(EntityId entityId, CancellationToken cancellation = default)
+    {
+        var query = Entity.AsQueryable();
+
+        // Include all navigation properties
+        foreach (var property in _context.Model.FindEntityType(typeof(TEntity)).GetNavigations())
+        {
+            query = query.Include(property.Name);
+        }
+
+        return await query.FirstOrDefaultAsync(item => item.EntityId.Equals(entityId), cancellation);
     }
 
 

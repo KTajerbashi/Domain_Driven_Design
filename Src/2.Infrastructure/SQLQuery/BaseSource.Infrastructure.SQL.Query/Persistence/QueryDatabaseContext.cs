@@ -1,6 +1,10 @@
 ﻿using BaseSource.Core.Application.UseCases.Store.Orders.Models;
 using BaseSource.Core.Application.UseCases.Store.Products.Models;
 using BaseSource.Core.Application.UseCases.Store.ShoppingCarts.Models;
+using BaseSource.Core.Domain.Aggregates.Store.Carts.Entities;
+using BaseSource.Core.Domain.Aggregates.Store.Customers.Entities;
+using BaseSource.Core.Domain.Aggregates.Store.Orders.Entities;
+using BaseSource.Core.Domain.Aggregates.Store.Products.Entities;
 using BaseSource.Infrastructure.SQL.Query.Common.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
@@ -12,6 +16,22 @@ public class QueryDatabaseContext : BaseQueryDatabaseContext<QueryDatabaseContex
     public QueryDatabaseContext(DbContextOptions<QueryDatabaseContext> options) : base(options)
     {
     }
+
+    // DbSets for Write operations
+    public DbSet<Customer> Customers => Set<Customer>();
+    public DbSet<CustomerAddress> CustomerAddresses => Set<CustomerAddress>();
+    public DbSet<Product> Products => Set<Product>();
+    public DbSet<ProductDetail> ProductDetails => Set<ProductDetail>();
+    public DbSet<ProductImage> ProductImages => Set<ProductImage>();
+    public DbSet<ProductComment> ProductComments => Set<ProductComment>();
+    public DbSet<ShoppingCart> ShoppingCarts => Set<ShoppingCart>();
+    public DbSet<CartItem> CartItems => Set<CartItem>();
+    public DbSet<Order> Orders => Set<Order>();
+    public DbSet<OrderItem> OrderItems => Set<OrderItem>();
+    public DbSet<OrderStatusHistory> OrderStatusHistory => Set<OrderStatusHistory>();
+
+
+
     // DbSets for Read operations (Query-specific models)
     public DbSet<ProductDto> ProductDtos => Set<ProductDto>();
     public DbSet<OrderDto> OrderDtos => Set<OrderDto>();

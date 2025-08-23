@@ -1,6 +1,11 @@
-﻿using BaseSource.Infrastructure.SQL.Common.Identity.Entities;
+﻿using BaseSource.Core.Domain.Aggregates.Store.Orders.ValueObjects;
+using BaseSource.Core.Domain.Aggregates.Store.Products.ValueObjects;
+using BaseSource.Core.Domain.ValueObjects.Common;
+using BaseSource.Infrastructure.SQL.Command.Conversions.Store;
+using BaseSource.Infrastructure.SQL.Common.Identity.Entities;
 using BaseSource.Infrastructure.SQL.Common.Persistence.Conversions;
 using BaseSource.Infrastructure.SQL.Common.Persistence.Interceptors;
+using BaseSource.Infrastructure.SQL.Conversions;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,6 +38,13 @@ public abstract class BaseDatabaseContext<TContext> : IdentityDbContext
     {
         base.ConfigureConventions(configurationBuilder);
         configurationBuilder.Properties<EntityId>().HaveConversion<EntityIdConversion>();
+        configurationBuilder.Properties<Title>().HaveConversion<TitleConversion>();
+        configurationBuilder.Properties<Description>().HaveConversion<DescriptionConversion>();
+        configurationBuilder.Properties<Address>().HaveConversion<AddressConversion>();
+        configurationBuilder.Properties<ProductWeight>().HaveConversion<ProductWeightConversion>();
+        configurationBuilder.Properties<ProductCategory>().HaveConversion<ProductCategoryConversion>();
+        configurationBuilder.Properties<ProductDimensions>().HaveConversion<ProductDimensionsConversion>();
+
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

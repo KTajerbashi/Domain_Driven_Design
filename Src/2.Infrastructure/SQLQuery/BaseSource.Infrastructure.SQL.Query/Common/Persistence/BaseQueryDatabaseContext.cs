@@ -13,6 +13,7 @@ public abstract class BaseQueryDatabaseContext<TContext> : BaseDatabaseContext<T
 
     protected BaseQueryDatabaseContext(DbContextOptions<TContext> options) : base(options)
     {
+        
     }
 
     public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)

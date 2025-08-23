@@ -6,7 +6,7 @@ namespace BaseSource.Infrastructure.SQL.Query.Repositories.Store.Products;
 
 public class ProductQRepository : QueryRepository<Product, long, QueryDatabaseContext>, IProductQRepository
 {
-    protected ProductQRepository(QueryDatabaseContext context) : base(context)
+    public ProductQRepository(QueryDatabaseContext context) : base(context)
     {
     }
 }

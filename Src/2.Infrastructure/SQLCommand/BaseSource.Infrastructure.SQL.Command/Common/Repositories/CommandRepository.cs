@@ -239,4 +239,17 @@ public abstract class CommandRepository<TEntity, TId, TContext> : ICommandReposi
     {
        return await Entity.Where(expression).ToListAsync(cancellation);
     }
+    private async Task DisposeTransactionAsync()
+    {
+        if (_transaction != null)
+        {
+            await _transaction.DisposeAsync();
+            _transaction = null;
+        }
+    }
+    public async ValueTask DisposeAsync()
+    {
+        await DisposeTransactionAsync();
+        await _context.DisposeAsync();
+    }
 }

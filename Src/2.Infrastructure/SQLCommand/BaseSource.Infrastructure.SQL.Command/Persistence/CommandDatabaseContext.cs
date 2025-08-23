@@ -1,13 +1,7 @@
 ﻿using BaseSource.Core.Domain.Aggregates.Store.Carts.Entities;
-using BaseSource.Core.Domain.Aggregates.Store.Customers;
 using BaseSource.Core.Domain.Aggregates.Store.Customers.Entities;
 using BaseSource.Core.Domain.Aggregates.Store.Orders.Entities;
-using BaseSource.Core.Domain.Aggregates.Store.Orders.ValueObjects;
 using BaseSource.Core.Domain.Aggregates.Store.Products.Entities;
-using BaseSource.Core.Domain.Aggregates.Store.Products.ValueObjects;
-using BaseSource.Core.Domain.ValueObjects.Common;
-using BaseSource.Infrastructure.SQL.Command.Conversions.Store;
-using BaseSource.Infrastructure.SQL.Conversions;
 
 namespace BaseSource.Infrastructure.SQL.Command.Persistence;
 
@@ -20,12 +14,6 @@ public class CommandDatabaseContext : BaseCommandDatabaseContext<CommandDatabase
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {
         base.ConfigureConventions(configurationBuilder);
-        configurationBuilder.Properties<Title>().HaveConversion<TitleConversion>();
-        configurationBuilder.Properties<Description>().HaveConversion<DescriptionConversion>();
-        configurationBuilder.Properties<Address>().HaveConversion<AddressConversion>();
-        configurationBuilder.Properties<ProductWeight>().HaveConversion<ProductWeightConversion>();
-        configurationBuilder.Properties<ProductCategory>().HaveConversion<ProductCategoryConversion>();
-        configurationBuilder.Properties<ProductDimensions>().HaveConversion<ProductDimensionsConversion>();
     }
 
 
@@ -41,4 +29,5 @@ public class CommandDatabaseContext : BaseCommandDatabaseContext<CommandDatabase
     public DbSet<Order> Orders => Set<Order>();
     public DbSet<OrderItem> OrderItems => Set<OrderItem>();
     public DbSet<OrderStatusHistory> OrderStatusHistory => Set<OrderStatusHistory>();
+
 }
