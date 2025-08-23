@@ -4,14 +4,14 @@ using System.Security.Claims;
 namespace BaseSource.Core.Application.Interfaces;
 
 
-public interface ICurrentUserServiceFactory : IAutofacScopedLifetime
+public interface ICurrentUserServiceFactory : IScopedLifetime
 {
     IUserSystem GetCurrentUser();
     ClaimsPrincipal? GetCurrentClaimsPrincipal();
 }
 
 
-public interface IUserSystem : IAutofacScopedLifetime
+public interface IUserSystem : IScopedLifetime
 {
     // Basic user information
     string Name { get; }

@@ -2,12 +2,10 @@
 using BaseSource.Core.Domain.Aggregates.Store.Products.Entities;
 using BaseSource.Core.Domain.Aggregates.Store.Products.Enums;
 using BaseSource.Core.Domain.Aggregates.Store.Products.ValueObjects;
-using BaseSource.Core.Domain.Common.ValueObjects;
-using System.Net.Http.Headers;
 
 namespace BaseSource.Core.Application.UseCases.Store.Products.Handlers.Commands.Create;
 
-public record ProductCreateResponse(long Id,Guid EntityId);
+public record ProductCreateResponse(long Id, Guid EntityId);
 
 
 public class ProductCategoryModel
@@ -72,7 +70,7 @@ public class ProductCreateHandler : CommandHandler<ProductCreateCommand, Product
 
             await _repository.AddAsync(entity, cancellationToken);
             await _repository.SaveChangesAsync(cancellationToken);
-            return new ProductCreateResponse(entity.Id,entity.EntityId.ToValue());
+            return new ProductCreateResponse(entity.Id, entity.EntityId.ToValue());
         }
         catch (Exception ex)
         {

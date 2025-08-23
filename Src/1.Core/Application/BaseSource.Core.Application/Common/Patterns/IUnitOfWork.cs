@@ -5,7 +5,7 @@
 /// تعریف کامل این الگو در کتاب P of EAA وجود دارد و تعریف اولیه را در آدرس زیر می‌توان مشاهده کرد
 /// https://martinfowler.com/eaaCatalog/unitOfWork.html
 /// </summary>
-public interface IUnitOfWork : IDisposable
+public interface IUnitOfWork : IDisposable, IAsyncDisposable, IScopedLifetime
 {
 
     int SaveChanges();

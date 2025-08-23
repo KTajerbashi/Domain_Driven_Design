@@ -11,7 +11,7 @@ public interface IQueryHandler<TQuery, TResponse> : IRequestHandler<TQuery, TRes
 public abstract class QueryHandler<TQuery, TResponse> : IQueryHandler<TQuery, TResponse>
     where TQuery : IQuery<TResponse>
 {
-    private readonly ProviderFactory Factory;
+    protected readonly ProviderFactory Factory;
     protected QueryHandler(ProviderFactory factory)
     {
         Factory = factory;

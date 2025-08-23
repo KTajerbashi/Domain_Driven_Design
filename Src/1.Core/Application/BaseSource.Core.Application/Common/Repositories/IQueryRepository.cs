@@ -15,6 +15,7 @@ public interface IQueryRepository<TEntity, TId>
 {
     Task<TEntity> GetAsync(TId id, CancellationToken cancellation = default);
     Task<TEntity> GetGraphAsync(TId id, CancellationToken cancellation = default);
+    Task<TEntity> GetGraphAsync(EntityId entityId, CancellationToken cancellation = default);
     Task<TEntity> GetAsync(EntityId entityId, CancellationToken cancellation = default);
     Task<IEnumerable<TEntity>> GetAsync(CancellationToken cancellation = default);
     Task<IEnumerable<TEntity>> QueryableAsync(Expression<Func<TEntity, bool>> expression, CancellationToken cancellation = default);

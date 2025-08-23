@@ -1,4 +1,5 @@
 ﻿using BaseSource.Core.Application.Common.Handlers.Behaviors;
+using BaseSource.Core.Application.Common.Repositories;
 using BaseSource.Core.Application.Providers;
 using BaseSource.Core.Application.Providers.Autofac;
 using BaseSource.Core.Application.Providers.CacheSystem;
@@ -14,9 +15,6 @@ public static class DependencyInjections
         IConfiguration configuration,
         Assembly[] assemblies)
     {
-        //  Autofac
-        services.BuildAutofacServiceProvider(assemblies);
-
         //  Cache
         services.AddSqlDistributedCache(configuration, "SqlCache");
 
@@ -34,6 +32,9 @@ public static class DependencyInjections
 
         //  Factory
         services.AddScoped<ProviderFactory>();
+
+        //  Repositories
+        services.AddRepositories(assemblies);
 
         //  MediateR
         services.AddMediatR(cfg =>
