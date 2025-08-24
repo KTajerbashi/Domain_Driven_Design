@@ -1,35 +1,8 @@
-﻿using AutoMapper;
-using BaseSource.EndPoint.WebApi.Common.Controllers;
+﻿using BaseSource.EndPoint.WebApi.Common.Controllers;
 using BaseSource.EndPoint.WebApi.Exceptions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace BaseSource.EndPoint.WebApi.Controllers.Test;
-
-public class MapperProfile : Profile
-{
-    public MapperProfile()
-    {
-        CreateMap<ModelTestJson, ModelTestJsonDTO>().ReverseMap();
-    }
-}
-
-public class ModelTestJson
-{
-    public string Name { get; set; }
-    public string Family { get; set; }
-    public DateTime EndDate { get; set; }
-}
-
-
-public class ModelTestJsonDTO
-{
-    public string Name { get; set; }
-    public string Family { get; set; }
-    public DateTime EndDate { get; set; }
-    public string StartDate { get; set; }
-}
-
 public class ProviderController : BaseController
 {
     private readonly ILogger<ProviderController> _logger;
@@ -100,6 +73,7 @@ public class ProviderController : BaseController
             throw ex;
         }
     }
+
 
     [HttpGet("User")]
     public IActionResult User()

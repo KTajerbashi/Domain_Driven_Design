@@ -1,12 +1,18 @@
 ﻿using BaseSource.Core.Application.UseCases.Store.Products.Handlers.Commands.Create;
 using BaseSource.Core.Application.UseCases.Store.Products.Handlers.Queries.GetById;
 using BaseSource.EndPoint.WebApi.Common.Controllers;
+using BaseSource.EndPoint.WebApi.Resources;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BaseSource.EndPoint.WebApi.Controllers.Store;
 
 public class ProductController : BaseController
 {
+    [HttpGet("name/{value}")]
+    public IActionResult GetResource(ProductResourcesEnum value)
+    {
+        return Ok(ProductResources.Handler(value));
+    }
     [HttpPost]
     public async Task<IActionResult> Create(ProductCreateCommand command)
     {

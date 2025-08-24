@@ -1,14 +1,12 @@
-﻿using BaseSource.Infrastructure.SQL.Command.Persistence;
-using BaseSource.Infrastructure.SQL.Common.Persistence.Interceptors;
+﻿using BaseSource.Infrastructure.SQL.Common.Persistence.Interceptors;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace BaseSource.Infrastructure.SQL.Command;
 
 public static class DependencyInjections
 {
-    public static IServiceCollection AddInfrastructureCommandsServices(this IServiceCollection services, IConfiguration configuration,string connectionString)
+    public static IServiceCollection AddInfrastructureCommandsServices(this IServiceCollection services, IConfiguration configuration, string connectionString)
     {
         services.AddDbContext<CommandDatabaseContext>((options) =>
         {
@@ -22,6 +20,7 @@ public static class DependencyInjections
             .EnableSensitiveDataLogging();
 
             options.AddInterceptors(new AuditableEntityInterceptor());
+            options.AddInterceptors(new DomainEventInterceptor());
         });
 
         services.AddScoped<InitialDatabaseContext>();

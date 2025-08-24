@@ -70,6 +70,7 @@ public class ProductCreateHandler : CommandHandler<ProductCreateCommand, Product
 
             await _repository.AddAsync(entity, cancellationToken);
             await _repository.SaveChangesAsync(cancellationToken);
+            await Factory.EventDispatcher.DispatchEventsAsync(entity,cancellationToken);
             return new ProductCreateResponse(entity.Id, entity.EntityId.ToValue());
         }
         catch (Exception ex)

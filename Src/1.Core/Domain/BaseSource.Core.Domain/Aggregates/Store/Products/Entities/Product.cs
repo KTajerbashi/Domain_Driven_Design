@@ -1,4 +1,5 @@
-﻿using BaseSource.Core.Domain.Aggregates.Store.Products.ValueObjects;
+﻿using BaseSource.Core.Domain.Aggregates.Store.Products.Events;
+using BaseSource.Core.Domain.Aggregates.Store.Products.ValueObjects;
 
 namespace BaseSource.Core.Domain.Aggregates.Store.Products.Entities;
 
@@ -43,6 +44,7 @@ public class Product : AggregateRoot
         StockQuantity = 0;
 
         Validate();
+        AddEvent(new ProductCreatedEvent(EntityId));
     }
 
     public void UpdateBasicInfo(string title, string description, decimal price)
@@ -52,6 +54,7 @@ public class Product : AggregateRoot
         Price = price;
 
         Validate();
+        AddEvent(new ProductUpdatedEvent(EntityId));
     }
 
     public void UpdateStock(int quantity)
@@ -60,6 +63,7 @@ public class Product : AggregateRoot
             throw new DomainException("Stock quantity cannot be negative");
 
         StockQuantity = quantity;
+        AddEvent(new ProductStockUpdatedEvent(EntityId));
     }
 
     public void Activate() => IsActive = true;
@@ -71,13 +75,17 @@ public class Product : AggregateRoot
             throw new DomainException($"Detail with key '{key}' already exists");
 
         _details.Add(new ProductDetail(key, value));
+        AddEvent(new ProductDetailAddedEvent(EntityId));
     }
 
     public void RemoveDetail(string key)
     {
         var detail = _details.FirstOrDefault(d => d.Key.Equals(key, StringComparison.OrdinalIgnoreCase));
         if (detail != null)
+        {
             _details.Remove(detail);
+            AddEvent(new ProductDetailDeletedEvent(EntityId));
+        }
     }
 
     public void AddImage(string imageUrl, string altText, bool isMain = false)
@@ -86,6 +94,7 @@ public class Product : AggregateRoot
             throw new DomainException("Main image already exists");
 
         _images.Add(new ProductImage(imageUrl, altText, isMain));
+        AddEvent(new ProductImageAddedEvent(EntityId));
     }
 
     public void AddComment(long customerId, string title, string description, int rating)
@@ -94,13 +103,17 @@ public class Product : AggregateRoot
             throw new DomainException("Rating must be between 1 and 5");
 
         _comments.Add(new ProductComment(customerId, Id, title, description, rating));
+        AddEvent(new ProductCommentAddedEvent(EntityId));
     }
 
     public void RemoveComment(long commentId)
     {
         var comment = _comments.FirstOrDefault(c => c.Id == commentId);
         if (comment != null)
+        {
             _comments.Remove(comment);
+            AddEvent(new ProductCommentRemovedEvent(EntityId));
+        }
     }
 
     private void Validate()

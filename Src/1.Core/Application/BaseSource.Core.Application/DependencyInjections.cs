@@ -19,7 +19,7 @@ public static class DependencyInjections
         services.AddSqlDistributedCache(configuration, "SqlCache");
 
         //  Dapper
-        services.AddQueryExecute(configuration, "Query");
+        services.AddQueryExecute(configuration, "QueryConnection");
 
         //  Mapper
         services.AddAutoMapperProfiles(configuration, assemblies);
