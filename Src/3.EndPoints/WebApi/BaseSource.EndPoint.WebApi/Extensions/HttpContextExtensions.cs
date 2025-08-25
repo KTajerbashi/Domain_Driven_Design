@@ -4,8 +4,6 @@ using System.Security.Claims;
 
 namespace BaseSource.EndPoint.WebApi.Extensions;
 
-
-
 public static class HttpContextExtensions
 {
     public static ProviderFactory ApplicationContext(this HttpContext httpContext) =>

@@ -11,7 +11,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\..\SharedKernel\Utilities\BaseSource.Kernel.Utilities\BaseSource.Kernel.Utilities.csproj" />
+	  <ProjectReference Include="..\..\..\SharedKernel\BaseSource.Kernel.Utilities\BaseSource.Kernel.Utilities.csproj" />
 	</ItemGroup>
 	
 	
