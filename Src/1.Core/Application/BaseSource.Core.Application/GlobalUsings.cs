@@ -1,8 +1,9 @@
 ﻿global using Autofac;
-global using Autofac.Extensions.DependencyInjection;
+global using AutoMapper;
 global using BaseSource.Core.Application.Common.Handlers.Command;
 global using BaseSource.Core.Application.Common.Handlers.Query;
 global using BaseSource.Core.Application.Common.Models;
+global using BaseSource.Core.Application.Exceptions;
 global using BaseSource.Core.Application.Providers;
 global using BaseSource.Core.Application.Providers.Scrutor;
 global using BaseSource.Core.Application.Providers.SerializerProvider;
@@ -20,4 +21,3 @@ global using Microsoft.Extensions.Logging;
 global using System.Data;
 global using System.Reflection;
 global using System.Text;
-global using BaseSource.Core.Application.Exceptions;

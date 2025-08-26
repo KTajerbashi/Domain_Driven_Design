@@ -1,10 +1,7 @@
-﻿
-
-using AutoMapper;
-using BaseSource.Core.Application.UseCases.Store.Products.Handlers.Commands.Create;
-using BaseSource.Core.Application.UseCases.Store.Products.Repositories;
+﻿using BaseSource.Core.Application.UseCases.Store.Products.Repositories;
 using BaseSource.Core.Domain.Aggregates.Store.Products.Entities;
 using BaseSource.Core.Domain.Aggregates.Store.Products.ValueObjects;
+using static BaseSource.Core.Application.UseCases.Store.Products.Handlers.Commands.Create.ProductCategoryRoot;
 
 namespace BaseSource.Core.Application.UseCases.Store.Products.Handlers.Queries.GetById;
 

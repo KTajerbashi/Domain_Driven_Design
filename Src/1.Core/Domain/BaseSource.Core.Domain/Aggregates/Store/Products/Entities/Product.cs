@@ -1,4 +1,5 @@
 ﻿using BaseSource.Core.Domain.Aggregates.Store.Products.Events;
+using BaseSource.Core.Domain.Aggregates.Store.Products.Parameters;
 using BaseSource.Core.Domain.Aggregates.Store.Products.ValueObjects;
 
 namespace BaseSource.Core.Domain.Aggregates.Store.Products.Entities;
@@ -30,13 +31,13 @@ public class Product : AggregateRoot
 
     private Product() { } // For EF Core
 
-    public Product(string title, string description, decimal price, string sku,
+    public Product(ProductCreateParameters parameter,
                   ProductCategory category, ProductWeight weight, ProductDimensions dimensions)
     {
-        Title = title;
-        Description = description;
-        Price = price;
-        Sku = sku;
+        Title = parameter.Title;
+        Description = parameter.Description;
+        Price = parameter.Price;
+        Sku = parameter.Sku;
         Category = category;
         Weight = weight;
         Dimensions = dimensions;
