@@ -1,4 +1,6 @@
 ﻿using BaseSource.EndPoint.WebApi.Middlewares.Exceptions;
+using BaseSource.Infrastructure.SQL.Command.Repositories.Auth.Interfaces;
+using Microsoft.AspNetCore.Identity;
 
 namespace BaseSource.EndPoint.WebApp;
 
@@ -6,6 +8,34 @@ public static class DependencyInjections
 {
     public static WebApplicationBuilder AddWebAppServices(this WebApplicationBuilder builder)
     {
+        // Configure JWT and JWE settings
+        builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
+        builder.Services.Configure<JweSettings>(builder.Configuration.GetSection("JweSettings"));
+        builder.Services.Configure<IdentityOptionsSettings>(builder.Configuration.GetSection("IdentityOptions"));
+        
+        // Configure Identity options from settings
+        builder.Services.Configure<IdentityOptions>(options =>
+        {
+            var identitySettings = builder.Configuration.GetSection("IdentityOptions").Get<IdentityOptionsSettings>();
+
+            options.Password.RequiredLength = identitySettings?.Password.RequiredLength ?? 6;
+            options.Password.RequiredUniqueChars = identitySettings?.Password.RequiredUniqueChars ?? 1;
+            options.Password.RequireNonAlphanumeric = identitySettings?.Password.RequireNonAlphanumeric ?? true;
+            options.Password.RequireLowercase = identitySettings?.Password.RequireLowercase ?? true;
+            options.Password.RequireUppercase = identitySettings?.Password.RequireUppercase ?? true;
+            options.Password.RequireDigit = identitySettings?.Password.RequireDigit ?? true;
+
+            options.Lockout.DefaultLockoutTimeSpan = identitySettings?.Lockout.DefaultLockoutTimeSpan ?? TimeSpan.FromMinutes(30);
+            options.Lockout.MaxFailedAccessAttempts = identitySettings?.Lockout.MaxFailedAccessAttempts ?? 5;
+            options.Lockout.AllowedForNewUsers = identitySettings?.Lockout.AllowedForNewUsers ?? true;
+
+            options.User.RequireUniqueEmail = identitySettings?.User.RequireUniqueEmail ?? true;
+            options.User.AllowedUserNameCharacters = identitySettings?.User.AllowedUserNameCharacters ?? "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+
+            options.SignIn.RequireConfirmedEmail = identitySettings?.SignIn.RequireConfirmedEmail ?? false;
+            options.SignIn.RequireConfirmedPhoneNumber = identitySettings?.SignIn.RequireConfirmedPhoneNumber ?? false;
+        });
+
         builder.Services.AddControllers();
 
         builder.Services.AddRazorPages();

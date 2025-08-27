@@ -20,6 +20,10 @@ public abstract class BaseDatabaseContext<TContext> : IdentityDbContext
     {
     }
 
+
+
+    public virtual DbSet<RevokedToken> RevokedTokens => Set<RevokedToken>();
+
     protected BaseDatabaseContext(DbContextOptions<TContext> options)
         : base(options)
     {

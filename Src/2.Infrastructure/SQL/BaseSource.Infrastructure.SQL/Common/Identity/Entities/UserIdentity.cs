@@ -2,6 +2,7 @@
 
 namespace BaseSource.Infrastructure.SQL.Common.Identity.Entities;
 
+
 [Table("Users", Schema = "Identity")]
 public class UserIdentity : IdentityUser<long>, IAuditableEntity<long>
 {

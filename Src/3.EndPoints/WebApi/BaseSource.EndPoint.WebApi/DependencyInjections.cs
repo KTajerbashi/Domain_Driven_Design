@@ -1,3 +1,4 @@
+using Autofac.Core;
 using BaseSource.EndPoint.WebApi.Providers.Swagger;
 
 namespace BaseSource.EndPoint.WebApi;
@@ -35,6 +36,15 @@ public static class DependencyInjections
 
         //  Add System Logger
         builder.Services.AddLoggerServices(configuration);
+
+
+        //// In Program.cs or Startup.cs
+        //builder.Services.AddOpenTelemetry()
+        //    .WithTracing(tracing => tracing
+        //        .AddSource("IdentityFactory")
+        //        .AddAspNetCoreInstrumentation()
+        //        .AddEntityFrameworkCoreInstrumentation()
+        //        .AddConsoleExporter()); // Or your preferred exporter
 
         return builder;
     }

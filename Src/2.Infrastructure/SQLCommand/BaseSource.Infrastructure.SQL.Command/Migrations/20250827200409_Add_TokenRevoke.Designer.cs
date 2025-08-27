@@ -4,6 +4,7 @@ using BaseSource.Infrastructure.SQL.Command.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BaseSource.Infrastructure.SQL.Command.Migrations
 {
     [DbContext(typeof(CommandDatabaseContext))]
-    partial class CommandDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20250827200409_Add_TokenRevoke")]
+    partial class Add_TokenRevoke
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
