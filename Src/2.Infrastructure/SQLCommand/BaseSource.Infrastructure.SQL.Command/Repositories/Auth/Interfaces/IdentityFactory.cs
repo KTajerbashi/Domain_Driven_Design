@@ -18,6 +18,7 @@ public class IdentityFactory : IIdentityFactory
     private readonly JweSettings _jweSettings;
     private readonly IdentityOptionsSettings _identityOptions;
     private readonly ActivitySource _activitySource;
+    public UserManager<UserIdentity> UserManager => _userManager;
 
     public IdentityFactory(
         ILogger<IdentityFactory> logger,
@@ -57,6 +58,51 @@ public class IdentityFactory : IIdentityFactory
             throw new ArgumentException("Token expiration must be greater than 0");
         }
     }
+
+    public async Task<AuthenticationResult> LoginAsAsync(UserIdentity user, bool rememberMe = true)
+    {
+        try
+        {
+            using var activity = _activitySource.StartActivity("Login", ActivityKind.Server);
+            if (!user.IsActive)
+            {
+                _logger.LogWarning("Login failed: User {Username} is inactive", user.UserName);
+                activity?.SetStatus(ActivityStatusCode.Error, "User inactive");
+                return AuthenticationResult.Failed("Account is inactive");
+            }
+
+            // Clear any existing session data before creating new one
+            await CleanupUserSession(user.Id);
+
+            // Generate tokens
+            var token = await GenerateJwtTokenAsync(user);
+            var refreshToken = await GenerateRefreshTokenAsync(user);
+
+            // Add user claims
+            await AddUserClaimsAsync(user);
+
+            // Add user login record
+            await AddUserLoginRecordAsync(user, "JWT", $"token_{user.Id}");
+
+            // Add user token
+            await AddUserTokenRecordAsync(user, refreshToken);
+
+            // Update last login timestamp
+            //user.LastLoginDate = DateTime.UtcNow;
+            await _userManager.UpdateAsync(user);
+
+            activity?.SetTag("user.id", user.Id);
+            activity?.SetStatus(ActivityStatusCode.Ok);
+            _logger.LogInformation("User {Username} logged in successfully", user.UserName);
+            await _signInManager.SignInAsync(user, rememberMe);
+            return AuthenticationResult.Success(token, refreshToken, DateTime.UtcNow.AddMinutes(_jwtSettings.TokenExpirationMinutes));
+        }
+        catch (Exception ex)
+        {
+            throw;
+        }
+    }
+
     public async Task<AuthenticationResult> LoginAsync(string username, string password, bool rememberMe = false)
     {
         using var activity = _activitySource.StartActivity("Login", ActivityKind.Server);
@@ -90,31 +136,8 @@ public class IdentityFactory : IIdentityFactory
                 return AuthenticationResult.Failed("Account is inactive");
             }
 
-            // Clear any existing session data before creating new one
-            await CleanupUserSession(user.Id);
+            return await LoginAsAsync(user, rememberMe);
 
-            // Generate tokens
-            var token = await GenerateJwtTokenAsync(user);
-            var refreshToken = await GenerateRefreshTokenAsync(user);
-
-            // Add user claims
-            await AddUserClaimsAsync(user);
-
-            // Add user login record
-            await AddUserLoginRecordAsync(user, "JWT", $"token_{user.Id}");
-
-            // Add user token
-            await AddUserTokenRecordAsync(user, refreshToken);
-
-            // Update last login timestamp
-            //user.LastLoginDate = DateTime.UtcNow;
-            await _userManager.UpdateAsync(user);
-
-            activity?.SetTag("user.id", user.Id);
-            activity?.SetStatus(ActivityStatusCode.Ok);
-            _logger.LogInformation("User {Username} logged in successfully", username);
-            await _signInManager.SignInAsync(user, rememberMe);
-            return AuthenticationResult.Success(token, refreshToken, DateTime.UtcNow.AddMinutes(_jwtSettings.TokenExpirationMinutes));
         }
         catch (Exception ex)
         {
@@ -169,7 +192,7 @@ public class IdentityFactory : IIdentityFactory
         await RemoveAllUserTokensAsync(userId);
 
         // Remove all user logins (optional - you might want to keep login history)
-        // await RemoveAllUserLoginsAsync(userId);
+        //await RemoveAllUserLoginsAsync(userId);
 
         // Remove role claims from user (but keep role assignments)
         await CleanupRoleClaimsAsync(userId);
@@ -634,6 +657,7 @@ public class IdentityFactory : IIdentityFactory
 
         return claims;
     }
+
 
 }
 

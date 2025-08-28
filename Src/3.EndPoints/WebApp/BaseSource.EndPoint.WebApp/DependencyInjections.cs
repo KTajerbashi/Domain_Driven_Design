@@ -8,6 +8,13 @@ public static class DependencyInjections
 {
     public static WebApplicationBuilder AddWebAppServices(this WebApplicationBuilder builder)
     {
+
+        builder.Services.AddHttpClient("API", client =>
+        {
+            client.BaseAddress = new Uri(builder.Configuration["ApiBaseUrl"]);
+            // Add any default headers if needed
+        });
+
         // Configure JWT and JWE settings
         builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
         builder.Services.Configure<JweSettings>(builder.Configuration.GetSection("JweSettings"));

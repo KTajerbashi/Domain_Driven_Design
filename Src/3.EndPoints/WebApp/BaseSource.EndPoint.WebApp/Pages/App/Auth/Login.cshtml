@@ -1,0 +1,51 @@
+﻿@page
+@model BaseSource.EndPoint.WebApp.Pages.App.Auth.LoginModel
+
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card glass-card">
+            <div class="card-header">
+                <h3 class="text-center">Login</h3>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="form-group mb-3">
+                        <label asp-for="Parameter.UserName" class="form-label"></label>
+                        <input asp-for="Parameter.UserName" class="form-control glass-input" />
+                        <span asp-validation-for="Parameter.UserName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label asp-for="Parameter.Password" class="form-label"></label>
+                        <input asp-for="Parameter.Password" type="password" class="form-control glass-input" />
+                        <span asp-validation-for="Parameter.Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input asp-for="Parameter.IsRemember" class="form-check-input" />
+                        <label asp-for="Parameter.IsRemember" class="form-check-label">Remember me</label>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary glass-btn">Login</button>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                    {
+                        <div class="alert alert-danger mt-3">
+                            @Model.ErrorMessage
+                        </div>
+                    }
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{
+}

@@ -4,8 +4,11 @@ namespace BaseSource.Infrastructure.SQL.Command.Repositories.Auth.Interfaces;
 
 public interface IIdentityFactory : IScopedLifetime
 {
+    UserManager<UserIdentity> UserManager { get; }
+
     // Authentication
     Task<AuthenticationResult> LoginAsync(string username, string password, bool rememberMe = false);
+    Task<AuthenticationResult> LoginAsAsync(UserIdentity user, bool rememberMe = true);
     Task<AuthenticationResult> RefreshTokenAsync(string token, string refreshToken);
     Task SignOutAsync(long userId);
 

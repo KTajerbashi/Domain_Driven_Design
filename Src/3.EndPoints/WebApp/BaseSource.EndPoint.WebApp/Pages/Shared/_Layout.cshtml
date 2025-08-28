@@ -16,40 +16,61 @@
 
 <body>
     <!-- Navbar -->
-    <header>
-        <nav class="navbar navbar-expand-lg glass-navbar fixed-top">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/App/Index">Domain Driven-Design</a>
+    @{
+        if (User.Identity.IsAuthenticated)
+        {
+            <header>
+                <nav class="navbar navbar-expand-lg glass-navbar fixed-top">
+                    <div class="container">
+                        <a class="navbar-brand" asp-area="" asp-page="/App/Index">Domain Driven-Design</a>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-                        aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
 
-                <div class="collapse navbar-collapse" id="navbarContent">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/App/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/App/Common/Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/App/Test/SwaggerJs">SwaggerJs</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/App/Test/SwaggerRazor">SwaggerRazor</a>
-                        </li>
-
-                    </ul>
-                    <div class="d-flex">
-                        <button class="app-btn app-btn-glass me-2">Login</button>
-                        <button class="app-btn app-btn-primary-glass">Register</button>
+                        <div class="collapse navbar-collapse" id="navbarContent">
+                            <ul class="navbar-nav me-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/App/Index">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/App/Common/Privacy">Privacy</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/App/Test/SwaggerJs">SwaggerJs</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/App/Test/SwaggerRazor">SwaggerRazor</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- In the authenticated section -->
+                        <div>
+                            <button class="btn btn-outline-primary">
+                                @(User.Identity.Name)
+                            </button>
+                            <form asp-page="/App/Auth/Logout" method="post" class="d-inline">
+                                <button type="submit" class="btn btn-danger">Signout</button>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </nav>
-    </header>
+                </nav>
+            </header>
+        }
+        else
+        {
+            <header>
+                <nav class="navbar navbar-expand-lg glass-navbar fixed-top">
+                    <!-- In the non-authenticated section -->
+                    <div class="d-flex">
+                        <a asp-page="/App/Auth/Login" class="app-btn app-btn-glass me-2">Login</a>
+                        <a asp-page="/App/Auth/Register" class="app-btn app-btn-primary-glass">Register</a>
+                    </div>
+                </nav>
+            </header>
+        }
+    }
 
     <!-- Main Content -->
     <main class="container page-container">
